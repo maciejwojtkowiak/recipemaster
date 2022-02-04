@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type Recipe = {
     title: string, 
+    type: string,
+    description: string,
 
 }
 

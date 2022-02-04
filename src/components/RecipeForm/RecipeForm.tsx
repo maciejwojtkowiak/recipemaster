@@ -3,6 +3,10 @@ import React from "react"
 import Navbar from "../Navbar"
 import SelectType from "./SelectType"
 
+const COLS = 20
+const ROWS = 20
+
+
 const RecipeForm = () => {
     return (
         <React.Fragment>
@@ -12,7 +16,7 @@ const RecipeForm = () => {
                     <FormControl textAlign="center">
                         <Input placeholder="Name for your recipe" />
                         <SelectType />
-                        <Textarea placeholder="Description" cols="20" rows="20" resize="none" />
+                        <Textarea placeholder="Description" cols={COLS} rows={ROWS} resize="none" />
                         <Button type="submit">Submit</Button>
                     </FormControl>
                 </Flex>
