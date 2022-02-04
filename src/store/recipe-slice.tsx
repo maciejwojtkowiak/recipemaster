@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Recipe = {
-    title: string, 
-    type: string,
-    description: string,
-
-}
+import { Recipe } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
     recipes: [] as Recipe[]
