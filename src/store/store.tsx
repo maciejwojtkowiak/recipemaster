@@ -7,5 +7,5 @@ const store = configureStore({
         recipe: recipeSlice.reducer
     }
 })
-
+export type RootState = ReturnType<typeof store.getState>
 export default store
