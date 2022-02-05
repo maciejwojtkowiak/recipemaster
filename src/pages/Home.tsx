@@ -1,8 +1,12 @@
-import Navbar from "../components/Navbar"
-
+import Navbar from "../components/Navbar/Navbar"
+import RecipesBox from "../components/Home/RecipesBox"
+import React from "react"
 const Home = () => {
     return (
-        <Navbar />
+        <React.Fragment>
+            <Navbar />
+            <RecipesBox />
+        </React.Fragment>
     )
 }
 
