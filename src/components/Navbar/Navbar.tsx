@@ -5,7 +5,7 @@ const Navbar = () => {
         <Box h="10vh" bgGradient='linear(to-r, orange.200, orange.500)'>
             <UnorderedList height="100%"  styleType="none">
                 <Flex height="100%" justifyContent="center" alignItems="center" >
-                    <ListItem >Recipemaster</ListItem>
+                    <ListItem fontSize="2rem" color="white" ><Link to="/">Recipemaster</Link></ListItem>
                     <Spacer />
                     <ListItem>
                         <Input width="30rem"  placeholder="Let`s find a recipe!" backgroundColor="white" focusBorderColor="orange.500" type="text" />

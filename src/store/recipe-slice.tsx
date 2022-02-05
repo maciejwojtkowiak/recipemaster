@@ -14,7 +14,8 @@ const recipeSlice = createSlice({
             state.recipes.push({
                 title: action.payload.title,
                 type: action.payload.type,
-                description: action.payload.description
+                description: action.payload.description,
+                id: action.payload.id
 
             })
         }

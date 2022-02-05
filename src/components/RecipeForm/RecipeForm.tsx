@@ -7,10 +7,7 @@ import { recipeAction } from "../../store/recipe-slice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { Recipe } from "../../shared/types/Recipe"
-
-const COLS = 20
-const ROWS = 20
-
+import { sendData } from "../../store/recipe-action"
 
 const RecipeForm = () => {
     const dispatch = useDispatch()
@@ -23,18 +20,14 @@ const RecipeForm = () => {
 
     const onSubmitHandler = (e: React.FormEvent): void => {
         e.preventDefault()
-        console.log('submit')
         const recipe: Recipe = {
             title: title, 
             type: type, 
-            description: description
+            description: description,
+            id: Math.random()
         }
-
-        console.log(title)
-
         dispatch(recipeAction.addRecipe(recipe))
-        console.log(items)
-        
+        dispatch(sendData(recipe))
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, setValue: Function): void => {
@@ -51,7 +44,7 @@ const RecipeForm = () => {
                         <FormControl textAlign="center" >
                             <Input onChange={(e) => onChangeHandler(e, setTitle)}  placeholder="Name for your recipe" />
                             <SelectType onChange={onChangeHandler} setType={setType} />
-                            <Textarea onChange={(e) => onChangeHandler(e, setDescription)} placeholder="Description" cols={COLS} rows={ROWS} resize="none" />
+                            <Textarea onChange={(e) => onChangeHandler(e, setDescription)} placeholder="Description" cols={20} rows={20} resize="none" />
                             <Button type="submit">Submit</Button>
                         </FormControl>
                 </Flex>
