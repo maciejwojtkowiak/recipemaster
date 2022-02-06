@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom"
-import { Box, UnorderedList, ListItem, Flex, Spacer, Input } from "@chakra-ui/react"
+import { Box, UnorderedList, ListItem, Flex, Spacer, Input, Button } from "@chakra-ui/react"
+import { userLogout } from "../../store/user-action"
+import { useDispatch } from "react-redux"
+import { auth } from "../../Firebase"
 const Navbar = () => {
+    const dispatch = useDispatch()
+    const onLogoutHandler = () => {
+        dispatch(userLogout())
+    }
+    
+
     return (
         <Box h="10vh" bgGradient='linear(to-r, orange.200, orange.500)'>
             <UnorderedList height="100%"  styleType="none">
@@ -14,7 +23,7 @@ const Navbar = () => {
                     <Flex alignItems="center" height="100%" gap="2rem" color="white" fontSize="1.2rem" marginRight="2rem">
                         <ListItem><Link to='/addRecipe'>add recipe</Link></ListItem>
                         <ListItem>Profile</ListItem>
-                        <ListItem>Logout</ListItem>
+                        <ListItem><Button onClick={onLogoutHandler}>Logout</Button></ListItem>
                     </Flex>
                     
                 </Flex>

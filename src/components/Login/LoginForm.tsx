@@ -3,6 +3,7 @@ import { useState } from "react"
 import {Box, Input, FormControl, Button, Grid} from '@chakra-ui/react'
 import { userLogin} from "../../store/user-action"
 import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
 
 
 const LoginForm = () => {
@@ -32,6 +33,7 @@ const LoginForm = () => {
                     </FormControl>
                 </form>
             </Grid>
+            <Link to="/">Home</Link>
         </Box>
     )
 }
