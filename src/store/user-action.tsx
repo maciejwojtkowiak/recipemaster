@@ -5,15 +5,16 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 export const userSignUp = (username: string, email: string, password: string) => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         const createUser = async () => {
-            await createUserWithEmailAndPassword(auth, email, password)
+            const user = await createUserWithEmailAndPassword(auth, email, password)
             updateProfile(auth.currentUser!, {
                 displayName: username 
             })
+
+            return user
          
         }
         try {
-            createUser()
-            console.log('created')
+            await createUser()
         } catch {
             console.log('error')
         }
@@ -24,16 +25,12 @@ export const userSignUp = (username: string, email: string, password: string) =>
 export const userLogin = (email: string, password: string) => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         const userLogin = async () => {
-            const user = await signInWithEmailAndPassword(auth, email, password)
-            return user
+            await signInWithEmailAndPassword(auth, email, password)
+            
         }
 
         try {
-            const user = await userLogin()
-            if (user) {
-                console.log('user logged in')
-                console.log(auth.currentUser)
-            }
+            await userLogin()
         } catch {
             console.log('error')
         }
@@ -47,7 +44,7 @@ export const userLogout = () => {
         }
 
         try {
-            logout()
+            await logout()
         } catch {
             console.log('error')
         }

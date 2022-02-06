@@ -8,8 +8,8 @@ const INITIAL_STATE = {
     name: 'ui',
     initialState: INITIAL_STATE,
     reducers: {
-        login(state, action: PayloadAction<boolean>) {
-            
+        isLoggedIn(state, action: PayloadAction<boolean>) {
+            state.isLoggedIn = action.payload
         }
     }
 })

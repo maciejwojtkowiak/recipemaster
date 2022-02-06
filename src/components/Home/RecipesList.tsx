@@ -10,8 +10,8 @@ const RecipesList = () => {
 
     return (
         <Flex height="100%" width="100%" borderWidth="1px"  justifyContent="center" alignItems="center">
-             <Grid height="80%" width="90%" placeItems="center" borderWidth="1px" >
-                {recipes.map(recipe => <RecipeItem key={recipe.id} user={recipe.user} id={recipe.id} title={recipe.title} type={recipe.type} description={recipe.description} /> )}
+             <Grid height="80%" width="90%" placeItems="center" borderWidth="1px" templateColumns="repeat(3, 1fr)" >
+                {recipes.map(recipe => <RecipeItem key={recipe.id} username={recipe.username} id={recipe.id} title={recipe.title} type={recipe.type} description={recipe.description} /> )}
             </Grid>
         </Flex>
            

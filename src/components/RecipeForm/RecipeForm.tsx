@@ -21,15 +21,18 @@ const RecipeForm = () => {
 
     const onSubmitHandler = (e: React.FormEvent): void => {
         e.preventDefault()
-        const recipe: Recipe = {
-            user: 'John',
-            title: title, 
-            type: type, 
-            description: description,
-            id: Math.random()
+        if (user?.displayName) {
+            const recipe: Recipe = {
+                username: user.displayName,
+                title: title, 
+                type: type, 
+                description: description,
+                id: Math.random()
+            }
+            dispatch(recipeAction.addRecipe(recipe))
+            dispatch(sendData(recipe))
         }
-        dispatch(recipeAction.addRecipe(recipe))
-        dispatch(sendData(recipe))
+        
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, setValue: Function): void => {

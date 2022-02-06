@@ -15,7 +15,7 @@ const recipeSlice = createSlice({
         },
         addRecipe(state, action: PayloadAction<Recipe>) {
             state.recipes.push({
-                user: action.payload.user,
+                username: action.payload.username,
                 title: action.payload.title,
                 type: action.payload.type,
                 description: action.payload.description,

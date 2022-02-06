@@ -11,6 +11,7 @@ interface funcProp {
 const SelectType: React.FC<funcProp> = (props) => {
     return (
     <Select onChange={(e) => {props.onChange(e, props.setType)}}>
+        <option selected disabled hidden>Choose type of your dish</option>
         <option>Breakfast</option>
         <option>Lunch</option>
         <option>Dinner</option>
