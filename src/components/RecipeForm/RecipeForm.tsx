@@ -22,7 +22,7 @@ const RecipeForm = () => {
     const onSubmitHandler = (e: React.FormEvent): void => {
         e.preventDefault()
         const recipe: Recipe = {
-            user: user!,
+            user: 'John',
             title: title, 
             type: type, 
             description: description,

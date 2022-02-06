@@ -2,7 +2,7 @@ import { User } from "firebase/auth";
 
 export type Recipe = {
     id: number,
-    user: User,
+    user: string,
     title: string, 
     type: string,
     description: string,

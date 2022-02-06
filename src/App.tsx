@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -6,9 +6,18 @@ import AddRecipe from './pages/AddRecipe';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import './App.css';
+import {useDispatch} from "react-redux"
+import {fetchRecipes} from "./store/recipe-action"
 
 function App() {
-  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchRecipes())
+  }, 
+  [dispatch])
+
+
+
   return (
     <Routes>
       <Route path='/' element={<Home />} />

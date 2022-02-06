@@ -1,5 +1,6 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit"
 import { Recipe } from "../shared/types/Recipe"
+import {recipeAction} from './recipe-slice'
 
 
 export const sendData = (recipe: Recipe) => {
@@ -35,7 +36,14 @@ export const fetchRecipes = () => {
         }
 
         try {
-            getRecipes()
+            const data = await getRecipes()
+            if (data) {
+                for (const key of Object.keys(data)) {
+                    dispatch(recipeAction.replaceRecipes(data[key] || []))
+                }
+                
+            }
+            
         }
         catch {
             console.error('ERROR')

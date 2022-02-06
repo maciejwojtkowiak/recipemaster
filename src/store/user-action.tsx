@@ -1,6 +1,6 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit"
 import { auth } from "../Firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, getAuth} from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut} from "firebase/auth"
 
 export const userSignUp = (username: string, email: string, password: string) => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
@@ -9,7 +9,7 @@ export const userSignUp = (username: string, email: string, password: string) =>
             updateProfile(auth.currentUser!, {
                 displayName: username 
             })
-          
+         
         }
         try {
             createUser()

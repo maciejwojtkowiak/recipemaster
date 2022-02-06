@@ -5,13 +5,13 @@ import RecipeItem from "./RecipeItem"
 
 
 const RecipesList = () => {
-    // const recipes = useSelector((state: RootState) => state.recipe.recipes)
-    // {recipes.map(recipe => <RecipeItem key={recipe.id} user={recipe.user} id={recipe.id} title={recipe.title} type={recipe.type} description={recipe.description} /> )}
+    const recipes = useSelector((state: RootState) => state.recipe.recipes)
+    console.log(recipes)
 
     return (
         <Flex height="100%" width="100%" borderWidth="1px"  justifyContent="center" alignItems="center">
              <Grid height="80%" width="90%" placeItems="center" borderWidth="1px" >
-                
+                {recipes.map(recipe => <RecipeItem key={recipe.id} user={recipe.user} id={recipe.id} title={recipe.title} type={recipe.type} description={recipe.description} /> )}
             </Grid>
         </Flex>
            
