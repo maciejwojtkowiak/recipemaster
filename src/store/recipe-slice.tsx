@@ -12,6 +12,7 @@ const recipeSlice = createSlice({
     reducers: {
         addRecipe(state, action: PayloadAction<Recipe>) {
             state.recipes.push({
+                user: action.payload.user,
                 title: action.payload.title,
                 type: action.payload.type,
                 description: action.payload.description,

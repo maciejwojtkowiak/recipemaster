@@ -8,19 +8,21 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { Recipe } from "../../shared/types/Recipe"
 import { sendData } from "../../store/recipe-action"
+import { auth } from "../../Firebase"
 
 const RecipeForm = () => {
     const dispatch = useDispatch()
     const [title, setTitle] = useState<string>('')
     const [type, setType] = useState<string>('')
     const [description, setDescription] = useState<string>('')
-    const items = useSelector((state: RootState) => state.recipe.recipes)
+    const user = auth.currentUser
     
 
 
     const onSubmitHandler = (e: React.FormEvent): void => {
         e.preventDefault()
         const recipe: Recipe = {
+            user: user!,
             title: title, 
             type: type, 
             description: description,
