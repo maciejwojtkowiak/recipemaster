@@ -1,6 +1,10 @@
+
 export type Recipe = {
-    title: string , 
+    id: number,
+    username: string,
+    title: string, 
     type: string,
+    time: string,
     description: string,
 
 }

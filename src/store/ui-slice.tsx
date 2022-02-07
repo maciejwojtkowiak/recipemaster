@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
-    test: 1,
+    isLoggedIn: false,
 }
 
  const uiSlice = createSlice({
     name: 'ui',
     initialState: INITIAL_STATE,
     reducers: {
-        increment(state, action: PayloadAction<number>) {
-            state.test++
+        isLoggedIn(state, action: PayloadAction<boolean>) {
+            state.isLoggedIn = action.payload
         }
     }
 })
