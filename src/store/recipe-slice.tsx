@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Recipe } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
-    recipes: [] as Recipe[]
+    recipes: [] as Recipe[],
+    filteredRecipes: [] as Recipe[]
 }
 
 
@@ -23,6 +24,10 @@ const recipeSlice = createSlice({
                 time: action.payload.time
 
             })
+        },
+
+        filterRecipes(state, action:PayloadAction<string>) {
+            state.filteredRecipes = state.recipes.filter(recipe => recipe.title.toLowerCase().includes(action.payload.toLowerCase()))
         }
     }
     
