@@ -20,7 +20,7 @@ const RecipeItem: React.FC<Recipe> = (props) => {
             <Image height="20vh" width="100%" src={Breakfast}></Image>
             </Box>
             <Box  marginLeft="1rem" marginTop="1rem">
-                <Heading font-weight="3rem">{props.title}<Text marginLeft="0.5rem" fontWeight="normal" fontSize="1rem" as="span">{props.type}</Text></Heading>
+                <Heading  font-weight="3rem">{props.title}<Text marginLeft="0.5rem" fontWeight="normal" fontSize="1rem" as="span">{props.type}</Text></Heading>
                 <Text fontSize="1.1rem"><Text fontSize="0.8rem" as="span">Author: </Text>{props.username}</Text>
                 <Text fontSize="1.1rem"><Text fontSize="0.8rem" as="span">Time: </Text>{props.time}</Text>
             </Box>

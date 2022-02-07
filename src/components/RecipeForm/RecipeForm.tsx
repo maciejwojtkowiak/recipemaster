@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"
 import { Recipe } from "../../shared/types/Recipe"
 import { sendData } from "../../store/recipe-action"
 import { auth } from "../../Firebase"
+import { uiAction } from "../../store/ui-slice"
 
 const RecipeForm = () => {
     const dispatch = useDispatch()
@@ -39,6 +40,8 @@ const RecipeForm = () => {
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, setValue: Function): void => {
         const newValue = e.target.value;
         setValue(newValue)
+        console.log(auth.currentUser)
+        dispatch(uiAction.isLoggedIn(true))
      }
 
     return (
@@ -49,8 +52,20 @@ const RecipeForm = () => {
                 <Flex justifyContent="center" alignItems="center" width="50vw">
                         <FormControl textAlign="center" >
                             <Input onChange={(e) => onChangeHandler(e, setTitle)}  placeholder="Name for your recipe" />
-                            <SelectType onChange={onChangeHandler} setType={setType} />
-                            <Input onChange={(e) => onChangeHandler(e, setTime)}  placeholder="Time to prepare" />
+                            <SelectType onChange={onChangeHandler} setType={setType} 
+                            placeHolder="Choose type of your dish" 
+                            option1="Breakfast" 
+                            option2="Lunch" 
+                            option3="Dinner" 
+                            option4="Supper" />
+                             <SelectType onChange={(e) => onChangeHandler(e, setTime)} setType={setTime} 
+                            placeHolder="Choose length of preparing" 
+                            option1="Very short (~30min)" 
+                            option2="short (~1hrs)" 
+                            option3="medium (~3hrs)" 
+                            option4="long (~6hrs)" 
+                            option5="very long (6hrs+)"
+                            />
                             <Textarea onChange={(e) => onChangeHandler(e, setDescription)} placeholder="Description" cols={20} rows={20} resize="none" />
                             <Button type="submit">Submit</Button>
                         </FormControl>

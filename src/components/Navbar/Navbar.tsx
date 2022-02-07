@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom"
 import { Box, UnorderedList, ListItem, Flex, Spacer, Input, Button } from "@chakra-ui/react"
 import { userLogout } from "../../store/user-action"
-import { useDispatch } from "react-redux"
-import { auth } from "../../Firebase"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../store/store"
+
 const Navbar = () => {
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector((state: RootState) => state.ui.isLoggedIn)
+    console.log(isLoggedIn)
     const onLogoutHandler = () => {
         dispatch(userLogout())
     }
@@ -23,7 +26,7 @@ const Navbar = () => {
                     <Flex alignItems="center" height="100%" gap="2rem" color="white" fontSize="1.2rem" marginRight="2rem">
                         <ListItem><Link to='/addRecipe'>add recipe</Link></ListItem>
                         <ListItem>Profile</ListItem>
-                        <ListItem><Button onClick={onLogoutHandler}>Logout</Button></ListItem>
+                        {isLoggedIn && <ListItem><Button onClick={onLogoutHandler}>Logout</Button></ListItem>}
                     </Flex>
                     
                 </Flex>
