@@ -4,8 +4,7 @@ import React from "react"
 import { useState } from "react"
 import Navbar from "../Navbar/Navbar"
 import { recipeAction } from "../../store/recipe-slice"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../store/store"
+import { useDispatch } from "react-redux"
 import { Recipe } from "../../shared/types/Recipe"
 import { sendData } from "../../store/recipe-action"
 import { auth } from "../../Firebase"
@@ -14,6 +13,7 @@ const RecipeForm = () => {
     const dispatch = useDispatch()
     const [title, setTitle] = useState<string>('')
     const [type, setType] = useState<string>('')
+    const [time, setTime] = useState<string>('')
     const [description, setDescription] = useState<string>('')
     const user = auth.currentUser
     
@@ -27,7 +27,8 @@ const RecipeForm = () => {
                 title: title, 
                 type: type, 
                 description: description,
-                id: Math.random()
+                id: Math.random(),
+                time: time
             }
             dispatch(recipeAction.addRecipe(recipe))
             dispatch(sendData(recipe))
@@ -49,6 +50,7 @@ const RecipeForm = () => {
                         <FormControl textAlign="center" >
                             <Input onChange={(e) => onChangeHandler(e, setTitle)}  placeholder="Name for your recipe" />
                             <SelectType onChange={onChangeHandler} setType={setType} />
+                            <Input onChange={(e) => onChangeHandler(e, setTime)}  placeholder="Time to prepare" />
                             <Textarea onChange={(e) => onChangeHandler(e, setDescription)} placeholder="Description" cols={20} rows={20} resize="none" />
                             <Button type="submit">Submit</Button>
                         </FormControl>

@@ -19,7 +19,8 @@ const recipeSlice = createSlice({
                 title: action.payload.title,
                 type: action.payload.type,
                 description: action.payload.description,
-                id: action.payload.id
+                id: action.payload.id,
+                time: action.payload.time
 
             })
         }

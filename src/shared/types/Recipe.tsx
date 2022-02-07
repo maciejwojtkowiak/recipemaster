@@ -4,6 +4,7 @@ export type Recipe = {
     username: string,
     title: string, 
     type: string,
+    time: string,
     description: string,
 
 }
