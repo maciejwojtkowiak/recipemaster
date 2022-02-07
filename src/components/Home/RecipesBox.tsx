@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react"
 
 const RecipesBox = () => {
     return (
-        <Box h="100vh" w="100%" borderWidth="1px" borderColor="red.300">
+        <Box minH="100vh" w="100%" >
             <RecipesList />
         </Box>
     )
