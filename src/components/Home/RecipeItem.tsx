@@ -15,6 +15,7 @@ const RecipeItem: React.FC<Recipe> = (props) => {
     const [isLiked, setIsLiekd] = useState<boolean>(false)
     const onClickHandler = () => {
         setIsLiekd(true)
+        
     }
     let imgName = {Breakfast, Lunch, Dinner, Supper}[props.type]
     

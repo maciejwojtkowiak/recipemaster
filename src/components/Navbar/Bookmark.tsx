@@ -5,8 +5,15 @@ const Bookmark = () => {
     return ( 
         <Menu>
             <MenuButton 
+                background="none"
                 as={IconButton}
-                icon={<Icon as={FiBookmark} />}
+                borderRadius='md'
+                borderWidth='0px'
+                _hover={{bg: "none"}}
+                _expanded={{ bg: 'none' }}
+                _focus={{ boxShadow: 'none' }}
+                _active={{bg: 'none'}}
+                icon={<Icon as={FiBookmark} w={8} h={8} />}
             />
             <MenuList>
                 <MenuItem>Elo</MenuItem>

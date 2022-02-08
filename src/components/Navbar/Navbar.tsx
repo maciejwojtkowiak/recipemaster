@@ -7,7 +7,7 @@ import {
     Spacer, 
     Input, 
     Button, 
-    Icon } from "@chakra-ui/react"
+    } from "@chakra-ui/react"
 import { userLogout } from "../../store/user-action"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store/store"
@@ -18,13 +18,11 @@ import Bookmark from "./Bookmark"
 const Navbar = () => {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootState) => state.ui.isLoggedIn)
-    console.log(isLoggedIn)
     const onLogoutHandler = () => {
         dispatch(userLogout())
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
         dispatch(recipeAction.filterRecipes(e.target.value))
     }
     

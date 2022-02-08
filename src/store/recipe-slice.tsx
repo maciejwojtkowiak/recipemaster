@@ -3,7 +3,8 @@ import { Recipe } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
     recipes: [] as Recipe[],
-    filteredRecipes: [] as Recipe[]
+    filteredRecipes: [] as Recipe[],
+    likedRecipes: [] as Recipe[]
 }
 
 
@@ -28,6 +29,10 @@ const recipeSlice = createSlice({
 
         filterRecipes(state, action:PayloadAction<string>) {
             state.filteredRecipes = state.recipes.filter(recipe => recipe.title.toLowerCase().includes(action.payload.toLowerCase()))
+        },
+
+        likedRecipe(state, action: PayloadAction<Recipe> ) {
+            state.likedRecipes.push(action.payload)
         }
     }
     
