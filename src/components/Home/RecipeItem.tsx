@@ -16,11 +16,8 @@ const RecipeItem: React.FC<Recipe> = (props) => {
     const onClickHandler = () => {
         setIsLiekd(true)
     }
-    let imgName;
-    if (props.type === 'Breakfast') imgName = Breakfast
-    if (props.type === 'Lunch') imgName = Lunch
-    if (props.type === 'Dinner') imgName = Dinner
-    if (props.type === 'Supper') imgName = Supper
+    let imgName = {Breakfast, Lunch, Dinner, Supper}[props.type]
+    
     
     
     return (
@@ -34,7 +31,7 @@ const RecipeItem: React.FC<Recipe> = (props) => {
                 <Text fontSize="1.1rem"><Text fontSize="0.8rem" as="span">Author: </Text>{props.username}</Text>
                 <Text fontSize="1.1rem"><Text fontSize="0.8rem" as="span">Time: </Text>{props.time}</Text>
             </Box>
-            <Box textAlign="right" marginRight="2rem"><Button bgGradient='linear(to-r, orange.200, orange.300)'><Link to={`/${props.id}`}>Go</Link></Button></Box>
+            <Link to={`/${props.id}`}><Box textAlign="right" marginRight="2rem"><Button bgGradient='linear(to-r, orange.200, orange.300)'>Go</Button></Box></Link>
         </Box>
     )
 }

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
-import { Box, UnorderedList, ListItem, Flex, Spacer, Input, Button } from "@chakra-ui/react"
+import { Box, UnorderedList, ListItem, Flex, Spacer, Input, Button, Icon } from "@chakra-ui/react"
 import { userLogout } from "../../store/user-action"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store/store"
+import {FiBookmark} from 'react-icons/fi'
 import React from "react"
 import { recipeAction } from "../../store/recipe-slice"
 
@@ -31,6 +32,7 @@ const Navbar = () => {
                     </ListItem>
                     <Spacer />
                     <Flex alignItems="center" height="100%" gap="2rem" color="white" fontSize="1.2rem" marginRight="2rem">
+                        <Icon as={FiBookmark} h={7} w={7}></Icon>
                         <ListItem><Link to='/addRecipe'>add recipe</Link></ListItem>
                         <ListItem>Profile</ListItem>
                         {isLoggedIn && <ListItem><Button onClick={onLogoutHandler}>Logout</Button></ListItem>}
