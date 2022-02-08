@@ -7,14 +7,18 @@ import Dinner from "../../images/Dinner.jpg"
 import Supper from "../../images/Supper.jpg"
 import {FaHeart} from "react-icons/fa"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { recipeAction } from "../../store/recipe-slice"
 
 
 
 
 const RecipeItem: React.FC<Recipe> = (props) => {
+    const dispatch = useDispatch()
     const [isLiked, setIsLiekd] = useState<boolean>(false)
     const onClickHandler = () => {
         setIsLiekd(true)
+        dispatch(recipeAction.addLikedRecipe(props.id))
         
     }
     let imgName = {Breakfast, Lunch, Dinner, Supper}[props.type]
