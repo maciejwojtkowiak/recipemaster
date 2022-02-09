@@ -39,7 +39,7 @@ const Bookmark = () => {
                 icon={<Icon as={FiBookmark} w={8} h={8} />}
             />
             <MenuList>
-                {likedItems.map(recipe => <Box key={recipe.id}><Button onClick={(e) => {onDeleteHandler(e, recipe.id)} }></Button><MenuItem onClick={(e) => {onDeleteHandler(e, recipe.id)}}>Elo</MenuItem></Box>)}
+                {likedItems.map(recipe => <Box key={recipe.id}><MenuItem>Elo<Button onClick={(e) => {onDeleteHandler(e, recipe.id)} }>X</Button></MenuItem></Box>)}
             </MenuList>
 
             
