@@ -5,8 +5,10 @@ import RecipeItem from "./RecipeItem"
 
 
 const RecipesList = () => {
-    const recipes = useSelector((state: RootState) => state.recipe.recipes)
-    console.log(recipes)
+    const initialRecipes = useSelector((state: RootState) => state.recipe.recipes )
+    const filteredRecipes = useSelector((state: RootState) => state.recipe.filteredRecipes)
+    let recipes = filteredRecipes.length > 0 ? filteredRecipes : initialRecipes
+
 
     return (
         <Flex height="100%" justifyContent="center" alignItems="center" margin="2rem">

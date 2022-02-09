@@ -1,10 +1,16 @@
 import RecipesList from "./RecipesList"
-import { Box } from "@chakra-ui/react"
+import { Box, Spinner,Center, Grid } from "@chakra-ui/react"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/store"
+
 
 const RecipesBox = () => {
+
+    const isLoading = useSelector((state: RootState) => state.ui.isLoading)
     return (
         <Box minH="100vh" w="100%" >
-            <RecipesList />
+            {isLoading && <Grid height="100vh" width="100%" placeItems="center"><Spinner size="xl" /></Grid>}
+            {!isLoading && <RecipesList /> }
         </Box>
     )
 }

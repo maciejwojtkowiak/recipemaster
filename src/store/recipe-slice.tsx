@@ -2,7 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Recipe } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
-    recipes: [] as Recipe[]
+    recipes: [] as Recipe[],
+    filteredRecipes: [] as Recipe[],
+    likedRecipes: {
+        recipes: [] as Recipe[],
+        totalAmount: 0
+    }
 }
 
 
@@ -23,6 +28,20 @@ const recipeSlice = createSlice({
                 time: action.payload.time
 
             })
+        },
+
+        filterRecipes(state, action:PayloadAction<string>) {
+            state.filteredRecipes = state.recipes.filter(recipe => recipe.title.toLowerCase().trim().includes(action.payload.toLowerCase().trim()))
+        },
+
+        addLikedRecipe(state, action: PayloadAction<number> ) {
+            const likedRecipe = state.recipes.find(recipe => recipe.id === action.payload) as Recipe
+            state.likedRecipes.recipes.push(likedRecipe)
+            state.likedRecipes.totalAmount++
+        },
+        deleteLikedRecipe(state, action: PayloadAction<number> ) {
+            state.likedRecipes.recipes = state.likedRecipes.recipes.filter(recipe => recipe.id !== action.payload)
+
         }
     }
     
