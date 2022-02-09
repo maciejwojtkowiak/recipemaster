@@ -13,9 +13,11 @@ import { recipeAction } from "../../store/recipe-slice"
 
 
 
+
 const RecipeItem: React.FC<Recipe> = (props) => {
     const dispatch = useDispatch()
     const [isLiked, setIsLiked] = useState<boolean>(false)
+    
     const onClickHandler = () => {
         if (isLiked) return
         setIsLiked(true)
