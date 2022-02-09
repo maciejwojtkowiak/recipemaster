@@ -15,9 +15,10 @@ import { recipeAction } from "../../store/recipe-slice"
 
 const RecipeItem: React.FC<Recipe> = (props) => {
     const dispatch = useDispatch()
-    const [isLiked, setIsLiekd] = useState<boolean>(false)
+    const [isLiked, setIsLiked] = useState<boolean>(false)
     const onClickHandler = () => {
-        setIsLiekd(true)
+        if (isLiked) return
+        setIsLiked(true)
         dispatch(recipeAction.addLikedRecipe(props.id))
         
     }
