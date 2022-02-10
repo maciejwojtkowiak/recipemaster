@@ -15,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { Recipe } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
-import { uiAction } from "../../store/ui-slice";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -49,7 +48,6 @@ const RecipeForm = () => {
   ): void => {
     const newValue = e.target.value;
     setValue(newValue);
-    dispatch(uiAction.isLoggedIn(true));
   };
 
   return (

@@ -7,6 +7,7 @@ import {
   Spacer,
   Input,
   Button,
+  Heading,
 } from "@chakra-ui/react";
 import { userLogout } from "../../store/user-action";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,11 +28,13 @@ const Navbar = () => {
   };
 
   return (
-    <Box h="10vh" bgGradient="linear(to-r, orange.200, orange.500)">
+    <Box h="10vh" bgGradient="linear(to-r, orange.300, orange.400)">
       <UnorderedList height="100%" styleType="none">
         <Flex height="100%" justifyContent="center" alignItems="center">
           <ListItem fontSize="2rem" color="white">
-            <Link to="/">Recipemaster</Link>
+            <Heading>
+              <Link to="/">Recipemaster</Link>
+            </Heading>
           </ListItem>
           <Spacer />
           <ListItem>

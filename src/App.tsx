@@ -10,11 +10,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Detail from "./pages/Detail";
 import { handleLoggedInState } from "./store/user-action";
-import { auth } from "./Firebase";
-import { uiAction } from "./store/ui-slice";
 
 function App() {
-  const user = auth.currentUser;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchRecipes());
