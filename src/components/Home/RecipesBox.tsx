@@ -13,7 +13,7 @@ const RecipesBox = () => {
           <Spinner size="xl" />
         </Grid>
       )}
-      {!isLoading && FilterBox}
+      {!isLoading && <FilterBox />}
       {!isLoading && <RecipesList />}
     </Box>
   );

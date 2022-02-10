@@ -6,7 +6,6 @@ import {
   Textarea,
   Button,
 } from "@chakra-ui/react";
-import SelectType from "./SelectType";
 import React from "react";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
@@ -15,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { Recipe } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
+import SelectComponent from "./SelectComponent";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const RecipeForm = () => {
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
-    setValue: Function
+    setValue: (value: string) => void
   ): void => {
     const newValue = e.target.value;
     setValue(newValue);
@@ -61,18 +61,16 @@ const RecipeForm = () => {
                 onChange={(e) => onChangeHandler(e, setTitle)}
                 placeholder="Name for your recipe"
               />
-              <SelectType
-                onChange={onChangeHandler}
-                setType={setType}
+              <SelectComponent
+                onChange={(e) => onChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
                 option1="Breakfast"
                 option2="Lunch"
                 option3="Dinner"
                 option4="Supper"
               />
-              <SelectType
+              <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
-                setType={setTime}
                 placeHolder="Choose length of preparing"
                 option1="Very short (~30min)"
                 option2="short (~1hrs)"

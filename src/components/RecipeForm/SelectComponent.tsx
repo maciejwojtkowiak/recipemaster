@@ -2,11 +2,7 @@ import { Select } from "@chakra-ui/react";
 import React from "react";
 
 interface funcProp {
-  onChange: (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    setValue: Function
-  ) => void;
-  setType: Function;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeHolder: string;
   option1: string;
   option2: string;
@@ -15,13 +11,9 @@ interface funcProp {
   option5?: string;
 }
 
-const SelectType: React.FC<funcProp> = (props) => {
+const SelectComponent: React.FC<funcProp> = (props) => {
   return (
-    <Select
-      onChange={(e) => {
-        props.onChange(e, props.setType);
-      }}
-    >
+    <Select onChange={props.onChange}>
       <option> {props.placeHolder}</option>
       <option>{props.option1}</option>
       <option>{props.option2}</option>
@@ -31,4 +23,4 @@ const SelectType: React.FC<funcProp> = (props) => {
   );
 };
 
-export default SelectType;
+export default SelectComponent;
