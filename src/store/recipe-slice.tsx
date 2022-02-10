@@ -48,6 +48,7 @@ const recipeSlice = createSlice({
       state.likedRecipes.recipes = state.likedRecipes.recipes.filter(
         (recipe) => recipe.id !== action.payload
       );
+      state.likedRecipes.totalAmount--;
     },
   },
 });

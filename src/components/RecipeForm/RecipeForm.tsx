@@ -49,7 +49,6 @@ const RecipeForm = () => {
   ): void => {
     const newValue = e.target.value;
     setValue(newValue);
-    console.log(auth.currentUser);
     dispatch(uiAction.isLoggedIn(true));
   };
 
