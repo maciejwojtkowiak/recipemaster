@@ -14,7 +14,7 @@ interface funcProp {
 const SelectComponent: React.FC<funcProp> = (props) => {
   return (
     <Select onChange={props.onChange}>
-      <option> {props.placeHolder}</option>
+      <option>{props.placeHolder}</option>
       <option>{props.option1}</option>
       <option>{props.option2}</option>
       <option>{props.option3}</option>

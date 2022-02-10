@@ -41,7 +41,7 @@ const RecipeItem: React.FC<Recipe> = (props) => {
         <Image height="20vh" width="100%" src={imgName}></Image>
       </Box>
       <Box marginLeft="1rem" marginTop="1rem">
-        <Heading fontWeight="3rem">
+        <Text fontSize="2rem" fontWeight="700">
           {props.title}
           <Text
             marginLeft="0.5rem"
@@ -51,7 +51,7 @@ const RecipeItem: React.FC<Recipe> = (props) => {
           >
             {props.type}
           </Text>
-        </Heading>
+        </Text>
         <Text fontSize="1.1rem">
           <Text fontSize="0.8rem" as="span">
             Author:{" "}

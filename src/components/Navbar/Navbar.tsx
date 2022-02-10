@@ -32,7 +32,7 @@ const Navbar = () => {
       <UnorderedList height="100%" styleType="none">
         <Flex height="100%" justifyContent="center" alignItems="center">
           <ListItem fontSize="2rem" color="white">
-            <Heading>
+            <Heading fontSize="4rem">
               <Link to="/">Recipemaster</Link>
             </Heading>
           </ListItem>
