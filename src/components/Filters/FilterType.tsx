@@ -1,5 +1,7 @@
+import { Select } from "@chakra-ui/react";
+
 const FilterType = () => {
-  return <div></div>;
+  return <Select></Select>;
 };
 
 export default FilterType;

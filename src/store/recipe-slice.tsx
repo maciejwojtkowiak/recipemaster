@@ -8,6 +8,13 @@ const INITIAL_VALUE = {
     recipes: [] as Recipe[],
     totalAmount: 0,
   },
+  recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
+  recipeTime: [
+    "Very short (~30min)",
+    "short (~1hr)",
+    "medium (~3hrs)",
+    "Long (~6hrs)",
+  ],
 };
 
 const recipeSlice = createSlice({
@@ -42,7 +49,6 @@ const recipeSlice = createSlice({
             .trim()
             .startsWith(action.payload.toLowerCase().trim()[0])
       );
-      state.recipes.map((recipe) => console.log(recipe.title[0]));
     },
 
     addLikedRecipe(state, action: PayloadAction<number>) {
