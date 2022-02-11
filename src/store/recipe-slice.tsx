@@ -3,7 +3,6 @@ import { Recipe } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
   recipes: [] as Recipe[],
-  filteredRecipes: [] as Recipe[],
   likedRecipes: {
     recipes: [] as Recipe[],
     totalAmount: 0,
@@ -15,6 +14,11 @@ const INITIAL_VALUE = {
     "medium (~3hrs)",
     "Long (~6hrs)",
   ],
+
+  // variables for filtering recipes
+  recipeTitle: "" as string,
+  chosenRecipeType: "" as string,
+  chosenRecipeLength: "" as string,
 };
 
 const recipeSlice = createSlice({
@@ -35,22 +39,6 @@ const recipeSlice = createSlice({
       });
     },
 
-    filterRecipesByTitle(state, action: PayloadAction<string>) {
-      state.filteredRecipes = state.recipes.filter(
-        (recipe) =>
-          recipe.title
-            .toString()
-            .toLowerCase()
-            .trim()
-            .includes(action.payload.toLowerCase().trim()) &&
-          recipe.title
-            .toString()
-            .toLowerCase()
-            .trim()
-            .startsWith(action.payload.toLowerCase().trim()[0])
-      );
-    },
-
     addLikedRecipe(state, action: PayloadAction<number>) {
       const likedRecipe = state.recipes.find(
         (recipe) => recipe.id === action.payload
@@ -63,6 +51,9 @@ const recipeSlice = createSlice({
         (recipe) => recipe.id !== action.payload
       );
       state.likedRecipes.totalAmount--;
+    },
+    setFilterTitle(state, action: PayloadAction<string>) {
+      state.recipeTitle = action.payload;
     },
   },
 });

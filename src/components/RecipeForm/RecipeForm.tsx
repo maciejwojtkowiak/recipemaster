@@ -17,7 +17,6 @@ import { auth } from "../../Firebase";
 import { useSelector } from "react-redux";
 import SelectComponent from "./SelectComponent";
 import { RootState } from "../../store/store";
-import RecipesBox from "../Home/RecipesBox";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -56,8 +55,6 @@ const RecipeForm = () => {
     const newValue = e.target.value;
     setValue(newValue);
   };
-
-  console.log(recipeTypes.map((recipe, i) => "option" + `${i} = ${recipe}`));
 
   return (
     <React.Fragment>
