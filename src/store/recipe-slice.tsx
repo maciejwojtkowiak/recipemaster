@@ -28,13 +28,21 @@ const recipeSlice = createSlice({
       });
     },
 
-    filterRecipes(state, action: PayloadAction<string>) {
-      state.filteredRecipes = state.recipes.filter((recipe) =>
-        recipe.title
-          .toLowerCase()
-          .trim()
-          .includes(action.payload.toLowerCase().trim())
+    filterRecipesByTitle(state, action: PayloadAction<string>) {
+      state.filteredRecipes = state.recipes.filter(
+        (recipe) =>
+          recipe.title
+            .toString()
+            .toLowerCase()
+            .trim()
+            .includes(action.payload.toLowerCase().trim()) &&
+          recipe.title
+            .toString()
+            .toLowerCase()
+            .trim()
+            .startsWith(action.payload.toLowerCase().trim()[0])
       );
+      state.recipes.map((recipe) => console.log(recipe.title[0]));
     },
 
     addLikedRecipe(state, action: PayloadAction<number>) {
