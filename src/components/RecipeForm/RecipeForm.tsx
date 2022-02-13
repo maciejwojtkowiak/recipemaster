@@ -15,7 +15,7 @@ import { Recipe } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
 import { useSelector } from "react-redux";
-import SelectComponent from "./SelectComponent";
+import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 
 const RecipeForm = () => {
