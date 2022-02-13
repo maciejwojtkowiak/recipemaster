@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Recipe } from "../shared/types/Recipe";
+import { Recipe, FilterType, typeOfFiltering } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
   recipes: [] as Recipe[],
@@ -16,9 +16,9 @@ const INITIAL_VALUE = {
   ],
 
   // variables for filtering recipes
-  recipeTitle: "" as string,
-  chosenRecipeType: "" as string,
-  chosenRecipeLength: "" as string,
+  recipeTitle: "",
+  chosenRecipeTypes: [] as string[],
+  chosenRecipeLengths: [] as string[],
 };
 
 const recipeSlice = createSlice({
@@ -54,6 +54,14 @@ const recipeSlice = createSlice({
     },
     setFilterTitle(state, action: PayloadAction<string>) {
       state.recipeTitle = action.payload;
+    },
+    setFilterType(state, action: PayloadAction<FilterType>) {
+      if (
+        action.payload.type === typeOfFiltering.dishType &&
+        action.payload.set
+      ) {
+        state.chosenRecipeTypes.push(action.payload.content);
+      }
     },
   },
 });
