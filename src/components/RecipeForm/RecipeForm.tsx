@@ -14,7 +14,9 @@ import { useDispatch } from "react-redux";
 import { Recipe } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
-import SelectComponent from "./SelectComponent";
+import { useSelector } from "react-redux";
+import SelectComponent from "../UI/SelectComponent";
+import { RootState } from "../../store/store";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -23,6 +25,10 @@ const RecipeForm = () => {
   const [time, setTime] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const user = auth.currentUser;
+  const recipeTypes = useSelector(
+    (state: RootState) => state.recipe.recipeTypes
+  );
+  const recipeTime = useSelector((state: RootState) => state.recipe.recipeTime);
 
   const onSubmitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -64,19 +70,12 @@ const RecipeForm = () => {
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
-                option1="Breakfast"
-                option2="Lunch"
-                option3="Dinner"
-                option4="Supper"
+                values={recipeTypes}
               />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
-                option1="Very short (~30min)"
-                option2="short (~1hrs)"
-                option3="medium (~3hrs)"
-                option4="long (~6hrs)"
-                option5="very long (6hrs+)"
+                values={recipeTime}
               />
               <Textarea
                 onChange={(e) => onChangeHandler(e, setDescription)}

@@ -1,13 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Recipe } from "../shared/types/Recipe";
+import { Recipe, FilterType, typeOfFiltering } from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
   recipes: [] as Recipe[],
-  filteredRecipes: [] as Recipe[],
   likedRecipes: {
     recipes: [] as Recipe[],
     totalAmount: 0,
   },
+  recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
+  recipeTime: [
+    "Very short (~30min)",
+    "short (~1hr)",
+    "medium (~3hrs)",
+    "Long (~6hrs)",
+  ],
+
+  // variables for filtering recipes
+  recipeTitle: "",
+  chosenRecipeTypes: [] as string[],
+  chosenRecipeLengths: [] as string[],
 };
 
 const recipeSlice = createSlice({
@@ -28,23 +39,6 @@ const recipeSlice = createSlice({
       });
     },
 
-    filterRecipesByTitle(state, action: PayloadAction<string>) {
-      state.filteredRecipes = state.recipes.filter(
-        (recipe) =>
-          recipe.title
-            .toString()
-            .toLowerCase()
-            .trim()
-            .includes(action.payload.toLowerCase().trim()) &&
-          recipe.title
-            .toString()
-            .toLowerCase()
-            .trim()
-            .startsWith(action.payload.toLowerCase().trim()[0])
-      );
-      state.recipes.map((recipe) => console.log(recipe.title[0]));
-    },
-
     addLikedRecipe(state, action: PayloadAction<number>) {
       const likedRecipe = state.recipes.find(
         (recipe) => recipe.id === action.payload
@@ -57,6 +51,17 @@ const recipeSlice = createSlice({
         (recipe) => recipe.id !== action.payload
       );
       state.likedRecipes.totalAmount--;
+    },
+    setFilterTitle(state, action: PayloadAction<string>) {
+      state.recipeTitle = action.payload;
+    },
+    setFilterType(state, action: PayloadAction<FilterType>) {
+      if (
+        action.payload.type === typeOfFiltering.dishType &&
+        action.payload.set
+      ) {
+        state.chosenRecipeTypes.push(action.payload.content);
+      }
     },
   },
 });

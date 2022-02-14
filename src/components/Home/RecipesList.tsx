@@ -4,13 +4,21 @@ import { Flex, Grid } from "@chakra-ui/react";
 import RecipeItem from "./RecipeItem";
 
 const RecipesList = () => {
-  const initialRecipes = useSelector(
-    (state: RootState) => state.recipe.recipes
+  const title = useSelector((state: RootState) => state.recipe.recipeTitle);
+  const chosenTypes = useSelector(
+    (state: RootState) => state.recipe.chosenRecipeTypes
   );
-  const filteredRecipes = useSelector(
-    (state: RootState) => state.recipe.filteredRecipes
+  console.log(chosenTypes);
+  const filteredRecipes = useSelector((state: RootState) =>
+    state.recipe.recipes.filter(
+      (recipe) =>
+        recipe.title.toLowerCase().trim().includes(title) &&
+        recipe.title
+          .toLowerCase()
+          .trim()
+          .startsWith(title.length !== 0 ? title[0] : "")
+    )
   );
-  let recipes = filteredRecipes.length > 0 ? filteredRecipes : initialRecipes;
 
   return (
     <Flex
@@ -27,7 +35,7 @@ const RecipesList = () => {
         templateColumns="repeat(3, 1fr)"
         templateRows="repeat(2, 1fr)"
       >
-        {recipes.map((recipe) => (
+        {filteredRecipes.map((recipe) => (
           <RecipeItem
             key={recipe.id}
             username={recipe.username}

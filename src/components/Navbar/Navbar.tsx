@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(recipeAction.filterRecipesByTitle(e.target.value));
+    dispatch(recipeAction.setFilterTitle(e.target.value));
   };
 
   return (
