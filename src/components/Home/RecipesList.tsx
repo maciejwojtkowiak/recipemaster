@@ -5,6 +5,10 @@ import RecipeItem from "./RecipeItem";
 
 const RecipesList = () => {
   const title = useSelector((state: RootState) => state.recipe.recipeTitle);
+  const chosenTypes = useSelector(
+    (state: RootState) => state.recipe.chosenRecipeTypes
+  );
+  console.log(chosenTypes);
   const filteredRecipes = useSelector((state: RootState) =>
     state.recipe.recipes.filter(
       (recipe) =>

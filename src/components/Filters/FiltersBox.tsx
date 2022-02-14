@@ -3,15 +3,21 @@ import FilterType from "./FilterType";
 import { useDispatch } from "react-redux";
 import React from "react";
 import { recipeAction } from "../../store/recipe-slice";
+import { typeOfFiltering } from "../../shared/types/Recipe";
 
 const FilterBox = () => {
   const dispatch = useDispatch();
-  // dodaj typ do array
   const onTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.checked) {
-      const title = e.target.value;
-      dispatch(recipeAction.setFilterTitle(title));
+      const content = e.target.value;
+      dispatch(
+        recipeAction.setFilterType({
+          type: typeOfFiltering.dishType,
+          set: true,
+          content: content,
+        })
+      );
     }
 
     if (!e.target.checked) {
