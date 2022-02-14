@@ -1,13 +1,13 @@
 import { Select } from "@chakra-ui/react";
 import React from "react";
 
-interface funcProp {
+interface FuncProp {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeHolder: string;
   values: string[];
 }
 
-const SelectComponent: React.FC<funcProp> = (props) => {
+const SelectComponent: React.FC<FuncProp> = (props) => {
   return (
     <Select onChange={props.onChange}>
       {props.values.map((value) => {
