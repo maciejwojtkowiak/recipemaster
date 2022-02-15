@@ -12,15 +12,11 @@ interface FuncProps {
 
 const FilterItems: React.FC<FuncProps> = (props) => {
   const dispatch = useDispatch();
-  const chosenTypes = useSelector(
-    (state: RootState) => state.recipe.chosenRecipeTypes
-  );
 
-  console.log(chosenTypes);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
     dispatch(
-      recipeAction.setFilterType({
+      recipeAction.setFilters({
         type: props.type,
         set: e.target.checked,
         content: content,

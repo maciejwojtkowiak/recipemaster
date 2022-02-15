@@ -21,6 +21,7 @@ const FilterType = () => {
 
   const lengthOfDishes = typeOfFiltering.dishLength;
   const typeOfDishes = typeOfFiltering.dishType;
+  console.log(typeOfDishes);
 
   return (
     <Box width="20%">

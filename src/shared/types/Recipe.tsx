@@ -3,7 +3,7 @@ export enum typeOfFiltering {
   dishLength,
 }
 
-export type FilterType = {
+export type FilteringConfiguration = {
   content: string;
   type: typeOfFiltering;
   set: boolean;

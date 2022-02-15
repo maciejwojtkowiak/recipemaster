@@ -6,10 +6,11 @@ import RecipeItem from "./RecipeItem";
 const RecipesList = () => {
   const title = useSelector((state: RootState) => state.recipe.recipeTitle);
   const chosenTypes = useSelector(
-    (state: RootState) => state.recipe.chosenRecipeTypes
+    (state: RootState) => state.recipe.filterTypes
   );
 
   const checkChosenFilters = (filters: string[], valueToCheck: string) => {
+    console.log(filters);
     if (filters.length === 0) return true;
     if (filters.length > 0) {
       return filters.includes(valueToCheck);
