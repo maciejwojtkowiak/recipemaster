@@ -56,11 +56,32 @@ const recipeSlice = createSlice({
       state.recipeTitle = action.payload;
     },
     setFilterType(state, action: PayloadAction<FilterType>) {
-      if (
-        action.payload.type === typeOfFiltering.dishType &&
-        action.payload.set
-      ) {
-        state.chosenRecipeTypes.push(action.payload.content);
+      if (action.payload.type === typeOfFiltering.dishType) {
+        const chosenType = action.payload.content;
+        if (action.payload.set) {
+          state.chosenRecipeTypes.push(chosenType);
+        }
+        if (!action.payload.set) {
+          const found = state.chosenRecipeTypes.find(
+            (recipeType) => recipeType === chosenType
+          );
+          const unselectedFilterType = state.chosenRecipeTypes.filter(
+            (recipe) => recipe !== found
+          );
+          state.chosenRecipeTypes = unselectedFilterType;
+        }
+      }
+
+      if (action.payload.type === typeOfFiltering.dishLength) {
+        const chosenType = action.payload.content;
+        if (action.payload.set) {
+          state.chosenRecipeLengths.push(chosenType);
+        }
+        if (!action.payload.set) {
+          state.chosenRecipeLengths.filter(
+            (recipeType) => recipeType !== chosenType
+          );
+        }
       }
     },
   },

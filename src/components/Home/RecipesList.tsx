@@ -8,7 +8,14 @@ const RecipesList = () => {
   const chosenTypes = useSelector(
     (state: RootState) => state.recipe.chosenRecipeTypes
   );
-  console.log(chosenTypes);
+
+  const checkChosenFilters = (filters: string[], valueToCheck: string) => {
+    if (filters.length === 0) return true;
+    if (filters.length > 0) {
+      return filters.includes(valueToCheck);
+    }
+  };
+
   const filteredRecipes = useSelector((state: RootState) =>
     state.recipe.recipes.filter(
       (recipe) =>
@@ -16,7 +23,8 @@ const RecipesList = () => {
         recipe.title
           .toLowerCase()
           .trim()
-          .startsWith(title.length !== 0 ? title[0] : "")
+          .startsWith(title.length !== 0 ? title[0] : "") &&
+        checkChosenFilters(chosenTypes, recipe.type)
     )
   );
 
