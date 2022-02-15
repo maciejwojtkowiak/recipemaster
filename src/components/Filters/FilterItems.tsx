@@ -15,13 +15,23 @@ const FilterItems: React.FC<FuncProps> = (props) => {
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
-    dispatch(
-      recipeAction.setFilters({
-        type: props.type,
-        set: e.target.checked,
-        content: content,
-      })
-    );
+    if (e.target.checked) {
+      dispatch(
+        recipeAction.addFilters({
+          type: props.type,
+          content: content,
+        })
+      );
+    }
+
+    if (!e.target.checked) {
+      dispatch(
+        recipeAction.removeFilters({
+          type: props.type,
+          content: content,
+        })
+      );
+    }
   };
 
   return (

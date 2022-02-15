@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Recipe, FilteringConfiguration } from "../shared/types/Recipe";
-
-type initialOptions = {
-  [key: string]: any;
-};
+import {
+  Recipe,
+  FilteringConfiguration,
+  typeOfFiltering,
+} from "../shared/types/Recipe";
 
 const INITIAL_VALUE = {
   recipes: [] as Recipe[],
@@ -59,13 +59,31 @@ const recipeSlice = createSlice({
     setFilterTitle(state, action: PayloadAction<string>) {
       state.recipeTitle = action.payload;
     },
-    setFilters(state, action: PayloadAction<FilteringConfiguration>) {
-      if (action.payload.set) {
+    addFilters(state, action: PayloadAction<FilteringConfiguration>) {
+      if (action.payload.type === typeOfFiltering.dishType) {
         state.filterTypes.push(action.payload.content);
+      }
+
+      if (action.payload.type === typeOfFiltering.dishLength) {
+        state.filterLengths.push(action.payload.content);
       }
     },
 
-    removeFilter(state, action: PayloadAction<FilteringConfiguration>) {},
+    removeFilters(state, action: PayloadAction<FilteringConfiguration>) {
+      if (action.payload.type === typeOfFiltering.dishType) {
+        const removedFilter = state.filterTypes.filter(
+          (length) => length !== action.payload.content
+        );
+        state.filterTypes = removedFilter;
+      }
+
+      if (action.payload.type === typeOfFiltering.dishLength) {
+        const removedFilter = state.filterLengths.filter(
+          (length) => length !== action.payload.content
+        );
+        state.filterTypes = removedFilter;
+      }
+    },
   },
 });
 

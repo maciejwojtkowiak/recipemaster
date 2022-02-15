@@ -6,7 +6,6 @@ export enum typeOfFiltering {
 export type FilteringConfiguration = {
   content: string;
   type: typeOfFiltering;
-  set: boolean;
 };
 
 export type Recipe = {
