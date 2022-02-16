@@ -12,7 +12,9 @@ interface FuncProps {
 
 const FilterItems: React.FC<FuncProps> = (props) => {
   const dispatch = useDispatch();
-  const filtered = useSelector((state: RootState) => state.recipe.filterTypes);
+  const filtered = useSelector(
+    (state: RootState) => state.recipe.filters.filterTypes
+  );
   console.log(filtered);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;

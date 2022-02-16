@@ -6,7 +6,7 @@ import RecipeItem from "./RecipeItem";
 const RecipesList = () => {
   const title = useSelector((state: RootState) => state.recipe.recipeTitle);
   const chosenTypes = useSelector(
-    (state: RootState) => state.recipe.filterTypes
+    (state: RootState) => state.recipe.filters.filterTypes
   );
 
   const checkChosenFilters = (filters: string[], valueToCheck: string) => {

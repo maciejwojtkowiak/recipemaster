@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import FilterType from "../components/Filters/FilterType";
 import {
   Recipe,
   FilteringConfiguration,
@@ -22,8 +23,10 @@ const INITIAL_VALUE: InitialState = {
 
   // variables for filtering recipes
   recipeTitle: "",
-  filterTypes: [] as string[],
-  filterLengths: [] as string[],
+  filters: {
+    filterLengths: [] as string[],
+    filterTypes: [] as string[],
+  },
 };
 
 const recipeSlice = createSlice({
@@ -61,26 +64,26 @@ const recipeSlice = createSlice({
       state.recipeTitle = action.payload;
     },
     addFilters(state, action: PayloadAction<FilteringConfiguration>) {
-      const arr = state[action.payload.filterName];
+      const arr = state.filters[action.payload.filterName];
       if (Array.isArray(arr)) {
         arr.push(action.payload.content);
-        state[action.payload.filterName] = arr;
+        state.filters[action.payload.filterName] = arr;
       }
     },
 
     removeFilters(state, action: PayloadAction<FilteringConfiguration>) {
       if (action.payload.type === typeOfFiltering.dishType) {
-        const removedFilter = state.filterTypes.filter(
+        const removedFilter = state.filters.filterTypes.filter(
           (length) => length !== action.payload.content
         );
-        state.filterTypes = removedFilter;
+        state.filters.filterTypes = removedFilter;
       }
 
       if (action.payload.type === typeOfFiltering.dishLength) {
-        const removedFilter = state.filterLengths.filter(
+        const removedFilter = state.filters.filterLengths.filter(
           (length) => length !== action.payload.content
         );
-        state.filterTypes = removedFilter;
+        state.filters.filterTypes = removedFilter;
       }
     },
   },

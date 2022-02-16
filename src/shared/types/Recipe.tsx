@@ -3,6 +3,11 @@ export enum typeOfFiltering {
   dishLength,
 }
 
+interface filters {
+  filterTypes: string[];
+  filterLengths: string[];
+}
+
 export interface InitialState {
   recipes: Recipe[];
   likedRecipes: {
@@ -12,17 +17,15 @@ export interface InitialState {
   recipeTypes: string[];
   recipeTime: string[];
   recipeTitle: string;
-  filterTypes: string[];
-  filterLengths: string[];
+  filters: filters;
 }
 
 export type FilteringConfiguration = {
   content: string;
   type: typeOfFiltering;
-  filterName: Exclude<
-    keyof InitialState,
-    "recipes" | "likedRecipes" | "recipeTitle"
-  >; // <--
+  filterName: keyof filters;
+
+  // <--
 };
 
 export type Recipe = {
