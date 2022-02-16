@@ -1,3 +1,4 @@
+import { filter } from "@chakra-ui/react";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import FilterType from "../components/Filters/FilterType";
 import {
@@ -64,27 +65,16 @@ const recipeSlice = createSlice({
       state.recipeTitle = action.payload;
     },
     addFilters(state, action: PayloadAction<FilteringConfiguration>) {
-      const arr = state.filters[action.payload.filterName];
-      if (Array.isArray(arr)) {
-        arr.push(action.payload.content);
-        state.filters[action.payload.filterName] = arr;
-      }
+      const filterArray = state.filters[action.payload.filterName];
+      filterArray.push(action.payload.content);
+      state.filters[action.payload.filterName] = filterArray;
     },
 
     removeFilters(state, action: PayloadAction<FilteringConfiguration>) {
-      if (action.payload.type === typeOfFiltering.dishType) {
-        const removedFilter = state.filters.filterTypes.filter(
-          (length) => length !== action.payload.content
-        );
-        state.filters.filterTypes = removedFilter;
-      }
-
-      if (action.payload.type === typeOfFiltering.dishLength) {
-        const removedFilter = state.filters.filterLengths.filter(
-          (length) => length !== action.payload.content
-        );
-        state.filters.filterTypes = removedFilter;
-      }
+      const filteredArray = state.filters[action.payload.filterName].filter(
+        (filterItem) => filterItem !== action.payload.content
+      );
+      state.filters[action.payload.filterName] = filteredArray;
     },
   },
 });
