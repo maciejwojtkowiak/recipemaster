@@ -3,21 +3,22 @@ import {
   Recipe,
   FilteringConfiguration,
   typeOfFiltering,
+  InitialState,
 } from "../shared/types/Recipe";
 
-const INITIAL_VALUE = {
-  recipes: [] as Recipe[],
+const INITIAL_VALUE: InitialState = {
+  recipes: [],
   likedRecipes: {
-    recipes: [] as Recipe[],
+    recipes: [],
     totalAmount: 0,
   },
-  recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"] as string[], // tutaj dodaj czas i typy
+  recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
   recipeTime: [
     "Very short (~30min)",
     "short (~1hr)",
     "medium (~3hrs)",
     "Long (~6hrs)",
-  ] as string[],
+  ],
 
   // variables for filtering recipes
   recipeTitle: "",
@@ -60,12 +61,10 @@ const recipeSlice = createSlice({
       state.recipeTitle = action.payload;
     },
     addFilters(state, action: PayloadAction<FilteringConfiguration>) {
-      if (action.payload.type === typeOfFiltering.dishType) {
-        state.filterTypes.push(action.payload.content);
-      }
-
-      if (action.payload.type === typeOfFiltering.dishLength) {
-        state.filterLengths.push(action.payload.content);
+      const arr = state[action.payload.filterName];
+      if (Array.isArray(arr)) {
+        arr.push(action.payload.content);
+        state[action.payload.filterName] = arr;
       }
     },
 

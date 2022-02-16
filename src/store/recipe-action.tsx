@@ -20,7 +20,6 @@ export const sendData = (recipe: Recipe) => {
 
     try {
       await sendRecipe();
-      console.log("sent");
     } catch {
       console.error("Error");
     }

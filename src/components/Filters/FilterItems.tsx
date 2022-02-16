@@ -12,7 +12,8 @@ interface FuncProps {
 
 const FilterItems: React.FC<FuncProps> = (props) => {
   const dispatch = useDispatch();
-
+  const filtered = useSelector((state: RootState) => state.recipe.filterTypes);
+  console.log(filtered);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
     if (e.target.checked) {
@@ -20,6 +21,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         recipeAction.addFilters({
           type: props.type,
           content: content,
+          filterName: "filterTypes",
         })
       );
     }
@@ -29,6 +31,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         recipeAction.removeFilters({
           type: props.type,
           content: content,
+          filterName: "filterTypes",
         })
       );
     }
