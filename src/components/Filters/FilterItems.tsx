@@ -1,29 +1,23 @@
 import { Checkbox } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
-import { typeOfFiltering } from "../../shared/types/Recipe";
 import React from "react";
-import { RootState } from "../../store/store";
+import { filters } from "../../shared/types/Recipe";
 
 interface FuncProps {
   options: string[];
-  type: typeOfFiltering;
+  filterName: keyof filters;
 }
 
 const FilterItems: React.FC<FuncProps> = (props) => {
   const dispatch = useDispatch();
-  const filtered = useSelector(
-    (state: RootState) => state.recipe.filters.filterTypes
-  );
-  console.log(filtered);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
     if (e.target.checked) {
       dispatch(
         recipeAction.addFilters({
-          type: props.type,
           content: content,
-          filterName: "filterTypes",
+          filterName: props.filterName,
         })
       );
     }
@@ -31,9 +25,8 @@ const FilterItems: React.FC<FuncProps> = (props) => {
     if (!e.target.checked) {
       dispatch(
         recipeAction.removeFilters({
-          type: props.type,
           content: content,
-          filterName: "filterTypes",
+          filterName: props.filterName,
         })
       );
     }

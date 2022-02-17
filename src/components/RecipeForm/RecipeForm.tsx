@@ -28,7 +28,9 @@ const RecipeForm = () => {
   const recipeTypes = useSelector(
     (state: RootState) => state.recipe.recipeTypes
   );
-  const recipeTime = useSelector((state: RootState) => state.recipe.recipeTime);
+  const recipeLengths = useSelector(
+    (state: RootState) => state.recipe.recipeLengths
+  );
 
   const onSubmitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -75,7 +77,7 @@ const RecipeForm = () => {
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
-                values={recipeTime}
+                values={recipeLengths}
               />
               <Textarea
                 onChange={(e) => onChangeHandler(e, setDescription)}

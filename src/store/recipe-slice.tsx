@@ -1,10 +1,7 @@
-import { filter } from "@chakra-ui/react";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import FilterType from "../components/Filters/FilterType";
 import {
   Recipe,
   FilteringConfiguration,
-  typeOfFiltering,
   InitialState,
 } from "../shared/types/Recipe";
 
@@ -15,7 +12,7 @@ const INITIAL_VALUE: InitialState = {
     totalAmount: 0,
   },
   recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
-  recipeTime: [
+  recipeLengths: [
     "Very short (~30min)",
     "short (~1hr)",
     "medium (~3hrs)",
@@ -25,8 +22,8 @@ const INITIAL_VALUE: InitialState = {
   // variables for filtering recipes
   recipeTitle: "",
   filters: {
-    filterLengths: [] as string[],
-    filterTypes: [] as string[],
+    filterLengths: [],
+    filterTypes: [],
   },
 };
 

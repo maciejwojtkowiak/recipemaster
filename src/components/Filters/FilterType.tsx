@@ -1,13 +1,6 @@
-import {
-  Menu,
-  MenuList,
-  MenuButton,
-  Checkbox,
-  Button,
-  Box,
-} from "@chakra-ui/react";
+import { Menu, MenuList, MenuButton, Button, Box } from "@chakra-ui/react";
 import FilterItems from "./FilterItems";
-import { typeOfFiltering } from "../../shared/types/Recipe";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
@@ -16,19 +9,22 @@ const FilterType = () => {
     (state: RootState) => state.recipe.recipeTypes
   );
   const lengthOfDishesOptions = useSelector(
-    (state: RootState) => state.recipe.recipeTypes
+    (state: RootState) => state.recipe.recipeLengths
   );
-
-  const lengthOfDishes = typeOfFiltering.dishLength;
-  const typeOfDishes = typeOfFiltering.dishType;
-  console.log(typeOfDishes);
 
   return (
     <Box width="20%">
       <Menu>
         <MenuButton as={Button}>Choose type</MenuButton>
         <MenuList>
-          <FilterItems options={typesOfDishesOptions} type={typeOfDishes} />
+          <FilterItems
+            options={typesOfDishesOptions}
+            filterName="filterTypes"
+          />
+          <FilterItems
+            options={lengthOfDishesOptions}
+            filterName="filterLengths"
+          />
         </MenuList>
       </Menu>
     </Box>

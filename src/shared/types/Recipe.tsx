@@ -1,9 +1,4 @@
-export enum typeOfFiltering {
-  dishType,
-  dishLength,
-}
-
-interface filters {
+export interface filters {
   filterTypes: string[];
   filterLengths: string[];
 }
@@ -15,17 +10,14 @@ export interface InitialState {
     totalAmount: number;
   };
   recipeTypes: string[];
-  recipeTime: string[];
+  recipeLengths: string[];
   recipeTitle: string;
   filters: filters;
 }
 
 export type FilteringConfiguration = {
   content: string;
-  type: typeOfFiltering;
   filterName: keyof filters;
-
-  // <--
 };
 
 export type Recipe = {
