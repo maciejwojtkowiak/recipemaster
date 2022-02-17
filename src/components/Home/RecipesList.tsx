@@ -13,7 +13,6 @@ const RecipesList = () => {
   );
 
   const checkChosenFilters = (filters: string[], valueToCheck: string) => {
-    console.log(filters);
     if (filters.length === 0) return true;
     if (filters.length > 0) {
       return filters.includes(valueToCheck);
@@ -33,6 +32,8 @@ const RecipesList = () => {
     )
   );
 
+  const noRecipes = filteredRecipes.length === 0 ? true : false;
+
   return (
     <Flex
       height="100%"
@@ -48,17 +49,19 @@ const RecipesList = () => {
         templateColumns="repeat(3, 1fr)"
         templateRows="repeat(2, 1fr)"
       >
-        {filteredRecipes.map((recipe) => (
-          <RecipeItem
-            key={recipe.id}
-            username={recipe.username}
-            id={recipe.id}
-            title={recipe.title}
-            type={recipe.type}
-            description={recipe.description}
-            time={recipe.time}
-          />
-        ))}
+        {noRecipes && <h1>No recipes found</h1>}
+        {!noRecipes &&
+          filteredRecipes.map((recipe) => (
+            <RecipeItem
+              key={recipe.id}
+              username={recipe.username}
+              id={recipe.id}
+              title={recipe.title}
+              type={recipe.type}
+              description={recipe.description}
+              time={recipe.time}
+            />
+          ))}
       </Grid>
     </Flex>
   );

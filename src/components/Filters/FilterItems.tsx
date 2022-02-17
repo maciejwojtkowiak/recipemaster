@@ -1,4 +1,4 @@
-import { Checkbox } from "@chakra-ui/react";
+import { Checkbox, Stack } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import React from "react";
@@ -7,6 +7,7 @@ import { filters } from "../../shared/types/Recipe";
 interface FuncProps {
   options: string[];
   filterName: keyof filters;
+  filterTitle: string;
 }
 
 const FilterItems: React.FC<FuncProps> = (props) => {
@@ -34,13 +35,16 @@ const FilterItems: React.FC<FuncProps> = (props) => {
 
   return (
     <React.Fragment>
-      {props.options.map((option) => {
-        return (
-          <Checkbox key={option} value={option} onChange={onChangeHandler}>
-            {option}
-          </Checkbox>
-        );
-      })}
+      <Checkbox>{props.filterTitle}</Checkbox>
+      <Stack pl={6} mt={1} spacing={1}>
+        {props.options.map((option) => {
+          return (
+            <Checkbox key={option} value={option} onChange={onChangeHandler}>
+              {option}
+            </Checkbox>
+          );
+        })}
+      </Stack>
     </React.Fragment>
   );
 };

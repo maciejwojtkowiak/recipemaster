@@ -18,10 +18,12 @@ const FilterType = () => {
         <MenuButton as={Button}>Choose type</MenuButton>
         <MenuList>
           <FilterItems
+            filterTitle="Types"
             options={typesOfDishesOptions}
             filterName="filterTypes"
           />
           <FilterItems
+            filterTitle="Lengths"
             options={lengthOfDishesOptions}
             filterName="filterLengths"
           />
