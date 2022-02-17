@@ -5,6 +5,7 @@ import {
   Flex,
   Textarea,
   Button,
+  Grid,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -65,28 +66,41 @@ const RecipeForm = () => {
         <form onSubmit={onSubmitHandler}>
           <Flex justifyContent="center" alignItems="center" width="50vw">
             <FormControl textAlign="center">
-              <Input
-                onChange={(e) => onChangeHandler(e, setTitle)}
-                placeholder="Name for your recipe"
-              />
-              <SelectComponent
-                onChange={(e) => onChangeHandler(e, setType)}
-                placeHolder="Choose type of your dish"
-                values={recipeTypes}
-              />
-              <SelectComponent
-                onChange={(e) => onChangeHandler(e, setTime)}
-                placeHolder="Choose length of preparing"
-                values={recipeLengths}
-              />
-              <Textarea
-                onChange={(e) => onChangeHandler(e, setDescription)}
-                placeholder="Description"
-                cols={20}
-                rows={20}
-                resize="none"
-              />
-              <Button type="submit">Submit</Button>
+              <Grid gap="1rem">
+                <Input
+                  onChange={(e) => onChangeHandler(e, setTitle)}
+                  placeholder="Name for your recipe"
+                />
+                <SelectComponent
+                  onChange={(e) => onChangeHandler(e, setType)}
+                  placeHolder="Choose type of your dish"
+                  values={recipeTypes}
+                />
+                <SelectComponent
+                  onChange={(e) => onChangeHandler(e, setTime)}
+                  placeHolder="Choose length of preparing"
+                  values={recipeLengths}
+                />
+                <Textarea
+                  onChange={(e) => onChangeHandler(e, setDescription)}
+                  placeholder="Description"
+                  cols={20}
+                  rows={20}
+                  resize="none"
+                />
+                <Button
+                  width="30%"
+                  bgGradient="linear(to-r, orange.300, orange.400)"
+                  color="white"
+                  justifySelf="center"
+                  type="submit"
+                  _hover={{
+                    bgGradient: "linear(to-r, orange.200, orange.400)",
+                  }}
+                >
+                  Submit
+                </Button>
+              </Grid>
             </FormControl>
           </Flex>
         </form>
