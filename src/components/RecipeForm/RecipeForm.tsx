@@ -18,11 +18,13 @@ import { auth } from "../../Firebase";
 import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
+import AddIngredients from "./AddIngredients";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<string>("");
   const [type, setType] = useState<string>("");
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [time, setTime] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const user = auth.currentUser;
@@ -43,6 +45,7 @@ const RecipeForm = () => {
         description: description,
         id: Math.random(),
         time: time,
+        ingredients: [],
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
@@ -57,6 +60,12 @@ const RecipeForm = () => {
   ): void => {
     const newValue = e.target.value;
     setValue(newValue);
+  };
+
+  const ingredientIsAdded = (ingredient: string) => {
+    setIngredients((previousIngredients) =>
+      previousIngredients.concat(ingredient)
+    );
   };
 
   return (
@@ -76,6 +85,7 @@ const RecipeForm = () => {
                   placeHolder="Choose type of your dish"
                   values={recipeTypes}
                 />
+                <AddIngredients ingredientIsAdded={ingredientIsAdded} />
                 <SelectComponent
                   onChange={(e) => onChangeHandler(e, setTime)}
                   placeHolder="Choose length of preparing"

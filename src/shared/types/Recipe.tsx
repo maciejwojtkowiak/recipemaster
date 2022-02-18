@@ -27,4 +27,5 @@ export type Recipe = {
   type: string;
   time: string;
   description: string;
+  ingredients: string[];
 };
