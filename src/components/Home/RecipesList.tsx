@@ -6,7 +6,10 @@ import RecipeItem from "./RecipeItem";
 const RecipesList = () => {
   const title = useSelector((state: RootState) => state.recipe.recipeTitle);
   const chosenTypes = useSelector(
-    (state: RootState) => state.recipe.chosenRecipeTypes
+    (state: RootState) => state.recipe.filters.filterTypes
+  );
+  const chosenLengths = useSelector(
+    (state: RootState) => state.recipe.filters.filterLengths
   );
 
   const checkChosenFilters = (filters: string[], valueToCheck: string) => {
@@ -24,9 +27,12 @@ const RecipesList = () => {
           .toLowerCase()
           .trim()
           .startsWith(title.length !== 0 ? title[0] : "") &&
-        checkChosenFilters(chosenTypes, recipe.type)
+        checkChosenFilters(chosenTypes, recipe.type) &&
+        checkChosenFilters(chosenLengths, recipe.time)
     )
   );
+
+  const noRecipes = filteredRecipes.length === 0 ? true : false;
 
   return (
     <Flex
@@ -43,17 +49,19 @@ const RecipesList = () => {
         templateColumns="repeat(3, 1fr)"
         templateRows="repeat(2, 1fr)"
       >
-        {filteredRecipes.map((recipe) => (
-          <RecipeItem
-            key={recipe.id}
-            username={recipe.username}
-            id={recipe.id}
-            title={recipe.title}
-            type={recipe.type}
-            description={recipe.description}
-            time={recipe.time}
-          />
-        ))}
+        {noRecipes && <h1>No recipes found</h1>}
+        {!noRecipes &&
+          filteredRecipes.map((recipe) => (
+            <RecipeItem
+              key={recipe.id}
+              username={recipe.username}
+              id={recipe.id}
+              title={recipe.title}
+              type={recipe.type}
+              description={recipe.description}
+              time={recipe.time}
+            />
+          ))}
       </Grid>
     </Flex>
   );

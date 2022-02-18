@@ -10,7 +10,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 
-const RecipeItem: React.FC<Recipe> = (props) => {
+type listedRecipe = {
+  id: number;
+  username: string;
+  title: string;
+  type: string;
+  time: string;
+  description: string;
+};
+
+const RecipeItem: React.FC<listedRecipe> = (props) => {
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 

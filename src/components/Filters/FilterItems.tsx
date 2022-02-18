@@ -1,42 +1,50 @@
-import { Checkbox } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { Checkbox, Stack } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
-import { typeOfFiltering } from "../../shared/types/Recipe";
 import React from "react";
-import { RootState } from "../../store/store";
+import { filters } from "../../shared/types/Recipe";
 
 interface FuncProps {
   options: string[];
-  type: typeOfFiltering;
+  filterName: keyof filters;
+  filterTitle: string;
 }
 
 const FilterItems: React.FC<FuncProps> = (props) => {
   const dispatch = useDispatch();
-  const chosenTypes = useSelector(
-    (state: RootState) => state.recipe.chosenRecipeTypes
-  );
-
-  console.log(chosenTypes);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
-    dispatch(
-      recipeAction.setFilterType({
-        type: props.type,
-        set: e.target.checked,
-        content: content,
-      })
-    );
+    if (e.target.checked) {
+      dispatch(
+        recipeAction.addFilters({
+          content: content,
+          filterName: props.filterName,
+        })
+      );
+    }
+
+    if (!e.target.checked) {
+      dispatch(
+        recipeAction.removeFilters({
+          content: content,
+          filterName: props.filterName,
+        })
+      );
+    }
   };
 
   return (
     <React.Fragment>
-      {props.options.map((option) => {
-        return (
-          <Checkbox key={option} value={option} onChange={onChangeHandler}>
-            {option}
-          </Checkbox>
-        );
-      })}
+      <Checkbox>{props.filterTitle}</Checkbox>
+      <Stack pl={6} mt={1} spacing={1}>
+        {props.options.map((option) => {
+          return (
+            <Checkbox key={option} value={option} onChange={onChangeHandler}>
+              {option}
+            </Checkbox>
+          );
+        })}
+      </Stack>
     </React.Fragment>
   );
 };

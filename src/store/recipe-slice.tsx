@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Recipe, FilterType, typeOfFiltering } from "../shared/types/Recipe";
+import {
+  Recipe,
+  FilteringConfiguration,
+  InitialState,
+} from "../shared/types/Recipe";
 
-const INITIAL_VALUE = {
-  recipes: [] as Recipe[],
+const INITIAL_VALUE: InitialState = {
+  recipes: [],
   likedRecipes: {
-    recipes: [] as Recipe[],
+    recipes: [],
     totalAmount: 0,
   },
   recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
-  recipeTime: [
+  recipeLengths: [
     "Very short (~30min)",
     "short (~1hr)",
     "medium (~3hrs)",
@@ -17,8 +21,10 @@ const INITIAL_VALUE = {
 
   // variables for filtering recipes
   recipeTitle: "",
-  chosenRecipeTypes: [] as string[],
-  chosenRecipeLengths: [] as string[],
+  filters: {
+    filterLengths: [],
+    filterTypes: [],
+  },
 };
 
 const recipeSlice = createSlice({
@@ -36,53 +42,37 @@ const recipeSlice = createSlice({
         description: action.payload.description,
         id: action.payload.id,
         time: action.payload.time,
+        ingredients: action.payload.ingredients,
       });
     },
 
     addLikedRecipe(state, action: PayloadAction<number>) {
       const likedRecipe = state.recipes.find(
-        (recipe) => recipe.id === action.payload
+        (recipe: Recipe) => recipe.id === action.payload
       ) as Recipe;
       state.likedRecipes.recipes.push(likedRecipe);
       state.likedRecipes.totalAmount++;
     },
     deleteLikedRecipe(state, action: PayloadAction<number>) {
       state.likedRecipes.recipes = state.likedRecipes.recipes.filter(
-        (recipe) => recipe.id !== action.payload
+        (recipe: Recipe) => recipe.id !== action.payload
       );
       state.likedRecipes.totalAmount--;
     },
     setFilterTitle(state, action: PayloadAction<string>) {
       state.recipeTitle = action.payload;
     },
-    setFilterType(state, action: PayloadAction<FilterType>) {
-      if (action.payload.type === typeOfFiltering.dishType) {
-        const chosenType = action.payload.content;
-        if (action.payload.set) {
-          state.chosenRecipeTypes.push(chosenType);
-        }
-        if (!action.payload.set) {
-          const found = state.chosenRecipeTypes.find(
-            (recipeType) => recipeType === chosenType
-          );
-          const unselectedFilterType = state.chosenRecipeTypes.filter(
-            (recipe) => recipe !== found
-          );
-          state.chosenRecipeTypes = unselectedFilterType;
-        }
-      }
+    addFilters(state, action: PayloadAction<FilteringConfiguration>) {
+      const filterArray = state.filters[action.payload.filterName];
+      filterArray.push(action.payload.content);
+      state.filters[action.payload.filterName] = filterArray;
+    },
 
-      if (action.payload.type === typeOfFiltering.dishLength) {
-        const chosenType = action.payload.content;
-        if (action.payload.set) {
-          state.chosenRecipeLengths.push(chosenType);
-        }
-        if (!action.payload.set) {
-          state.chosenRecipeLengths.filter(
-            (recipeType) => recipeType !== chosenType
-          );
-        }
-      }
+    removeFilters(state, action: PayloadAction<FilteringConfiguration>) {
+      const filteredArray = state.filters[action.payload.filterName].filter(
+        (filterItem) => filterItem !== action.payload.content
+      );
+      state.filters[action.payload.filterName] = filteredArray;
     },
   },
 });
