@@ -85,7 +85,10 @@ const RecipeForm = () => {
                   placeHolder="Choose type of your dish"
                   values={recipeTypes}
                 />
-                <AddIngredients ingredientIsAdded={ingredientIsAdded} />
+                <AddIngredients
+                  ingredientIsAdded={ingredientIsAdded}
+                  ingredients={ingredients}
+                />
                 <SelectComponent
                   onChange={(e) => onChangeHandler(e, setTime)}
                   placeHolder="Choose length of preparing"
