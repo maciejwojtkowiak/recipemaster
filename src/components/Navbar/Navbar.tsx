@@ -42,7 +42,6 @@ const Navbar = () => {
               width="30rem"
               placeholder="Let`s find a recipe!"
               backgroundColor="white"
-              focusBorderColor="orange.500"
               type="text"
               onChange={onChangeHandler}
             />

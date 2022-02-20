@@ -71,7 +71,7 @@ const RecipeForm = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <Center width="100%" height="95vh">
+      <Center width="100%" minH="95vh" paddingTop="2rem" paddingBottom="2rem">
         <form onSubmit={onSubmitHandler}>
           <Flex justifyContent="center" alignItems="center" width="50vw">
             <FormControl textAlign="center">

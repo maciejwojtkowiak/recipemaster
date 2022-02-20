@@ -21,7 +21,6 @@ const AddIngredients: React.FC<ingredient> = (props) => {
   };
   const onAddIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
     props.ingredientIsAdded(ingredientName);
-    console.log(ingredientName);
     setIngredientName("");
   };
 
