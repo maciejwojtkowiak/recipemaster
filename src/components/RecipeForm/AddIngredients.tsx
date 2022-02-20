@@ -4,6 +4,8 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  Heading,
+  Select,
 } from "@chakra-ui/react";
 import IngredientItem from "./IngredientItem";
 import { AddIcon } from "@chakra-ui/icons";
@@ -24,23 +26,39 @@ const AddIngredients: React.FC<ingredient> = (props) => {
     setIngredientName("");
   };
 
+  const thereIsNoIngredients = props.ingredients.length === 0;
+
   return (
-    <Box border="1px">
-      <Box padding="1rem">
-        {props.ingredients.map((ingredient, index) => (
-          <IngredientItem
-            key={index}
-            ingredientName={ingredient}
-            numberOfIngredient={index}
-          />
-        ))}
+    <Box>
+      <Box>
+        <Box
+          border="1px"
+          borderColor="gray.200"
+          padding="1rem"
+          marginTop="1rem"
+          marginBottom="1rem"
+        >
+          <Heading>Ingredients</Heading>
+          {thereIsNoIngredients && <h1>No ingredients was added yet</h1>}
+          {!thereIsNoIngredients &&
+            props.ingredients.map((ingredient, index) => (
+              <IngredientItem
+                key={index}
+                ingredientName={ingredient}
+                numberOfIngredient={index + 1}
+              />
+            ))}
+        </Box>
+
         <InputGroup>
           <Input
             onChange={onIngredientNameChange}
             type="text"
             placeholder="add ingredient"
           />
-          <InputRightElement>
+          <InputRightElement width="auto">
+            <Select></Select>
+            <Select></Select>
             <Button
               type="submit"
               onClick={onAddIngredient}
