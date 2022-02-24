@@ -1,5 +1,5 @@
 import RecipesList from "./RecipesList";
-import { Box, Spinner, Center, Grid } from "@chakra-ui/react";
+import { Box, Spinner, Grid } from "@chakra-ui/react";
 import FilterBox from "../Filters/FiltersBox";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
