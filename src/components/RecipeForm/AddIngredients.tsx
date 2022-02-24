@@ -56,9 +56,9 @@ const AddIngredients: React.FC<ingredient> = (props) => {
             type="text"
             placeholder="add ingredient"
           />
-          <InputRightElement width="auto">
-            <Select></Select>
-            <Select></Select>
+          <InputRightElement width="25%">
+            <Input width="100%" placeholder="Amount" borderRadius="0" />
+            <Select isReadOnly placeholder="Unit" borderRadius="0"></Select>
             <Button
               type="submit"
               onClick={onAddIngredient}

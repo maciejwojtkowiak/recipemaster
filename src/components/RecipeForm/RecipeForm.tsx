@@ -6,6 +6,7 @@ import {
   Textarea,
   Button,
   Grid,
+  Box,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -18,6 +19,7 @@ import { auth } from "../../Firebase";
 import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
+import FormHeader from "./FormHeader";
 import AddIngredients from "./AddIngredients";
 
 const RecipeForm = () => {
@@ -71,7 +73,13 @@ const RecipeForm = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <Center width="100%" minH="95vh" paddingTop="2rem" paddingBottom="2rem">
+      <Box width="100%">
+        <Grid height="100%" placeItems="center" marginTop="3rem">
+          <FormHeader />
+        </Grid>
+      </Box>
+
+      <Center width="100%" minH="95vh" paddingTop="4rem" paddingBottom="2rem">
         <form onSubmit={onSubmitHandler}>
           <Flex justifyContent="center" alignItems="center" width="50vw">
             <FormControl textAlign="center">

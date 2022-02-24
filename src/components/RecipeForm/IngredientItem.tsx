@@ -1,4 +1,4 @@
-import { Box, Text, Flex, Grid } from "@chakra-ui/react";
+import { Box, Text, Grid } from "@chakra-ui/react";
 
 type funcProps = {
   ingredientName: string;
