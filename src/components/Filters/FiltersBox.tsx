@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
+import { Box, Grid, Flex } from "@chakra-ui/react";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import FilterType from "./FilterType";
 import React, { useState } from "react";
@@ -14,33 +6,41 @@ import React, { useState } from "react";
 const FilterBox = () => {
   const [filtersAreShown, setFiltersAreShown] = useState<boolean>(false);
 
-  const showFiltersHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setFiltersAreShown(true);
+  const showFiltersHandler = (e: React.MouseEvent) => {
+    setFiltersAreShown((prevState) => !prevState);
   };
 
   return (
     <Box position="relative" height="100%" width="100%" zIndex="10">
-      <Box position="fixed" top="40%">
-        <Menu>
-          <MenuButton>
-            <Box
-              width="3rem"
-              height="5rem"
-              bg="blue"
-              borderTopRightRadius="50%"
-              borderBottomRightRadius="50%"
+      <Box position="fixed" top="30%">
+        <Flex width="100%" justifyContent="center" alignItems="center">
+          <Grid
+            border="1px"
+            transition="0.5s all"
+            transform={filtersAreShown ? "translateX(0)" : "translate(-20vh)"}
+            maxH="auto"
+            width="20vh"
+          >
+            <FilterType />
+          </Grid>
+          <Box
+            transition="0.5s all"
+            transform={filtersAreShown ? "translateX(0)" : "translate(-20vh)"}
+            width="3rem"
+            height="5rem"
+            bgGradient="linear(to-r, orange.300, orange.400)"
+            borderTopRightRadius="50%"
+            borderBottomRightRadius="50%"
+          >
+            <Grid
+              onClick={showFiltersHandler}
+              height="100%"
+              placeItems="center"
             >
-              <Grid height="100%" placeItems="center">
-                <ArrowRightIcon />
-              </Grid>
-            </Box>
-          </MenuButton>
-          <MenuList marginLeft="1rem">
-            <Grid overflowY="scroll" maxH="30vh" marginLeft="1.5rem">
-              <FilterType />
+              <ArrowRightIcon color="white" />
             </Grid>
-          </MenuList>
-        </Menu>
+          </Box>
+        </Flex>
       </Box>
     </Box>
   );
