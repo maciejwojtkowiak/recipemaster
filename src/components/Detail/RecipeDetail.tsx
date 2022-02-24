@@ -2,10 +2,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Box } from "@chakra-ui/react";
-import Breakfast from "../../images/Breakfast.jpg";
-import Lunch from "../../images/Lunch.jpg";
-import Dinner from "../../images/Dinner.jpg";
-import Supper from "../../images/Supper.jpg";
+import { getRecipeImage } from "../../Helpers/getRecipeImage";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
@@ -14,7 +11,7 @@ const RecipeDetail = () => {
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
-  let imgName = { Breakfast, Lunch, Dinner, Supper }[detailedRecipe!.type];
+  let imgName = getRecipeImage(detailedRecipe!.type);
 
   return (
     <Box>
