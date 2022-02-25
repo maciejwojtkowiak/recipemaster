@@ -15,11 +15,14 @@ const FilterBox = () => {
       <Box position="fixed" top="30%">
         <Flex width="100%" justifyContent="center" alignItems="center">
           <Grid
-            border="1px"
+            borderRightWidth="5px"
+            borderRightRadius="5rem"
             transition="0.5s all"
             transform={filtersAreShown ? "translateX(0)" : "translate(-20vh)"}
             maxH="auto"
             width="20vh"
+            padding="1rem"
+            paddingLeft="1.5rem"
           >
             <FilterType />
           </Grid>
@@ -36,6 +39,7 @@ const FilterBox = () => {
               onClick={showFiltersHandler}
               height="100%"
               placeItems="center"
+              cursor="pointer"
             >
               <ArrowRightIcon color="white" />
             </Grid>
