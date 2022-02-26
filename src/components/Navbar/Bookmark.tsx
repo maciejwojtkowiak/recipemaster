@@ -3,11 +3,11 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuItem,
   MenuList,
   Button,
   Box,
   Text,
+  Image,
 } from "@chakra-ui/react";
 
 import { AiOutlineClose } from "react-icons/ai";
@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import { recipeAction } from "../../store/recipe-slice";
 import React from "react";
+import { getRecipeImage } from "../../Helpers/getRecipeImage";
 
 const Bookmark = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,12 @@ const Bookmark = () => {
               justifyContent="space-between"
               alignItems="center"
             >
+              <Image
+                src={`${getRecipeImage(recipe.type)}`}
+                boxSize="3rem"
+                objectFit="cover"
+                borderRadius="full"
+              />
               <Text color="black" display="inline-block">
                 <Link to="/addRecipe">{recipe.title}</Link>
               </Text>
