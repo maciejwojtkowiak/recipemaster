@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const FilterBox = () => {
   const [filtersAreShown, setFiltersAreShown] = useState<boolean>(false);
 
-  const showFiltersHandler = (e: React.MouseEvent) => {
+  const showFiltersHandler = () => {
     setFiltersAreShown((prevState) => !prevState);
   };
 
