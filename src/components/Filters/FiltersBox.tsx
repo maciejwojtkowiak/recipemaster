@@ -1,5 +1,5 @@
 import { Box, Grid, Flex } from "@chakra-ui/react";
-import { ArrowRightIcon } from "@chakra-ui/icons";
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 import FilterType from "./FilterType";
 import React, { useState } from "react";
 
@@ -41,7 +41,13 @@ const FilterBox = () => {
               placeItems="center"
               cursor="pointer"
             >
-              <ArrowRightIcon color="white" />
+              <ArrowLeftIcon
+                color="white"
+                transition="all 0.5s"
+                transform={`${
+                  filtersAreShown ? "rotate(0deg)" : "rotate(180deg)"
+                }`}
+              />
             </Grid>
           </Box>
         </Flex>
