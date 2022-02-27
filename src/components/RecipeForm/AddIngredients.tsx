@@ -29,7 +29,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   ) => {
     setValue(e.target.value);
   };
-  const onAddIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onAddIngredient = () => {
     let ingredient: ingredient = {
       name: ingredientName,
       amount: ingredientAmount,
