@@ -13,7 +13,7 @@ const FilterType = () => {
   );
 
   return (
-    <Box width="20%">
+    <Box width="100%">
       <FilterItems
         filterTitle="Types"
         options={typesOfDishesOptions}

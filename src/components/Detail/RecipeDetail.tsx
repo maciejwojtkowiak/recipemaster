@@ -41,7 +41,7 @@ const RecipeDetail = () => {
                 />
               </Box>
               <Box>
-                <RecipeDescription title={detailedRecipe!.description} />
+                <RecipeDescription recipe={detailedRecipe!} />
               </Box>
             </Flex>
           </Box>

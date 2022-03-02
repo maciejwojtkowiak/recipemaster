@@ -35,10 +35,8 @@ const FilterItems: React.FC<FuncProps> = (props) => {
 
   return (
     <React.Fragment>
-      <Text _notFirst={{ marginTop: "2rem" }} width="10vw">
-        {props.filterTitle}
-      </Text>
-      <Stack pl={6} mt={1} spacing={1}>
+      <Text _notFirst={{ marginTop: "2rem" }}>{props.filterTitle}</Text>
+      <Stack pl={2} mt={1} spacing={1}>
         {props.options.map((option) => {
           return (
             <Checkbox key={option} value={option} onChange={onChangeHandler}>
