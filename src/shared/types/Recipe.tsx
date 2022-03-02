@@ -2,6 +2,11 @@ export interface filters {
   filterTypes: string[];
   filterLengths: string[];
 }
+export interface ingredient {
+  name: string | null;
+  amount: string | null;
+  unit: string | null;
+}
 
 export interface InitialState {
   recipes: Recipe[];
@@ -27,5 +32,5 @@ export type Recipe = {
   type: string;
   time: string;
   description: string;
-  ingredients: string[];
+  ingredients: ingredient[];
 };

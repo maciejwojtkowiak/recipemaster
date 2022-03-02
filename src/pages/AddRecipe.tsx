@@ -1,11 +1,12 @@
 import React from "react";
 import RecipeForm from "../components/RecipeForm/RecipeForm";
+import PageAnimationWrapper from "../components/wrappers/PageAnimationWrapper";
 
 const AddRecipe = () => {
   return (
-    <React.Fragment>
+    <PageAnimationWrapper>
       <RecipeForm />
-    </React.Fragment>
+    </PageAnimationWrapper>
   );
 };
 

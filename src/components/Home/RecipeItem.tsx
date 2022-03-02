@@ -1,14 +1,10 @@
-import { Box, Heading, Image, Text, Button, Icon } from "@chakra-ui/react";
+import { Box, Image, Text, Button, Icon } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Recipe } from "../../shared/types/Recipe";
-import Breakfast from "../../images/Breakfast.jpg";
-import Lunch from "../../images/Lunch.jpg";
-import Dinner from "../../images/Dinner.jpg";
-import Supper from "../../images/Supper.jpg";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
+import { getRecipeImage } from "../../Helpers/getRecipeImage";
 
 type listedRecipe = {
   id: number;
@@ -32,7 +28,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
     setIsLiked(true);
     dispatch(recipeAction.addLikedRecipe(props.id));
   };
-  let imgName = { Breakfast, Lunch, Dinner, Supper }[props.type];
+  let imgName = getRecipeImage(props.type);
 
   return (
     <Box height="40vh" width="40vh" borderWidth="1px" marginTop="2rem">

@@ -1,7 +1,7 @@
 import { Box, Text, Grid } from "@chakra-ui/react";
 
 type funcProps = {
-  ingredientName: string;
+  ingredientName: string | null;
   numberOfIngredient: number;
 };
 

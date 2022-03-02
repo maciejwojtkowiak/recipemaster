@@ -19,6 +19,12 @@ const theme = extendTheme({
         focusBorderColor: "orange.400",
       },
     },
+
+    Checkbox: {
+      defaultProps: {
+        colorScheme: "orange",
+      },
+    },
   },
   fonts: {
     heading: "Dancing Script",

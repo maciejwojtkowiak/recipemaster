@@ -21,12 +21,13 @@ import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 import FormHeader from "./FormHeader";
 import AddIngredients from "./AddIngredients";
+import { ingredient } from "../../shared/types/Recipe";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<string>("");
   const [type, setType] = useState<string>("");
-  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [ingredients, setIngredients] = useState<ingredient[]>([]);
   const [time, setTime] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const user = auth.currentUser;
@@ -47,7 +48,7 @@ const RecipeForm = () => {
         description: description,
         id: Math.random(),
         time: time,
-        ingredients: [],
+        ingredients: ingredients,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
@@ -64,7 +65,7 @@ const RecipeForm = () => {
     setValue(newValue);
   };
 
-  const ingredientIsAdded = (ingredient: string) => {
+  const ingredientIsAdded = (ingredient: ingredient) => {
     setIngredients((previousIngredients) =>
       previousIngredients.concat(ingredient)
     );

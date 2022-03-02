@@ -1,10 +1,10 @@
-import { Box } from "@chakra-ui/react";
 import RegisterForm from "../components/Register/RegisterForm";
+import PageAnimationWrapper from "../components/wrappers/PageAnimationWrapper";
 const Register = () => {
   return (
-    <Box>
+    <PageAnimationWrapper>
       <RegisterForm />
-    </Box>
+    </PageAnimationWrapper>
   );
 };
 

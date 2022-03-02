@@ -1,4 +1,4 @@
-import { Menu, MenuList, MenuButton, Button, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import FilterItems from "./FilterItems";
 
 import { useSelector } from "react-redux";
