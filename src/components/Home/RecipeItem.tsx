@@ -57,17 +57,19 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
             {props.type}
           </Text>
         </Text>
-        <Text fontSize="1.1rem">
-          <Text fontSize="0.8rem" as="span">
-            Author:{" "}
+
+        <Text fontSize="0.8rem">
+          Author:{" "}
+          <Text as="span" fontSize="1.1rem">
+            {props.username}
           </Text>
-          {props.username}
         </Text>
-        <Text fontSize="1.1rem">
-          <Text fontSize="0.8rem" as="span">
-            Time:{" "}
+
+        <Text fontSize="0.8rem" as="span">
+          Time:{" "}
+          <Text as="span" fontSize="1.1rem">
+            {props.time}
           </Text>
-          {props.time}
         </Text>
       </Box>
       <Link to={`/${props.id}`}>

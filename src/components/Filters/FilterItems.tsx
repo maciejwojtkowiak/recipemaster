@@ -35,7 +35,9 @@ const FilterItems: React.FC<FuncProps> = (props) => {
 
   return (
     <React.Fragment>
-      <Text _notFirst={{ marginTop: "2rem" }}>{props.filterTitle}</Text>
+      <Text _notFirst={{ marginTop: "2rem" }} fontWeight="700">
+        {props.filterTitle}
+      </Text>
       <Stack pl={2} mt={1} spacing={1}>
         {props.options.map((option) => {
           return (

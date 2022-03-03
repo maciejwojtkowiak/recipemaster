@@ -4,7 +4,6 @@ import {
   Center,
   Flex,
   Textarea,
-  Button,
   Grid,
   Box,
 } from "@chakra-ui/react";
@@ -20,8 +19,9 @@ import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 import FormHeader from "./FormHeader";
-import AddIngredients from "./AddIngredients";
+import AddIngredients from "./Ingredients/AddIngredients";
 import { ingredient } from "../../shared/types/Recipe";
+import FormSubmitButton from "./FormSubmitButton";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -110,18 +110,7 @@ const RecipeForm = () => {
                   rows={20}
                   resize="none"
                 />
-                <Button
-                  width="30%"
-                  bgGradient="linear(to-r, orange.300, orange.400)"
-                  color="white"
-                  justifySelf="center"
-                  type="submit"
-                  _hover={{
-                    bgGradient: "linear(to-r, orange.200, orange.400)",
-                  }}
-                >
-                  Submit
-                </Button>
+                <FormSubmitButton />
               </Grid>
             </FormControl>
           </Flex>

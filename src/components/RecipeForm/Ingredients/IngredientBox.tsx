@@ -10,9 +10,9 @@ import {
 import IngredientItem from "./IngredientItem";
 import { AddIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
-import { ingredient } from "../../shared/types/Recipe";
+import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../../../store/store";
 
 type ingredientProps = {
   ingredientIsAdded: (ingredient: ingredient) => void;
