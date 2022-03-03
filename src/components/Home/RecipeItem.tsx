@@ -1,6 +1,6 @@
-import { Box, Image, Text, Button, Icon } from "@chakra-ui/react";
+import { Box, Image, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
+import RecipeHeart from "./RecipeHeart";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
@@ -33,16 +33,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   return (
     <Box height="40vh" width="40vh" borderWidth="1px" marginTop="2rem">
       <Box position="relative">
-        <Icon
-          onClick={onClickHandler}
-          as={FaHeart}
-          w={8}
-          h={8}
-          color={`${isLiked ? "red.500" : "white"}`}
-          position="absolute"
-          right="2%"
-          top="4%"
-        />
+        <RecipeHeart onClickHandler={onClickHandler} isLiked={isLiked} />
         <Image height="20vh" width="100%" src={imgName}></Image>
       </Box>
       <Box marginLeft="1rem" marginTop="1rem">

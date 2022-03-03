@@ -76,6 +76,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
               width="100%"
               placeholder="Amount"
               borderRadius="0"
+              outline="none"
             />
             <Select
               onChange={(e) => onIngredientChange(e, setIngredientUnit)}

@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  Input,
-  Center,
-  Flex,
-  Textarea,
-  Grid,
-  Box,
-} from "@chakra-ui/react";
+import { Input, Center, Flex, Textarea, Grid, Box } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
@@ -19,7 +11,7 @@ import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 import FormHeader from "./FormHeader";
-import AddIngredients from "./Ingredients/AddIngredients";
+import AddIngredients from "./Ingredients/IngredientBox";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
 
@@ -83,36 +75,34 @@ const RecipeForm = () => {
       <Center width="100%" minH="95vh" paddingTop="4rem" paddingBottom="2rem">
         <form onSubmit={onSubmitHandler}>
           <Flex justifyContent="center" alignItems="center" width="50vw">
-            <FormControl textAlign="center">
-              <Grid gap="1rem">
-                <Input
-                  onChange={(e) => onChangeHandler(e, setTitle)}
-                  placeholder="Name for your recipe"
-                />
-                <SelectComponent
-                  onChange={(e) => onChangeHandler(e, setType)}
-                  placeHolder="Choose type of your dish"
-                  values={recipeTypes}
-                />
-                <AddIngredients
-                  ingredientIsAdded={ingredientIsAdded}
-                  ingredients={ingredients}
-                />
-                <SelectComponent
-                  onChange={(e) => onChangeHandler(e, setTime)}
-                  placeHolder="Choose length of preparing"
-                  values={recipeLengths}
-                />
-                <Textarea
-                  onChange={(e) => onChangeHandler(e, setDescription)}
-                  placeholder="Description"
-                  cols={20}
-                  rows={20}
-                  resize="none"
-                />
-                <FormSubmitButton />
-              </Grid>
-            </FormControl>
+            <Grid gap="1rem">
+              <Input
+                onChange={(e) => onChangeHandler(e, setTitle)}
+                placeholder="Name for your recipe"
+              />
+              <SelectComponent
+                onChange={(e) => onChangeHandler(e, setType)}
+                placeHolder="Choose type of your dish"
+                values={recipeTypes}
+              />
+              <AddIngredients
+                ingredientIsAdded={ingredientIsAdded}
+                ingredients={ingredients}
+              />
+              <SelectComponent
+                onChange={(e) => onChangeHandler(e, setTime)}
+                placeHolder="Choose length of preparing"
+                values={recipeLengths}
+              />
+              <Textarea
+                onChange={(e) => onChangeHandler(e, setDescription)}
+                placeholder="Description"
+                cols={20}
+                rows={20}
+                resize="none"
+              />
+              <FormSubmitButton />
+            </Grid>
           </Flex>
         </form>
       </Center>
