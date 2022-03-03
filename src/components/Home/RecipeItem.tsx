@@ -72,7 +72,15 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
       </Box>
       <Link to={`/${props.id}`}>
         <Box textAlign="right" marginRight="2rem">
-          <Button bgGradient="linear(to-r, orange.200, orange.300)">Go</Button>
+          <Button
+            variant="solid"
+            color="white"
+            _hover={{ bg: "orange.300" }}
+            transition="none"
+            bgGradient="linear(to-r, orange.300, orange.400)"
+          >
+            Go
+          </Button>
         </Box>
       </Link>
     </Box>
