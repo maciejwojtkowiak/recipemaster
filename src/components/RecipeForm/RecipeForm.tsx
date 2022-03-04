@@ -41,6 +41,7 @@ const RecipeForm = () => {
         id: Math.random(),
         time: time,
         ingredients: ingredients,
+        stars: Math.floor(Math.random() * 6) + 1,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
@@ -75,7 +76,7 @@ const RecipeForm = () => {
       <Center width="100%" minH="95vh" paddingTop="4rem" paddingBottom="2rem">
         <form onSubmit={onSubmitHandler}>
           <Flex justifyContent="center" alignItems="center" width="50vw">
-            <Grid gap="1rem">
+            <Grid gap="1rem" width="100%">
               <Input
                 onChange={(e) => onChangeHandler(e, setTitle)}
                 placeholder="Name for your recipe"

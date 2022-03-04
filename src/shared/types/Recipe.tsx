@@ -33,4 +33,5 @@ export type Recipe = {
   time: string;
   description: string;
   ingredients: ingredient[];
+  stars: number;
 };

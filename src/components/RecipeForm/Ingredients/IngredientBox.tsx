@@ -43,7 +43,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   const ingredients = useSelector((state: RootState) => state.recipe.recipes);
   console.log(ingredients);
   return (
-    <Box>
+    <Box textAlign="center">
       <Box>
         <Box
           border="1px"

@@ -43,6 +43,7 @@ const recipeSlice = createSlice({
         id: action.payload.id,
         time: action.payload.time,
         ingredients: action.payload.ingredients,
+        stars: action.payload.stars,
       });
     },
 
