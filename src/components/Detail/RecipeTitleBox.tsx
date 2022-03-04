@@ -1,8 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { Recipe } from "../../shared/types/Recipe";
 import { StarIcon } from "@chakra-ui/icons";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 
 interface recipeDesc {
   recipe: Recipe;
