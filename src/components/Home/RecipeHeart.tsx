@@ -2,14 +2,14 @@ import { Icon } from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
 
 interface funcProps {
-  onClickHandler: () => void;
+  onLikeHandler: () => void;
   isLiked: boolean;
 }
 
 const RecipeHeart: React.FC<funcProps> = (props) => {
   return (
     <Icon
-      onClick={props.onClickHandler}
+      onClick={props.onLikeHandler}
       as={FaHeart}
       w={8}
       h={8}

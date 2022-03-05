@@ -19,7 +19,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const onClickHandler = () => {
+  const onLikeHandler = () => {
     if (isLiked) {
       setIsLiked(false);
       dispatch(recipeAction.deleteLikedRecipe(props.id));
@@ -33,7 +33,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   return (
     <Box height="40vh" width="40vh" borderWidth="1px" marginTop="2rem">
       <Box position="relative">
-        <RecipeHeart onClickHandler={onClickHandler} isLiked={isLiked} />
+        <RecipeHeart onLikeHandler={onLikeHandler} isLiked={isLiked} />
         <Image height="20vh" width="100%" src={imgName}></Image>
       </Box>
       <Box marginLeft="1rem" marginTop="1rem">
