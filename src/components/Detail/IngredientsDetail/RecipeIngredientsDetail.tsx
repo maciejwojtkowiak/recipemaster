@@ -1,5 +1,6 @@
 import { Box, Grid } from "@chakra-ui/react";
 import { Recipe } from "../../../shared/types/Recipe";
+import RecipeIngredientsBox from "./RecipeIngredientsBox";
 
 interface funcProps {
   recipe: Recipe;
@@ -21,9 +22,7 @@ const RecipeIngredientDetail: React.FC<funcProps> = (props) => {
           ))}
         </Box>
         <Box border="1px">
-          {ingredientsArray.map((ingredient) => (
-            <Box>{ingredient.name}</Box>
-          ))}
+          <RecipeIngredientsBox recipe={props.recipe} />
         </Box>
       </Grid>
     </Box>
