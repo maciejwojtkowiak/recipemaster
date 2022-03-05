@@ -6,7 +6,8 @@ import { getRecipeImage } from "../../Helpers/getRecipeImage";
 import Navbar from "../Navbar/Navbar";
 import React from "react";
 import TopBorderStyling from "./TopBorderStyling";
-import RecipeDescription from "./RecipeDescription";
+import RecipeTitleBox from "./RecipeTitleBox";
+import RecipeIngredientDetail from "./IngredientsDetail/RecipeIngredientsDetail";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
@@ -41,10 +42,11 @@ const RecipeDetail = () => {
                 />
               </Box>
               <Box>
-                <RecipeDescription title={detailedRecipe!.description} />
+                <RecipeTitleBox recipe={detailedRecipe!} />
               </Box>
             </Flex>
           </Box>
+          <RecipeIngredientDetail recipe={detailedRecipe!} />
         </Grid>
       </Box>
     </React.Fragment>

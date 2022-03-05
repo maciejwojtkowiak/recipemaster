@@ -1,6 +1,6 @@
-import { Box, Image, Text, Button, Icon } from "@chakra-ui/react";
+import { Box, Image, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
+import RecipeHeart from "./RecipeHeart";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
@@ -19,7 +19,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const onClickHandler = () => {
+  const onLikeHandler = () => {
     if (isLiked) {
       setIsLiked(false);
       dispatch(recipeAction.deleteLikedRecipe(props.id));
@@ -33,16 +33,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   return (
     <Box height="40vh" width="40vh" borderWidth="1px" marginTop="2rem">
       <Box position="relative">
-        <Icon
-          onClick={onClickHandler}
-          as={FaHeart}
-          w={8}
-          h={8}
-          color={`${isLiked ? "red.500" : "white"}`}
-          position="absolute"
-          right="2%"
-          top="4%"
-        />
+        <RecipeHeart onLikeHandler={onLikeHandler} isLiked={isLiked} />
         <Image height="20vh" width="100%" src={imgName}></Image>
       </Box>
       <Box marginLeft="1rem" marginTop="1rem">
@@ -57,22 +48,32 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
             {props.type}
           </Text>
         </Text>
-        <Text fontSize="1.1rem">
-          <Text fontSize="0.8rem" as="span">
-            Author:{" "}
+
+        <Text fontSize="0.8rem">
+          Author:{" "}
+          <Text as="span" fontSize="1.1rem">
+            {props.username}
           </Text>
-          {props.username}
         </Text>
-        <Text fontSize="1.1rem">
-          <Text fontSize="0.8rem" as="span">
-            Time:{" "}
+
+        <Text fontSize="0.8rem" as="span">
+          Time:{" "}
+          <Text as="span" fontSize="1.1rem">
+            {props.time}
           </Text>
-          {props.time}
         </Text>
       </Box>
       <Link to={`/${props.id}`}>
         <Box textAlign="right" marginRight="2rem">
-          <Button bgGradient="linear(to-r, orange.200, orange.300)">Go</Button>
+          <Button
+            variant="solid"
+            color="white"
+            _hover={{ bg: "orange.300" }}
+            transition="none"
+            bgGradient="linear(to-r, orange.300, orange.400)"
+          >
+            Go
+          </Button>
         </Box>
       </Link>
     </Box>
