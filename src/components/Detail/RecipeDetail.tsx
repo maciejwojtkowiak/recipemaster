@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import React from "react";
 import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
-import RecipeIngredientDetail from "./RecipeIngredientsDetail";
+import RecipeIngredientDetail from "./IngredientsDetail/RecipeIngredientsDetail";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
@@ -46,9 +46,9 @@ const RecipeDetail = () => {
               </Box>
             </Flex>
           </Box>
+          <RecipeIngredientDetail recipe={detailedRecipe!} />
         </Grid>
       </Box>
-      <RecipeIngredientDetail recipe={detailedRecipe!} />
     </React.Fragment>
   );
 };
