@@ -10,7 +10,7 @@ const RecipeIngredientDetail: React.FC<funcProps> = (props) => {
   return (
     <Box h="80vh">
       {ingredientsArray.map((ingredient) => (
-        <Box>{ingredient.name}</Box>
+        <Box key={ingredient.name}>{ingredient.name}</Box>
       ))}
     </Box>
   );
