@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import React from "react";
 import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
-import RecipeIngredientDetail from "./IngredientsDetail/RecipeIngredientsDetail";
+import RecipeIngredientDetail from "./IngredientsDetailColumns/RecipeIngredientsDetail";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);

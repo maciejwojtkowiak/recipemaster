@@ -1,15 +1,15 @@
+import { Box } from "@chakra-ui/react";
 import { Recipe } from "../../../shared/types/Recipe";
-import { Box, Heading } from "@chakra-ui/react";
+import ColumnHeader from "./ColumnHeader";
 
 interface funcProps {
   recipe: Recipe;
 }
-
-const RecipeIngredientsBox: React.FC<funcProps> = (props) => {
+const RecipeStepsBox: React.FC<funcProps> = (props) => {
   const ingredients = props.recipe.ingredients;
   return (
     <Box>
-      <Heading textAlign="center">Ingredients</Heading>
+      <ColumnHeader title="Steps" />
       {ingredients.map((ingredient) => (
         <Box key={ingredient.name}> {ingredient.name} </Box>
       ))}
@@ -17,4 +17,4 @@ const RecipeIngredientsBox: React.FC<funcProps> = (props) => {
   );
 };
 
-export default RecipeIngredientsBox;
+export default RecipeStepsBox;
