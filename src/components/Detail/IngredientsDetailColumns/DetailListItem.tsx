@@ -13,6 +13,8 @@ const DetailListItem: React.FC<funcProps> = (props) => {
           bgGradient="linear(to-r, orange.200, orange.400)"
           height="6vh"
           width="6vh"
+          boxShadow="md"
+          rounded="md"
         >
           <Grid w="100%" h="100%" placeItems="center">
             <Text color="white" fontWeight="700" fontSize="1.6rem">
