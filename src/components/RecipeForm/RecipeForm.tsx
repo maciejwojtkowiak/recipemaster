@@ -14,6 +14,7 @@ import FormHeader from "./FormHeader";
 import AddIngredients from "./Ingredients/IngredientBox";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
+import StepsBox from "./Steps/StepsBox";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const RecipeForm = () => {
   const [ingredients, setIngredients] = useState<ingredient[]>([]);
   const [time, setTime] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [steps, setSteps] = useState<string[]>([]);
   const user = auth.currentUser;
   const recipeTypes = useSelector(
     (state: RootState) => state.recipe.recipeTypes
@@ -58,10 +60,14 @@ const RecipeForm = () => {
     setValue(newValue);
   };
 
-  const ingredientIsAdded = (ingredient: ingredient) => {
+  const onIngredientAdd = (ingredient: ingredient) => {
     setIngredients((previousIngredients) =>
       previousIngredients.concat(ingredient)
     );
+  };
+
+  const onStepAdd = (step: string) => {
+    setSteps((previousSteps) => previousSteps.concat(step));
   };
 
   return (
@@ -87,9 +93,10 @@ const RecipeForm = () => {
                 values={recipeTypes}
               />
               <AddIngredients
-                ingredientIsAdded={ingredientIsAdded}
+                onIngredientAdd={onIngredientAdd}
                 ingredients={ingredients}
               />
+              <StepsBox />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"

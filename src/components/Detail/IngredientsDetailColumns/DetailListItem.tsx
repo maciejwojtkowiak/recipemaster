@@ -3,9 +3,11 @@ import { Box, Grid, Text, Flex } from "@chakra-ui/react";
 interface funcProps {
   item: string;
   indexOfItem: number;
+  amount?: string;
 }
 
 const DetailListItem: React.FC<funcProps> = (props) => {
+  console.log(props.amount);
   return (
     <Box border="1px">
       <Flex margin="1rem">
@@ -18,11 +20,15 @@ const DetailListItem: React.FC<funcProps> = (props) => {
         >
           <Grid w="100%" h="100%" placeItems="center">
             <Text color="white" fontWeight="700" fontSize="1.6rem">
-              {props.indexOfItem}
+              {props.amount}
             </Text>
           </Grid>
         </Box>
-        <Box>{props.item}</Box>
+        <Grid placeItems="center">
+          <Text marginLeft="1rem" fontWeight="500" fontSize="1.8rem">
+            {props.item}
+          </Text>
+        </Grid>
       </Flex>
     </Box>
   );

@@ -16,6 +16,7 @@ const RecipeIngredientsBox: React.FC<funcProps> = (props) => {
         <DetailListItem
           key={ingredient.name}
           item={ingredient.name!}
+          amount={ingredient.amount!}
           indexOfItem={index}
         />
       ))}

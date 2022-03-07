@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 
 type ingredientProps = {
-  ingredientIsAdded: (ingredient: ingredient) => void;
+  onIngredientAdd: (ingredient: ingredient) => void;
   ingredients: ingredient[];
 };
 
@@ -35,7 +35,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       amount: ingredientAmount,
       unit: ingredientUnit,
     };
-    props.ingredientIsAdded(ingredient);
+    props.onIngredientAdd(ingredient);
     setIngredientName("");
   };
 

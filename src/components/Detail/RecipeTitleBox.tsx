@@ -13,9 +13,9 @@ const RecipeDescription: React.FC<recipeDesc> = (props) => {
   const numberOfGoldenStars = props.recipe.stars;
 
   for (let i = 0; i < totalStars; i++) {
-    if (i > numberOfGoldenStars) stars.push(<StarIcon key={i} />);
+    if (i > numberOfGoldenStars) stars.push(<StarIcon h={7} w={7} key={i} />);
     if (i < numberOfGoldenStars)
-      stars.push(<StarIcon key={i} color="yellow.400" />);
+      stars.push(<StarIcon key={i} h={7} w={7} color="yellow.400" />);
   }
 
   return (
