@@ -36,14 +36,7 @@ const recipeSlice = createSlice({
     },
     addRecipe(state, action: PayloadAction<Recipe>) {
       state.recipes.push({
-        username: action.payload.username,
-        title: action.payload.title,
-        type: action.payload.type,
-        description: action.payload.description,
-        id: action.payload.id,
-        time: action.payload.time,
-        ingredients: action.payload.ingredients,
-        stars: action.payload.stars,
+        ...action.payload,
       });
     },
 

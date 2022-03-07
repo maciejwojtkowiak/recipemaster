@@ -9,7 +9,7 @@ interface funcProps {
 const DetailListItem: React.FC<funcProps> = (props) => {
   console.log(props.amount);
   return (
-    <Box border="1px">
+    <Box>
       <Flex margin="1rem">
         <Box
           bgGradient="linear(to-r, orange.200, orange.400)"
