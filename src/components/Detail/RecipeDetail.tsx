@@ -17,7 +17,8 @@ const RecipeDetail = () => {
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
-  let imgName = getRecipeImage(detailedRecipe!.type);
+  console.log(detailedRecipe);
+  let imgName = getRecipeImage(detailedRecipe?.type!);
 
   return (
     <React.Fragment>

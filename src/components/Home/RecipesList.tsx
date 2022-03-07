@@ -22,7 +22,7 @@ const RecipesList = () => {
   const filteredRecipes = useSelector((state: RootState) =>
     state.recipe.recipes.filter(
       (recipe) =>
-        recipe.title.toLowerCase().trim().includes(title) &&
+        recipe?.title?.toLowerCase().trim().includes(title) &&
         recipe.title
           .toLowerCase()
           .trim()
@@ -32,7 +32,10 @@ const RecipesList = () => {
     )
   );
 
+  console.log(filteredRecipes);
+
   const noRecipes = filteredRecipes.length === 0 ? true : false;
+  console.log(noRecipes);
 
   return (
     <Flex

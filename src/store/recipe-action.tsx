@@ -7,7 +7,7 @@ export const sendData = (recipe: Recipe) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     const sendRecipe = async () => {
       await fetch(
-        "https://recipemaster-3256c-default-rtdb.europe-west1.firebasedatabase.app/recipes.json",
+        "https://recipereact-b9333-default-rtdb.europe-west1.firebasedatabase.app/recipes.json",
         {
           method: "POST",
           headers: {
@@ -31,7 +31,7 @@ export const fetchRecipes = () => {
     dispatch(uiAction.isLoading(true));
     const getRecipes = async () => {
       const response = await fetch(
-        "https://recipemaster-3256c-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
+        "https://recipereact-b9333-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
       );
       const data = response.json();
       return data;
