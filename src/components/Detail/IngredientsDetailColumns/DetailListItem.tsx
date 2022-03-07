@@ -7,7 +7,6 @@ interface funcProps {
 }
 
 const DetailListItem: React.FC<funcProps> = (props) => {
-  console.log(props.amount);
   return (
     <Box>
       <Flex margin="1rem">

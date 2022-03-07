@@ -1,9 +1,12 @@
-import { Box, Input } from "@chakra-ui/react";
+import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 
 const StepsBox = () => {
   return (
     <Box>
-      <Input></Input>
+      <InputGroup>
+        <Input placeholder="Add a step" />
+        <InputRightElement />
+      </InputGroup>
     </Box>
   );
 };

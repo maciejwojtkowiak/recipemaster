@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import AddButton from "../../UI/AddButton";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
@@ -68,7 +69,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           <Input
             onChange={(e) => onIngredientChange(e, setIngredientName)}
             type="text"
-            placeholder="add ingredient"
+            placeholder="add an ingredient"
           />
           <InputRightElement width="25%">
             <Input
@@ -84,18 +85,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
               placeholder="Unit"
               borderRadius="0"
             ></Select>
-            <Button
-              type="submit"
-              onClick={onAddIngredient}
-              bgGradient="linear(to-r, orange.300, orange.400)"
-              color="white"
-              justifySelf="center"
-              _hover={{
-                bgGradient: "linear(to-r, orange.200, orange.400)",
-              }}
-            >
-              <AddIcon w={4} h={4} />
-            </Button>
+            <AddButton onClickHandler={onAddIngredient} />
           </InputRightElement>
         </InputGroup>
       </Box>
