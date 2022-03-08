@@ -43,30 +43,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     setIngredientName("");
   };
 
-  const thereIsNoIngredients = props.ingredients.length === 0;
-
   return (
     <Box textAlign="center">
       <Box>
-        <Box
-          border="1px"
-          borderColor="gray.200"
-          padding="1rem"
-          marginTop="1rem"
-          marginBottom="1rem"
-        >
-          <Heading>Ingredients</Heading>
-          {thereIsNoIngredients && <h1>No ingredients was added yet</h1>}
-          {!thereIsNoIngredients &&
-            props.ingredients.map((ingredient, index) => (
-              <IngredientItem
-                key={index}
-                ingredientName={ingredient.name}
-                numberOfIngredient={index + 1}
-              />
-            ))}
-        </Box>
-
         <InputGroup>
           <Input
             onChange={(e) => onIngredientChange(e, setIngredientName)}

@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 import FormHeader from "./FormHeader";
-import AddIngredients from "./Ingredients/IngredientBox";
+import AddIngredients from "./Ingredients/IngredientInput";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
 import StepsBox from "./Steps/StepsBox";
