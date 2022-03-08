@@ -14,6 +14,7 @@ import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import AddButton from "../../UI/AddButton";
+import ListBox from "../UI/ListBox";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
@@ -45,6 +46,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
 
   return (
     <Box textAlign="center">
+      <ListBox items={props.ingredients} />
       <Box>
         <InputGroup>
           <Input
