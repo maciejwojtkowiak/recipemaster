@@ -14,6 +14,7 @@ export interface InitialState {
     recipes: Recipe[];
     totalAmount: number;
   };
+  ingredientsUnits: string[];
   recipeTypes: string[];
   recipeLengths: string[];
   recipeTitle: string;

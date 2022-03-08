@@ -24,6 +24,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [ingredientName, setIngredientName] = useState<string | null>(null);
   const [ingredientAmount, setIngredientAmount] = useState<string | null>(null);
   const [ingredientUnit, setIngredientUnit] = useState<string | null>(null);
+  const ingredientsUnits = useSelector(
+    (state: RootState) => state.recipe.ingredientsUnits
+  );
   const onIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     setValue: (value: string) => void
@@ -41,8 +44,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   };
 
   const thereIsNoIngredients = props.ingredients.length === 0;
-  const ingredients = useSelector((state: RootState) => state.recipe.recipes);
-  console.log(ingredients);
+
   return (
     <Box textAlign="center">
       <Box>
@@ -84,7 +86,11 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
               isReadOnly
               placeholder="Unit"
               borderRadius="0"
-            ></Select>
+            >
+              {ingredientsUnits.map((unit) => (
+                <option>{unit}</option>
+              ))}
+            </Select>
             <AddButton onClickHandler={onAddIngredient} />
           </InputRightElement>
         </InputGroup>
