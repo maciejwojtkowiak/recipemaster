@@ -11,13 +11,6 @@ const INITIAL_VALUE: InitialState = {
     recipes: [],
     totalAmount: 0,
   },
-  recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
-  recipeLengths: [
-    "Very short (~30min)",
-    "short (~1hr)",
-    "medium (~3hrs)",
-    "Long (~6hrs)",
-  ],
 
   // variables for filtering recipes
   recipeTitle: "",
@@ -36,14 +29,7 @@ const recipeSlice = createSlice({
     },
     addRecipe(state, action: PayloadAction<Recipe>) {
       state.recipes.push({
-        username: action.payload.username,
-        title: action.payload.title,
-        type: action.payload.type,
-        description: action.payload.description,
-        id: action.payload.id,
-        time: action.payload.time,
-        ingredients: action.payload.ingredients,
-        stars: action.payload.stars,
+        ...action.payload,
       });
     },
 

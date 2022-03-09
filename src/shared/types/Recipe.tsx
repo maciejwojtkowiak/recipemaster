@@ -14,8 +14,6 @@ export interface InitialState {
     recipes: Recipe[];
     totalAmount: number;
   };
-  recipeTypes: string[];
-  recipeLengths: string[];
   recipeTitle: string;
   filters: filters;
 }
@@ -33,5 +31,6 @@ export type Recipe = {
   time: string;
   description: string;
   ingredients: ingredient[];
+  steps: string[];
   stars: number;
 };

@@ -7,7 +7,8 @@ import Navbar from "../Navbar/Navbar";
 import React from "react";
 import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
-import RecipeIngredientDetail from "./IngredientsDetail/RecipeIngredientsDetail";
+import RecipeIngredientDetail from "./IngredientsDetailColumns/RecipeIngredientsDetail";
+import { motion } from "framer-motion";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
@@ -16,7 +17,8 @@ const RecipeDetail = () => {
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
-  let imgName = getRecipeImage(detailedRecipe!.type);
+  console.log(detailedRecipe);
+  let imgName = getRecipeImage(detailedRecipe?.type!);
 
   return (
     <React.Fragment>
@@ -33,13 +35,15 @@ const RecipeDetail = () => {
           >
             <Flex padding="5rem">
               <Box display="inline-block">
-                <Image
-                  boxShadow="dark-lg"
-                  rounded="md"
-                  objectFit="cover"
-                  boxSize="30rem"
-                  src={imgName}
-                />
+                <motion.div whileHover={{ scale: 1.05 }}>
+                  <Image
+                    boxShadow="dark-lg"
+                    rounded="md"
+                    objectFit="cover"
+                    boxSize="30rem"
+                    src={imgName}
+                  />
+                </motion.div>
               </Box>
               <Box>
                 <RecipeTitleBox recipe={detailedRecipe!} />

@@ -3,19 +3,18 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Button,
-  Heading,
   Select,
 } from "@chakra-ui/react";
-import IngredientItem from "./IngredientItem";
-import { AddIcon } from "@chakra-ui/icons";
+import IngredientItem from "../UI/ListItem";
 import React, { useState } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import AddButton from "../../UI/AddButton";
+import ListBox from "../UI/ListBox";
 
 type ingredientProps = {
-  ingredientIsAdded: (ingredient: ingredient) => void;
+  onIngredientAdd: (ingredient: ingredient) => void;
   ingredients: ingredient[];
 };
 
@@ -23,6 +22,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [ingredientName, setIngredientName] = useState<string | null>(null);
   const [ingredientAmount, setIngredientAmount] = useState<string | null>(null);
   const [ingredientUnit, setIngredientUnit] = useState<string | null>(null);
+  const ingredientsUnits = useSelector(
+    (state: RootState) => state.constantValues.ingredientsUnits
+  );
   const onIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     setValue: (value: string) => void
@@ -35,40 +37,19 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       amount: ingredientAmount,
       unit: ingredientUnit,
     };
-    props.ingredientIsAdded(ingredient);
+    props.onIngredientAdd(ingredient);
     setIngredientName("");
   };
 
-  const thereIsNoIngredients = props.ingredients.length === 0;
-  const ingredients = useSelector((state: RootState) => state.recipe.recipes);
-  console.log(ingredients);
   return (
     <Box textAlign="center">
+      <ListBox items={props.ingredients} />
       <Box>
-        <Box
-          border="1px"
-          borderColor="gray.200"
-          padding="1rem"
-          marginTop="1rem"
-          marginBottom="1rem"
-        >
-          <Heading>Ingredients</Heading>
-          {thereIsNoIngredients && <h1>No ingredients was added yet</h1>}
-          {!thereIsNoIngredients &&
-            props.ingredients.map((ingredient, index) => (
-              <IngredientItem
-                key={index}
-                ingredientName={ingredient.name}
-                numberOfIngredient={index + 1}
-              />
-            ))}
-        </Box>
-
         <InputGroup>
           <Input
             onChange={(e) => onIngredientChange(e, setIngredientName)}
             type="text"
-            placeholder="add ingredient"
+            placeholder="add an ingredient"
           />
           <InputRightElement width="25%">
             <Input
@@ -83,19 +64,12 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
               isReadOnly
               placeholder="Unit"
               borderRadius="0"
-            ></Select>
-            <Button
-              type="submit"
-              onClick={onAddIngredient}
-              bgGradient="linear(to-r, orange.300, orange.400)"
-              color="white"
-              justifySelf="center"
-              _hover={{
-                bgGradient: "linear(to-r, orange.200, orange.400)",
-              }}
             >
-              <AddIcon w={4} h={4} />
-            </Button>
+              {ingredientsUnits.map((unit) => (
+                <option>{unit}</option>
+              ))}
+            </Select>
+            <AddButton onClickHandler={onAddIngredient} />
           </InputRightElement>
         </InputGroup>
       </Box>

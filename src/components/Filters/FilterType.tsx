@@ -6,10 +6,10 @@ import { RootState } from "../../store/store";
 
 const FilterType = () => {
   const typesOfDishesOptions = useSelector(
-    (state: RootState) => state.recipe.recipeTypes
+    (state: RootState) => state.constantValues.recipeTypes
   );
   const lengthOfDishesOptions = useSelector(
-    (state: RootState) => state.recipe.recipeLengths
+    (state: RootState) => state.constantValues.recipeLengths
   );
 
   return (
