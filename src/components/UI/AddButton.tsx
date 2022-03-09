@@ -9,7 +9,6 @@ const AddButton: React.FC<funcProps> = (props) => {
   return (
     <Box>
       <Button
-        type="submit"
         onClick={props.onClickHandler}
         bgGradient="linear(to-r, orange.300, orange.400)"
         color="white"

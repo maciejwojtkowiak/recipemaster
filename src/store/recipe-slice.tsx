@@ -11,8 +11,6 @@ const INITIAL_VALUE: InitialState = {
     recipes: [],
     totalAmount: 0,
   },
-  steps: [],
-  // arrays for iterating
 
   // variables for filtering recipes
   recipeTitle: "",
@@ -62,9 +60,6 @@ const recipeSlice = createSlice({
         (filterItem) => filterItem !== action.payload.content
       );
       state.filters[action.payload.filterName] = filteredArray;
-    },
-    addStep(state, action: PayloadAction<string>) {
-      state.steps.push(action.payload);
     },
   },
 });

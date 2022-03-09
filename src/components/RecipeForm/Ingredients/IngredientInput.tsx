@@ -3,12 +3,9 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Button,
-  Heading,
   Select,
 } from "@chakra-ui/react";
-import IngredientItem from "./IngredientItem";
-import { AddIcon } from "@chakra-ui/icons";
+import IngredientItem from "../UI/ListItem";
 import React, { useState } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
@@ -26,7 +23,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [ingredientAmount, setIngredientAmount] = useState<string | null>(null);
   const [ingredientUnit, setIngredientUnit] = useState<string | null>(null);
   const ingredientsUnits = useSelector(
-    (state: RootState) => state.recipe.ingredientsUnits
+    (state: RootState) => state.constantValues.ingredientsUnits
   );
   const onIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,

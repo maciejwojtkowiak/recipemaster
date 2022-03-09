@@ -1,5 +1,5 @@
 import { ingredient } from "../../../shared/types/Recipe";
-import IngredientItem from "../Ingredients/IngredientItem";
+import IngredientItem from "./ListItem";
 import { Box, Heading } from "@chakra-ui/react";
 
 interface funcProps {

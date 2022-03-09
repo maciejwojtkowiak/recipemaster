@@ -15,9 +15,11 @@ import AddIngredients from "./Ingredients/IngredientInput";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
 import StepsBox from "./Steps/StepsBox";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [type, setType] = useState<string>("");
   const [ingredients, setIngredients] = useState<ingredient[]>([]);
@@ -26,10 +28,10 @@ const RecipeForm = () => {
   const [steps, setSteps] = useState<string[]>([]);
   const user = auth.currentUser;
   const recipeTypes = useSelector(
-    (state: RootState) => state.recipe.recipeTypes
+    (state: RootState) => state.constantValues.recipeTypes
   );
   const recipeLengths = useSelector(
-    (state: RootState) => state.recipe.recipeLengths
+    (state: RootState) => state.constantValues.recipeLengths
   );
 
   const onSubmitHandler = (e: React.FormEvent): void => {
@@ -44,9 +46,11 @@ const RecipeForm = () => {
         time: time,
         ingredients: ingredients,
         stars: Math.floor(Math.random() * 6) + 1,
+        steps: steps,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
+      navigate("/");
     }
   };
 

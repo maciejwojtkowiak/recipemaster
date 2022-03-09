@@ -8,16 +8,13 @@ import React, { useState } from "react";
 const StepsBox = () => {
   const dispatch = useDispatch();
   const [step, setStep] = useState<string>("");
-  const onStepAddHandler = () => {
-    dispatch(recipeAction.addStep(step));
-  };
+  const onStepAddHandler = () => {};
   const onChangeStepNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStep(e.target.value);
   };
-  const steps = useSelector((state: RootState) => state.recipe.steps);
+
   return (
     <Box>
-      {steps}
       <InputGroup>
         <Input onChange={onChangeStepNameChange} placeholder="Add a step" />
         <InputRightElement>
