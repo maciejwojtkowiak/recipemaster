@@ -19,15 +19,15 @@ const StepsBox: React.FC<funcProps> = (props) => {
 
   return (
     <Box>
+      <Box>
+        <ListBox title="Steps" steps={props.steps} />
+      </Box>
       <InputGroup>
         <Input onChange={onStepNameChange} placeholder="Add a step" />
         <InputRightElement>
           <AddButton onClickHandler={onStepNameAdd} />
         </InputRightElement>
       </InputGroup>
-      <Box>
-        <ListBox title="steps" items={props.steps} />
-      </Box>
     </Box>
   );
 };

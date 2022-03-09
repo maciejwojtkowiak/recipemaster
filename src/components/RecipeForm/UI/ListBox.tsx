@@ -3,12 +3,14 @@ import IngredientItem from "./ListItem";
 import { Box, Heading } from "@chakra-ui/react";
 
 interface funcProps {
-  items: ingredient[] | string[];
   title: string;
+  ingredients?: ingredient[];
+  steps?: string[];
 }
 
 const ListBox: React.FC<funcProps> = (props) => {
-  const thereIsNoItem = props.items.length === 0;
+  const items = props.steps ? props.steps! : props.ingredients!;
+  const thereIsNoItem = items.length === 0;
 
   return (
     <Box
@@ -22,7 +24,7 @@ const ListBox: React.FC<funcProps> = (props) => {
       <Heading>{props.title}</Heading>
       {thereIsNoItem && <h1>No ingredients was added yet</h1>}
       {!thereIsNoItem &&
-        props.items.map((item, index) => (
+        items.map((item, index) => (
           <IngredientItem
             key={index}
             itemName={typeof item === "object" ? item.name! : item!}
