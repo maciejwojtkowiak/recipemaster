@@ -4,6 +4,7 @@ import { Box, Heading } from "@chakra-ui/react";
 
 interface funcProps {
   items: ingredient[] | string[];
+  title: string;
 }
 
 const ListBox: React.FC<funcProps> = (props) => {
@@ -18,7 +19,7 @@ const ListBox: React.FC<funcProps> = (props) => {
       marginBottom="1rem"
       textAlign="center"
     >
-      <Heading>Ingredients</Heading>
+      <Heading>{props.title}</Heading>
       {thereIsNoItem && <h1>No ingredients was added yet</h1>}
       {!thereIsNoItem &&
         props.items.map((item, index) => (

@@ -42,7 +42,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
 
   return (
     <Box>
-      <ListBox items={props.ingredients} />
+      <ListBox title="Ingredients" items={props.ingredients} />
       <Box>
         <InputGroup>
           <Input

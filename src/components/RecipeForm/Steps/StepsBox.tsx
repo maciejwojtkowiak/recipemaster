@@ -26,7 +26,7 @@ const StepsBox: React.FC<funcProps> = (props) => {
         </InputRightElement>
       </InputGroup>
       <Box>
-        <ListBox items={props.steps} />
+        <ListBox title="steps" items={props.steps} />
       </Box>
     </Box>
   );
