@@ -15,7 +15,7 @@ import AddIngredients from "./Ingredients/IngredientInput";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
 import StepsBox from "./Steps/StepsBox";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -100,7 +100,7 @@ const RecipeForm = () => {
                 onIngredientAdd={onIngredientAdd}
                 ingredients={ingredients}
               />
-              <StepsBox />
+              <StepsBox onStepAdd={onStepAdd} steps={steps} />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"

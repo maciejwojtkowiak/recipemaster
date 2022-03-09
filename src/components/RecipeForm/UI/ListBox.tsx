@@ -8,6 +8,7 @@ interface funcProps {
 
 const ListBox: React.FC<funcProps> = (props) => {
   const thereIsNoItem = props.items.length === 0;
+
   return (
     <Box
       border="1px"
@@ -15,6 +16,7 @@ const ListBox: React.FC<funcProps> = (props) => {
       padding="1rem"
       marginTop="1rem"
       marginBottom="1rem"
+      textAlign="center"
     >
       <Heading>Ingredients</Heading>
       {thereIsNoItem && <h1>No ingredients was added yet</h1>}
@@ -22,7 +24,7 @@ const ListBox: React.FC<funcProps> = (props) => {
         props.items.map((item, index) => (
           <IngredientItem
             key={index}
-            ingredientName={typeof item === "object" ? item.name : item}
+            itemName={typeof item === "object" ? item.name! : item!}
             numberOfIngredient={index + 1}
           />
         ))}

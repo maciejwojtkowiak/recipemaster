@@ -1,7 +1,7 @@
 import { Box, Text, Grid } from "@chakra-ui/react";
 
 type funcProps = {
-  ingredientName: string | null;
+  itemName: string;
   numberOfIngredient: number;
 };
 
@@ -23,7 +23,7 @@ const IngredientItem: React.FC<funcProps> = (props) => {
         >
           {props.numberOfIngredient}
         </Text>
-        <Text textAlign="center">{props.ingredientName}</Text>
+        <Text textAlign="center">{props.itemName}</Text>
       </Grid>
     </Box>
   );

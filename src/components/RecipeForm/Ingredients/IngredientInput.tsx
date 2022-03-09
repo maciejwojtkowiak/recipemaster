@@ -5,7 +5,6 @@ import {
   InputRightElement,
   Select,
 } from "@chakra-ui/react";
-import IngredientItem from "../UI/ListItem";
 import React, { useState } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
@@ -42,7 +41,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   };
 
   return (
-    <Box textAlign="center">
+    <Box>
       <ListBox items={props.ingredients} />
       <Box>
         <InputGroup>
