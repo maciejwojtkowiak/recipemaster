@@ -13,14 +13,6 @@ const INITIAL_VALUE: InitialState = {
   },
   steps: [],
   // arrays for iterating
-  recipeTypes: ["Breakfast", "Lunch", "Dinner", "Supper"], // tutaj dodaj czas i typy
-  recipeLengths: [
-    "Very short (~30min)",
-    "short (~1hr)",
-    "medium (~3hrs)",
-    "Long (~6hrs)",
-  ],
-  ingredientsUnits: ["g", "dag", "kg"],
 
   // variables for filtering recipes
   recipeTitle: "",
