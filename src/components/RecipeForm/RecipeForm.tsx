@@ -16,6 +16,7 @@ import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
 import StepsBox from "./Steps/StepsBox";
 import { useNavigate } from "react-router-dom";
+import IngredientsContainer from "./Ingredients/IngredientsContainer";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -96,9 +97,9 @@ const RecipeForm = () => {
                 placeHolder="Choose type of your dish"
                 values={recipeTypes}
               />
-              <AddIngredients
-                onIngredientAdd={onIngredientAdd}
+              <IngredientsContainer
                 ingredients={ingredients}
+                onIngredientAdd={onIngredientAdd}
               />
               <StepsBox onStepAdd={onStepAdd} steps={steps} />
               <SelectComponent

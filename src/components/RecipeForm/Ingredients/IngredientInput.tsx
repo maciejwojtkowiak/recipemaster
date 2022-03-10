@@ -10,11 +10,9 @@ import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import AddButton from "../../UI/AddButton";
-import ListBox from "../UI/ListBox";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
-  ingredients: ingredient[];
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
@@ -42,7 +40,6 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
 
   return (
     <Box>
-      <ListBox title="Ingredients" ingredients={props.ingredients} />
       <Box>
         <InputGroup>
           <Input
