@@ -1,6 +1,7 @@
 import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
 import React, { useState } from "react";
+import StepItem from "./StepItem";
 
 interface funcProps {
   onStepAdd: (step: string) => void;
@@ -20,7 +21,7 @@ const StepsBox: React.FC<funcProps> = (props) => {
     <Box>
       <Box>
         {props.steps.map((step) => (
-          <Box>{step}</Box>
+          <StepItem key={step} step={step} />
         ))}
       </Box>
       <InputGroup>

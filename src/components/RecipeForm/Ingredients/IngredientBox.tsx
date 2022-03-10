@@ -1,8 +1,7 @@
 import { ingredient } from "../../../shared/types/Recipe";
 import IngredientItem from "./IngredientItem";
-import { Box, Heading } from "@chakra-ui/react";
-
-// nie kombinuj zrób oddzielne mapowanie dla obu.
+import { Heading } from "@chakra-ui/react";
+import ListContainerBox from "../UI/ListContainerBox";
 
 interface funcProps {
   ingredients: ingredient[];
@@ -10,17 +9,9 @@ interface funcProps {
 
 const IngredientBox: React.FC<funcProps> = (props) => {
   const isThereNoIngredients = props.ingredients?.length === 0;
-  console.log(isThereNoIngredients);
 
   return (
-    <Box
-      border="1px"
-      borderColor="gray.200"
-      padding="1rem"
-      marginTop="1rem"
-      marginBottom="1rem"
-      textAlign="center"
-    >
+    <ListContainerBox>
       <Heading>Ingredients</Heading>
       {isThereNoIngredients && <h1>No ingredients was added yet</h1>}
       {!isThereNoIngredients &&
@@ -31,7 +22,7 @@ const IngredientBox: React.FC<funcProps> = (props) => {
             numberOfIngredient={index + 1}
           />
         ))}
-    </Box>
+    </ListContainerBox>
   );
 };
 

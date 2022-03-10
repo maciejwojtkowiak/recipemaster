@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import IngredientBox from "./IngredientList";
+import IngredientBox from "./IngredientBox";
 import IngredientInput from "./IngredientInput";
 import { ingredient } from "../../../shared/types/Recipe";
 interface funcProps {

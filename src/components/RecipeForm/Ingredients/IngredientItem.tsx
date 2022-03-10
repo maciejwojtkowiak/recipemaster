@@ -1,4 +1,5 @@
-import { Box, Text, Grid } from "@chakra-ui/react";
+import { Text, Grid } from "@chakra-ui/react";
+import ItemBox from "../UI/ItemBox";
 
 type funcProps = {
   itemName: string;
@@ -7,13 +8,7 @@ type funcProps = {
 
 const IngredientItem: React.FC<funcProps> = (props) => {
   return (
-    <Box
-      border="1px"
-      borderColor="gray.200"
-      marginTop="0.5rem"
-      marginBottom="0.5rem"
-      padding="0.5rem"
-    >
+    <ItemBox>
       <Grid templateColumns=" min-content 100%" placeItems="center">
         <Text
           fontSize="1.2rem"
@@ -25,7 +20,7 @@ const IngredientItem: React.FC<funcProps> = (props) => {
         </Text>
         <Text textAlign="center">{props.itemName}</Text>
       </Grid>
-    </Box>
+    </ItemBox>
   );
 };
 

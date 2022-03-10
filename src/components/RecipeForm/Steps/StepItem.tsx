@@ -1,7 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import ItemBox from "../UI/ItemBox";
 
-const StepItem = () => {
-  return <Box></Box>;
+interface funcProps {
+  step: string;
+}
+
+const StepItem: React.FC<funcProps> = (props) => {
+  return <ItemBox>{props.step}</ItemBox>;
 };
 
 export default StepItem;
