@@ -11,10 +11,9 @@ import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 import FormHeader from "./FormHeader";
-import AddIngredients from "./Ingredients/IngredientInput";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
-import StepsBox from "./Steps/StepsBox";
+import StepsContainer from "./Steps/StepsContainer";
 import { useNavigate } from "react-router-dom";
 import IngredientsContainer from "./Ingredients/IngredientsContainer";
 
@@ -101,7 +100,7 @@ const RecipeForm = () => {
                 ingredients={ingredients}
                 onIngredientAdd={onIngredientAdd}
               />
-              <StepsBox onStepAdd={onStepAdd} steps={steps} />
+              <StepsContainer onStepAdd={onStepAdd} steps={steps} />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
