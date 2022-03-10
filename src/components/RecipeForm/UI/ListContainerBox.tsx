@@ -1,6 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 
-const ListContainerBox: React.FC = (props) => {
+interface funcProps {
+  title: string;
+}
+
+const ListContainerBox: React.FC<funcProps> = (props) => {
   return (
     <Box
       border="1px"
@@ -8,8 +12,8 @@ const ListContainerBox: React.FC = (props) => {
       padding="1rem"
       marginTop="1rem"
       marginBottom="1rem"
-      textAlign="center"
     >
+      <Heading textAlign="center">{props.title}</Heading>
       {props.children}
     </Box>
   );

@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import StepsBox from "./StepsBox";
+import StepsInput from "./StepsInput";
 import StepsList from "./StepsList";
 
 interface funcProps {
@@ -10,8 +10,8 @@ interface funcProps {
 const StepsContainer: React.FC<funcProps> = (props) => {
   return (
     <Box>
-      <StepsBox onStepAdd={props.onStepAdd} steps={props.steps} />
-      <StepsList />
+      <StepsList steps={props.steps} />
+      <StepsInput onStepAdd={props.onStepAdd} />
     </Box>
   );
 };

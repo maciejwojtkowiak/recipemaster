@@ -5,10 +5,9 @@ import StepItem from "./StepItem";
 
 interface funcProps {
   onStepAdd: (step: string) => void;
-  steps: string[];
 }
 
-const StepsBox: React.FC<funcProps> = (props) => {
+const StepsInput: React.FC<funcProps> = (props) => {
   const [stepName, setStep] = useState<string>("");
   const onStepNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStep(e.target.value);
@@ -19,11 +18,6 @@ const StepsBox: React.FC<funcProps> = (props) => {
 
   return (
     <Box>
-      <Box>
-        {props.steps.map((step) => (
-          <StepItem key={step} step={step} />
-        ))}
-      </Box>
       <InputGroup>
         <Input onChange={onStepNameChange} placeholder="Add a step" />
         <InputRightElement>
@@ -34,4 +28,4 @@ const StepsBox: React.FC<funcProps> = (props) => {
   );
 };
 
-export default StepsBox;
+export default StepsInput;

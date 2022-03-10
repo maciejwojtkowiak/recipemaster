@@ -62,7 +62,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
               borderRadius="0"
             >
               {ingredientsUnits.map((unit) => (
-                <option>{unit}</option>
+                <option key={unit}>{unit}</option>
               ))}
             </Select>
             <AddButton onClickHandler={onAddIngredient} />
