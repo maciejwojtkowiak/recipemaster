@@ -1,4 +1,4 @@
-import { Box, Text, Grid } from "@chakra-ui/react";
+import { Text, Grid } from "@chakra-ui/react";
 import ItemBox from "../UI/ItemBox";
 
 type funcProps = {

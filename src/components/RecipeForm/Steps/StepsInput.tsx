@@ -1,7 +1,6 @@
 import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
 import React, { useState } from "react";
-import StepItem from "./StepItem";
 
 interface funcProps {
   onStepAdd: (step: string) => void;
