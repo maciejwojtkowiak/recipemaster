@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import React from "react";
 import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
-import RecipeIngredientDetail from "./IngredientsDetailColumns/RecipeIngredientsDetail";
+import RecipeIngredientDetail from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
 
 const RecipeDetail = () => {

@@ -7,7 +7,7 @@ import RecipeStepsBox from "./RecipeStepsBox";
 interface funcProps {
   recipe: Recipe;
 }
-const RecipeIngredientDetail: React.FC<funcProps> = (props) => {
+const DetailColumns: React.FC<funcProps> = (props) => {
   return (
     <Box h="80vh" border="1px" w="80%">
       <Grid w="100%" h="100%" templateColumns="60% 20% 20%">
@@ -25,4 +25,4 @@ const RecipeIngredientDetail: React.FC<funcProps> = (props) => {
   );
 };
 
-export default RecipeIngredientDetail;
+export default DetailColumns;
