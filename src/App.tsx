@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Detail from "./pages/Detail";
 import { handleLoggedInState } from "./store/user-action";
 import "./Fonts/handwriting.css";
+import Notification from "./components/UI/Notification";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,14 +24,17 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/:recipeid" element={<Detail />} />
-      <Route path="/addRecipe" element={<AddRecipe />} />
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/Register" element={<Register />} />
-      <Route path="/Login" element={<Login />} />
-    </Routes>
+    <React.Fragment>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:recipeid" element={<Detail />} />
+        <Route path="/addRecipe" element={<AddRecipe />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Login" element={<Login />} />
+      </Routes>
+      <Notification />
+    </React.Fragment>
   );
 }
 
