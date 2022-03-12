@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchRecipes } from "./store/recipe-action";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -11,8 +11,13 @@ import Login from "./pages/Login";
 import Detail from "./pages/Detail";
 import { handleLoggedInState } from "./store/user-action";
 import Notification from "./components/UI/Notification";
+import { RootState } from "./store/store";
+import { uiAction } from "./store/ui-slice";
 
 function App() {
+  const notificationIsShown = useSelector(
+    (state: RootState) => state.ui.notificationIsShown
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -21,6 +26,14 @@ function App() {
   useEffect(() => {
     dispatch(handleLoggedInState());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (notificationIsShown) {
+      setTimeout(() => {
+        dispatch(uiAction.notificationIsShown(false));
+      }, 3000);
+    }
+  }, [dispatch, notificationIsShown]);
 
   return (
     <React.Fragment>
