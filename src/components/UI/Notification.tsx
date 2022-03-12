@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { Box } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 
 const Notification = () => {
   const notificationIsShown = useSelector(
@@ -19,8 +19,14 @@ const Notification = () => {
       bgColor="white"
       borderColor="orange.400"
       borderWidth="5px"
+      boxShadow="lg"
+      rounded="md"
     >
-      {notificationIsShown && notification}
+      {notificationIsShown && (
+        <Grid placeItems="center" width="100%" height="100%">
+          <Text fontSize="2rem">{notification}</Text>
+        </Grid>
+      )}
     </Box>
   );
 };
