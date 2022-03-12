@@ -21,7 +21,7 @@ const animate = {
 
 const Notification = () => {
   const notificationIsShown = useSelector(
-    (state: RootState) => state.ui.notificationIsShown
+    (state: RootState) => state.ui.notification.isShown
   );
   const notification = useSelector((state: RootState) => state.ui.notification);
   return (
@@ -50,7 +50,7 @@ const Notification = () => {
             >
               <Grid placeItems="center" width="100%" height="100%">
                 <Text fontFamily="dancingScriptFont" fontSize="3rem">
-                  {notification}
+                  {notification.message}
                 </Text>
               </Grid>
             </Box>

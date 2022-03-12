@@ -1,10 +1,4 @@
-import {
-  Box,
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Box, Flex, Input } from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
 import React, { useState } from "react";
 

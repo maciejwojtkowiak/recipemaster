@@ -43,8 +43,13 @@ export const fetchRecipes = () => {
         for (const key of Object.keys(data)) {
           dispatch(recipeAction.replaceRecipes(data[key]));
         }
-        dispatch(uiAction.notificationIsShown(true));
-        dispatch(uiAction.setNotificationContent("Data was fetched"));
+        dispatch(
+          uiAction.setNotification({
+            message: "Data was fetched",
+            isShown: true,
+            type: "fetch",
+          })
+        );
       }
     } catch {
       console.error("ERROR");

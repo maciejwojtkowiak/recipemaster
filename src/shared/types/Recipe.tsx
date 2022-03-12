@@ -34,3 +34,9 @@ export type Recipe = {
   steps: string[];
   stars: number;
 };
+
+export type Notification = {
+  message: string;
+  isShown: boolean;
+  type: string;
+};

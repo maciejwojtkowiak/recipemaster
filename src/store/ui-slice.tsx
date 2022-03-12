@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Notification } from "../shared/types/Recipe";
 
 const INITIAL_STATE = {
   isLoggedIn: false,
   isLoading: false,
-  notificationIsShown: false,
-  notification: "",
+  notification: {
+    isShown: false,
+    message: "",
+    type: "",
+  } as Notification,
 };
 
 const uiSlice = createSlice({
@@ -19,11 +23,8 @@ const uiSlice = createSlice({
       state.isLoading = action.payload;
     },
 
-    notificationIsShown(state, action: PayloadAction<boolean>) {
-      state.notificationIsShown = action.payload;
-    },
-    setNotificationContent(state, action: PayloadAction<string>) {
-      state.notification = action.payload;
+    setNotification(state, action: PayloadAction<Notification>) {
+      state.notification = { ...action.payload };
     },
   },
 });

@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import IngredientList from "./IngredientList";
 import IngredientInput from "./IngredientInput";
 import { ingredient } from "../../../shared/types/Recipe";

@@ -16,7 +16,7 @@ import { uiAction } from "./store/ui-slice";
 
 function App() {
   const notificationIsShown = useSelector(
-    (state: RootState) => state.ui.notificationIsShown
+    (state: RootState) => state.ui.notification.isShown
   );
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,7 +30,13 @@ function App() {
   useEffect(() => {
     if (notificationIsShown) {
       setTimeout(() => {
-        dispatch(uiAction.notificationIsShown(false));
+        dispatch(
+          uiAction.setNotification({
+            type: "",
+            message: "",
+            isShown: false,
+          })
+        );
       }, 3000);
     }
   }, [dispatch, notificationIsShown]);
