@@ -1,4 +1,10 @@
-import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
 import React, { useState } from "react";
 
@@ -17,12 +23,16 @@ const StepsInput: React.FC<funcProps> = (props) => {
 
   return (
     <Box>
-      <InputGroup>
-        <Input onChange={onStepNameChange} placeholder="Add a step" />
-        <InputRightElement>
-          <AddButton onClickHandler={onStepNameAdd} />
-        </InputRightElement>
-      </InputGroup>
+      <Flex gap="1px">
+        <Input
+          onChange={onStepNameChange}
+          placeholder="Add a step"
+          borderRadius="0"
+          border="1px"
+        />
+
+        <AddButton onClickHandler={onStepNameAdd} />
+      </Flex>
     </Box>
   );
 };

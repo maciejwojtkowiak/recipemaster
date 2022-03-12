@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 import IngredientList from "./IngredientList";
 import IngredientInput from "./IngredientInput";
 import { ingredient } from "../../../shared/types/Recipe";
@@ -8,10 +8,10 @@ interface funcProps {
 }
 const IngredientsContainer: React.FC<funcProps> = (props) => {
   return (
-    <Box>
+    <Grid width="100%">
       <IngredientList ingredients={props.ingredients} />
       <IngredientInput onIngredientAdd={props.onIngredientAdd} />
-    </Box>
+    </Grid>
   );
 };
 

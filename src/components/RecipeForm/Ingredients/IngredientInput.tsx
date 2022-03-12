@@ -1,10 +1,4 @@
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Select,
-} from "@chakra-ui/react";
+import { Box, Flex, Input, Select } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
@@ -39,35 +33,40 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   };
 
   return (
-    <Box>
-      <Box>
-        <InputGroup>
+    <Box width="100%">
+      <Box width="100%" boxSizing="border-box">
+        <Flex width="100%" boxSizing="border-box" gap="1px">
           <Input
             onChange={(e) => onIngredientChange(e, setIngredientName)}
             type="text"
             placeholder="add an ingredient"
+            borderRadius="0"
+            zIndex="10"
+            border="1px"
+            flex="6"
           />
-          <InputRightElement width="25%">
-            <Input
-              onChange={(e) => onIngredientChange(e, setIngredientAmount)}
-              width="100%"
-              placeholder="Amount"
-              borderRadius="0"
-              outline="none"
-            />
-            <Select
-              onChange={(e) => onIngredientChange(e, setIngredientUnit)}
-              isReadOnly
-              placeholder="Unit"
-              borderRadius="0"
-            >
-              {ingredientsUnits.map((unit) => (
-                <option key={unit}>{unit}</option>
-              ))}
-            </Select>
-            <AddButton onClickHandler={onAddIngredient} />
-          </InputRightElement>
-        </InputGroup>
+
+          <Input
+            onChange={(e) => onIngredientChange(e, setIngredientAmount)}
+            placeholder="Amount"
+            borderRadius="0"
+            outline="none"
+            flex="1"
+          />
+          <Select
+            onChange={(e) => onIngredientChange(e, setIngredientUnit)}
+            isReadOnly
+            placeholder="Unit"
+            borderRadius="0"
+            flex="1"
+          >
+            {ingredientsUnits.map((unit) => (
+              <option key={unit}>{unit}</option>
+            ))}
+          </Select>
+
+          <AddButton onClickHandler={onAddIngredient} />
+        </Flex>
       </Box>
     </Box>
   );
