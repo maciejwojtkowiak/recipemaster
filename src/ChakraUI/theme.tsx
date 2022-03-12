@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import "@fontsource/dancing-script";
 
 const theme = extendTheme({
   components: {
@@ -28,6 +29,7 @@ const theme = extendTheme({
   },
   fonts: {
     heading: "Dancing Script",
+    dancingScriptFont: "Dancing Script",
   },
 });
 

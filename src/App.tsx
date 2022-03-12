@@ -10,7 +10,6 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Detail from "./pages/Detail";
 import { handleLoggedInState } from "./store/user-action";
-import "./Fonts/handwriting.css";
 import Notification from "./components/UI/Notification";
 
 function App() {

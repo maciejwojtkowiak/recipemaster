@@ -24,7 +24,9 @@ const Notification = () => {
     >
       {notificationIsShown && (
         <Grid placeItems="center" width="100%" height="100%">
-          <Text fontSize="2rem">{notification}</Text>
+          <Text fontFamily="dancingScriptFont" fontSize="3rem">
+            {notification}
+          </Text>
         </Grid>
       )}
     </Box>
