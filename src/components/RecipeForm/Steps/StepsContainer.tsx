@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
+import { Step } from "../../../shared/types/Recipe";
 import StepsInput from "./StepsInput";
 import StepsList from "./StepsList";
 
 interface funcProps {
-  onStepAdd: (step: string) => void;
-  steps: string[];
+  onStepAdd: (step: Step) => void;
+  steps: Step[];
 }
 
 const StepsContainer: React.FC<funcProps> = (props) => {

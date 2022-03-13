@@ -4,7 +4,7 @@ import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { recipeAction } from "../../store/recipe-slice";
 import { useDispatch } from "react-redux";
-import { Recipe } from "../../shared/types/Recipe";
+import { Recipe, Step } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
 import { useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const RecipeForm = () => {
   const [ingredients, setIngredients] = useState<ingredient[]>([]);
   const [time, setTime] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [steps, setSteps] = useState<string[]>([]);
+  const [steps, setSteps] = useState<Step[]>([]);
   const user = auth.currentUser;
   const recipeTypes = useSelector(
     (state: RootState) => state.constantValues.recipeTypes
@@ -70,7 +70,7 @@ const RecipeForm = () => {
     );
   };
 
-  const onStepAdd = (step: string) => {
+  const onStepAdd = (step: Step) => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
 

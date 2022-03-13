@@ -1,18 +1,19 @@
 import { Box, Flex, Input } from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
 import React, { useState } from "react";
+import { Step } from "../../../shared/types/Recipe";
 
 interface funcProps {
-  onStepAdd: (step: string) => void;
+  onStepAdd: (step: Step) => void;
 }
 
 const StepsInput: React.FC<funcProps> = (props) => {
-  const [stepName, setStep] = useState<string>("");
+  const [stepName, setStepName] = useState<string>("");
   const onStepNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStep(e.target.value);
+    setStepName(e.target.value);
   };
   const onStepNameAdd = () => {
-    props.onStepAdd(stepName);
+    props.onStepAdd({ name: stepName, id: Math.random() });
   };
 
   return (

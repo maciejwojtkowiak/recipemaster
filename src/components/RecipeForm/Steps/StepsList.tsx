@@ -1,9 +1,10 @@
 import { Text } from "@chakra-ui/react";
+import { Step } from "../../../shared/types/Recipe";
 import ListContainerBox from "../UI/ListContainerBox";
 import StepItem from "./StepItem";
 
 interface funcProps {
-  steps: string[];
+  steps: Step[];
 }
 
 const StepsList: React.FC<funcProps> = (props) => {
@@ -13,7 +14,7 @@ const StepsList: React.FC<funcProps> = (props) => {
       {thereIsNoSteps && <Text>No steps was added yet</Text>}
       {!thereIsNoSteps &&
         props.steps.map((step, index) => (
-          <StepItem key={step} step={step} stepNumber={index} />
+          <StepItem key={step.name} step={step.name} stepNumber={index} />
         ))}
     </ListContainerBox>
   );
