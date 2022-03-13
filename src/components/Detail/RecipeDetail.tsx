@@ -26,14 +26,8 @@ const RecipeDetail = () => {
       <Box>
         <TopBorderStyling />
         <Grid placeItems="center">
-          <Box
-            width="80%"
-            borderWidth="0.5rem"
-            borderColor="orange.300"
-            borderRadius="1rem"
-            marginTop="5rem"
-          >
-            <Flex padding="5rem">
+          <Box width="80%">
+            <Flex marginTop="5rem" marginBottom="5rem">
               <Box display="inline-block">
                 <motion.div whileHover={{ scale: 1.05 }}>
                   <Image

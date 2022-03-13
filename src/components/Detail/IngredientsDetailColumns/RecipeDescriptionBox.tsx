@@ -11,7 +11,9 @@ const RecipeDescriptionBox: React.FC<funcProps> = (props) => {
   return (
     <Box>
       <ColumnHeader title="Description" />
-      <Text textAlign="center">{description}</Text>
+      <Text textAlign="center" fontSize="1.8rem" marginTop="1.5rem">
+        {description}
+      </Text>
     </Box>
   );
 };
