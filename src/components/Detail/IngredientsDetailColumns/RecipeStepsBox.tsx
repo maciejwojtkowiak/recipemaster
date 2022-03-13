@@ -1,15 +1,17 @@
 import { Box } from "@chakra-ui/react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { Recipe } from "../../../shared/types/Recipe";
+import { Recipe, Step } from "../../../shared/types/Recipe";
 import ColumnHeader from "./ColumnHeader";
 import DetailListItem from "./DetailListItem";
-import React from "react";
+import React, { useState } from "react";
 
 interface funcProps {
   recipe: Recipe;
 }
+let initial = true;
 const RecipeStepsBox: React.FC<funcProps> = (props) => {
-  const steps = props.recipe.steps;
+  const [stepsState, setStepsState] = useState<Step[]>(props.recipe.steps);
+
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) return;
@@ -20,7 +22,25 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
       return;
     }
 
-    const step = props.recipe.steps[Number(source.droppableId)];
+    let stepId = [];
+
+    for (const step of stepsState!) {
+      stepId.push(step.id);
+    }
+    let newSteps: Step[] = [];
+    const [reoderedSteps] = stepId.splice(result.source.index, 1);
+    stepId.splice(result.destination?.index!, 0, reoderedSteps);
+
+    for (const id of stepId) {
+      for (const step of stepsState!) {
+        if (id === step.id) newSteps.push(step);
+      }
+
+      setStepsState(newSteps);
+    }
+
+    stepId.splice(source.index, 1);
+    stepId.splice(destination.index, 0, Number(draggableId));
   };
   return (
     <React.Fragment>
@@ -29,11 +49,11 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
         <Droppable droppableId="steps">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {steps.map((step, index) => (
+              {stepsState.map((step, index) => (
                 <DetailListItem
-                  key={step.name}
+                  key={step.id}
                   itemName={step.name}
-                  indexOfItem={index + 1}
+                  indexOfItem={index}
                   id={(index + 1).toString()}
                 />
               ))}

@@ -14,7 +14,7 @@ const StepsList: React.FC<funcProps> = (props) => {
       {thereIsNoSteps && <Text>No steps was added yet</Text>}
       {!thereIsNoSteps &&
         props.steps.map((step, index) => (
-          <StepItem key={step.name} step={step.name} stepNumber={index} />
+          <StepItem key={step.id} step={step.name} stepNumber={index} />
         ))}
     </ListContainerBox>
   );
