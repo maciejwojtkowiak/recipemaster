@@ -8,7 +8,6 @@ import React, { useState } from "react";
 interface funcProps {
   recipe: Recipe;
 }
-let initial = true;
 const RecipeStepsBox: React.FC<funcProps> = (props) => {
   const [stepsState, setStepsState] = useState<Step[]>(props.recipe.steps);
 
@@ -54,7 +53,7 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
                   key={step.id}
                   itemName={step.name}
                   indexOfItem={index}
-                  id={(index + 1).toString()}
+                  id={step.id.toString()}
                 />
               ))}
               {provided.placeholder}
