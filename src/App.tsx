@@ -51,7 +51,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
       </Routes>
-      <Notification />
+      {notificationIsShown && <Notification />}
     </React.Fragment>
   );
 }

@@ -18,6 +18,7 @@ import { RootState } from "../../store/store";
 import { recipeAction } from "../../store/recipe-slice";
 import React from "react";
 import { getRecipeImage } from "../../Helpers/getRecipeImage";
+import { uiAction } from "../../store/ui-slice";
 
 const Bookmark = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,13 @@ const Bookmark = () => {
   );
   const onDeleteHandler = (e: React.FormEvent, id: number) => {
     dispatch(recipeAction.deleteLikedRecipe(id));
+    dispatch(
+      uiAction.setNotification({
+        message: "Item was unliked",
+        type: "DELETE",
+        isShown: true,
+      })
+    );
   };
 
   return (
