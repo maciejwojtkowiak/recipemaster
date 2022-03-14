@@ -7,6 +7,7 @@
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@fontsource/dancing-script": "^4.5.4",
     "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
@@ -17,6 +18,7 @@
     "firebase": "^9.6.6",
     "framer-motion": "^5.6.0",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
     "react-icons": "^4.3.1",
@@ -53,6 +55,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-transition-group": "^4.4.4"
   }
 }

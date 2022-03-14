@@ -11,7 +11,11 @@ const SelectComponent: React.FC<FuncProp> = (props) => {
   return (
     <Select onChange={props.onChange}>
       {props.values.map((value) => {
-        return <option value={value}>{value}</option>;
+        return (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        );
       })}
     </Select>
   );

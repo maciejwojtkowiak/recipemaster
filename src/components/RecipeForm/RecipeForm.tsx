@@ -4,18 +4,18 @@ import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { recipeAction } from "../../store/recipe-slice";
 import { useDispatch } from "react-redux";
-import { Recipe } from "../../shared/types/Recipe";
+import { Recipe, Step } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
 import { useSelector } from "react-redux";
 import SelectComponent from "../UI/SelectComponent";
 import { RootState } from "../../store/store";
 import FormHeader from "./FormHeader";
-import AddIngredients from "./Ingredients/IngredientInput";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
-import StepsBox from "./Steps/StepsBox";
-import { Navigate, useNavigate } from "react-router-dom";
+import StepsContainer from "./Steps/StepsContainer";
+import { useNavigate } from "react-router-dom";
+import IngredientsContainer from "./Ingredients/IngredientsContainer";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const RecipeForm = () => {
   const [ingredients, setIngredients] = useState<ingredient[]>([]);
   const [time, setTime] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [steps, setSteps] = useState<string[]>([]);
+  const [steps, setSteps] = useState<Step[]>([]);
   const user = auth.currentUser;
   const recipeTypes = useSelector(
     (state: RootState) => state.constantValues.recipeTypes
@@ -70,7 +70,7 @@ const RecipeForm = () => {
     );
   };
 
-  const onStepAdd = (step: string) => {
+  const onStepAdd = (step: Step) => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
 
@@ -96,11 +96,11 @@ const RecipeForm = () => {
                 placeHolder="Choose type of your dish"
                 values={recipeTypes}
               />
-              <AddIngredients
-                onIngredientAdd={onIngredientAdd}
+              <IngredientsContainer
                 ingredients={ingredients}
+                onIngredientAdd={onIngredientAdd}
               />
-              <StepsBox />
+              <StepsContainer onStepAdd={onStepAdd} steps={steps} />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"

@@ -5,7 +5,7 @@ interface funcProps {
 
 const ColumnHeader: React.FC<funcProps> = (props) => {
   return (
-    <Heading fontSize="3rem" marginTop="2rem" textAlign="center">
+    <Heading fontSize="3.2rem" marginTop="2rem" textAlign="center">
       {props.title}
     </Heading>
   );

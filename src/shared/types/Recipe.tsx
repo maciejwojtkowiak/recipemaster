@@ -18,6 +18,11 @@ export interface InitialState {
   filters: filters;
 }
 
+export interface Step {
+  name: string;
+  id: number;
+}
+
 export type FilteringConfiguration = {
   content: string;
   filterName: keyof filters;
@@ -31,6 +36,12 @@ export type Recipe = {
   time: string;
   description: string;
   ingredients: ingredient[];
-  steps: string[];
+  steps: Step[];
   stars: number;
+};
+
+export type Notification = {
+  message: string;
+  isShown: boolean;
+  type: string;
 };

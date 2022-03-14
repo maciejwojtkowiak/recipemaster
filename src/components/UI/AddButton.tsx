@@ -16,8 +16,9 @@ const AddButton: React.FC<funcProps> = (props) => {
         _hover={{
           bgGradient: "linear(to-r, orange.200, orange.400)",
         }}
+        borderRadius="0"
       >
-        <AddIcon w={4} h={4} />
+        <AddIcon />
       </Button>
     </Box>
   );

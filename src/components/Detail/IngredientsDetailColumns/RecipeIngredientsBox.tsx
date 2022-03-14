@@ -12,14 +12,7 @@ const RecipeIngredientsBox: React.FC<funcProps> = (props) => {
   return (
     <Box>
       <ColumnHeader title="Ingredients" />
-      {ingredients.map((ingredient, index) => (
-        <DetailListItem
-          key={ingredient.name}
-          item={ingredient.name!}
-          amount={ingredient.amount!}
-          indexOfItem={index}
-        />
-      ))}
+      helo
     </Box>
   );
 };
