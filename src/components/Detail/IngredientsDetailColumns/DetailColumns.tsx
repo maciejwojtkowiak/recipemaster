@@ -24,7 +24,7 @@ const DetailColumns: React.FC<funcProps> = (props) => {
           <RecipeDescriptionBox recipe={props.recipe} />
         </Box>
         <Box borderLeftWidth="0.5rem" borderColor="orange.300">
-          <RecipeStepsBox recipe={props.recipe} />
+          <RecipeStepsBox recipeId={props.recipe.id} />
         </Box>
 
         <Box borderLeftWidth="0.5rem" borderColor="orange.300">
