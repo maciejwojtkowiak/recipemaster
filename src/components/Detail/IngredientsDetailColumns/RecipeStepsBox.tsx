@@ -46,9 +46,8 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
 
     stepId.splice(source.index, 1);
     stepId.splice(destination.index, 0, Number(draggableId));
-    console.log(destination.index, source.index);
+
     dispatch(recipeAction.setSteps({ id: recipe!.id, steps: newSteps }));
-    console.log(recipe?.steps);
   };
   return (
     <React.Fragment>
