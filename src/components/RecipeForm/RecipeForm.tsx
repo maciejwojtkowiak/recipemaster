@@ -100,7 +100,11 @@ const RecipeForm = () => {
                 ingredients={ingredients}
                 onIngredientAdd={onIngredientAdd}
               />
-              <StepsContainer onStepAdd={onStepAdd} steps={steps} />
+              <StepsContainer
+                onStepAdd={onStepAdd}
+                steps={steps}
+                setSteps={setSteps}
+              />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"

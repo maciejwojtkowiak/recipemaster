@@ -5,13 +5,14 @@ import StepsList from "./StepsList";
 
 interface funcProps {
   onStepAdd: (step: Step) => void;
+  setSteps: (steps: Step[]) => void;
   steps: Step[];
 }
 
 const StepsContainer: React.FC<funcProps> = (props) => {
   return (
     <Box>
-      <StepsList steps={props.steps} />
+      <StepsList steps={props.steps} setSteps={props.setSteps} />
       <StepsInput onStepAdd={props.onStepAdd} />
     </Box>
   );
