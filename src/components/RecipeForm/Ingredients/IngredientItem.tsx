@@ -1,27 +1,25 @@
-import { Text, Grid } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
+import { ingredient } from "../../../shared/types/Recipe";
 import ItemBox from "../UI/ItemBox";
+import ItemOrangeBox from "../UI/ItemOrangeBox";
 
 type funcProps = {
-  itemName: string;
+  ingredient: ingredient;
   numberOfIngredient: number;
 };
 
 const IngredientItem: React.FC<funcProps> = (props) => {
   return (
     <ItemBox>
-      <Grid templateColumns="0% 100%" placeItems="center">
-        <Text
-          fontSize="1.2rem"
-          color="orange.300"
-          fontWeight="700"
-          textAlign="left"
-        >
-          {props.numberOfIngredient}
-        </Text>
-        <Text fontSize="1.2rem" textAlign="center">
-          {props.itemName}
-        </Text>
-      </Grid>
+      <Text fontSize="1.2rem" textAlign="center" position="relative">
+        <Box position="absolute">
+          <ItemOrangeBox>
+            {props.ingredient.amount}
+            {props.ingredient.unit}
+          </ItemOrangeBox>
+        </Box>
+        {props.ingredient.name}
+      </Text>
     </ItemBox>
   );
 };

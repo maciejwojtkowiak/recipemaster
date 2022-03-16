@@ -1,6 +1,7 @@
 import ItemBox from "../UI/ItemBox";
-import { Text } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
+import ItemOrangeBox from "../UI/ItemOrangeBox";
 
 interface funcProps {
   stepName: string;
@@ -20,10 +21,12 @@ const StepItem: React.FC<funcProps> = (props) => {
             textAlign="center"
             fontSize="1.2rem"
           >
-            <Text marginRight="5rem" as="span">
-              {props.stepIndex + 1}
+            <Text fontSize="1.2rem" textAlign="center" position="relative">
+              <Box position="absolute">
+                <ItemOrangeBox>{props.stepIndex + 1}</ItemOrangeBox>
+              </Box>
+              {props.stepName}
             </Text>
-            {props.stepName}
           </Text>
         )}
       </Draggable>
