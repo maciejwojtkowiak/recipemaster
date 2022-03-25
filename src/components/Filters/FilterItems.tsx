@@ -14,19 +14,26 @@ interface FuncProps {
 
 const FilterItems: React.FC<FuncProps> = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
-  const queryParams = new URLSearchParams(location.search);
+
+  let chosenListOfFilters: string[] = [];
   const chosenFilters = useSelector((state: RootState) => state.recipe.filters);
-  for (const chosenFilterArray of chosenFilters) {
-    console.log(chosenFilterArray);
+  for (const k of Object.keys(chosenFilters)) {
+    for (const filter of chosenFilters[k]) {
+      chosenListOfFilters.push(filter);
+    }
   }
-  const chosenFiltersLengths = useSelector(
-    (state: RootState) => state.recipe.filters.filterLengths
-  );
-  const chosenFiltersTypes = useSelector(
-    (state: RootState) => state.recipe.filters.filterTypes
-  );
+
+  const getFilterParam = (): string => {
+    let param = `?filter=`;
+    for (const filter of chosenListOfFilters) {
+      param += filter.toLowerCase();
+    }
+
+    return param;
+  };
+
+  console.log(getFilterParam());
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
@@ -37,7 +44,6 @@ const FilterItems: React.FC<FuncProps> = (props) => {
           filterName: props.filterName,
         })
       );
-      navigate(`?filter${e.target.value}`);
     }
 
     if (!e.target.checked) {
@@ -48,6 +54,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         })
       );
     }
+    navigate(getFilterParam());
   };
 
   return (

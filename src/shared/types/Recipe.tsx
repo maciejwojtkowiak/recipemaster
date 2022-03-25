@@ -1,4 +1,8 @@
-export interface filters {
+interface ObjectKeys {
+  [key: string]: string[];
+}
+
+export interface filters extends ObjectKeys {
   filterTypes: string[];
   filterLengths: string[];
 }
