@@ -1,10 +1,10 @@
 import { Checkbox, Stack, Text } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import React from "react";
 import { filters } from "../../shared/types/Recipe";
-import { useNavigate, useLocation } from "react-router-dom";
-import { RootState } from "../../store/store";
+import { useNavigate } from "react-router-dom";
+import { makeParam } from "../../Helpers/makeParam";
 
 interface FuncProps {
   options: string[];
@@ -16,27 +16,10 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let chosenListOfFilters: string[] = [];
-  const chosenFilters = useSelector((state: RootState) => state.recipe.filters);
-  for (const k of Object.keys(chosenFilters)) {
-    for (const filter of chosenFilters[k]) {
-      chosenListOfFilters.push(filter);
-    }
-  }
-
-  const getFilterParam = (): string => {
-    let param = `?filter=`;
-    for (const filter of chosenListOfFilters) {
-      param += filter.toLowerCase();
-    }
-
-    return param;
-  };
-
-  console.log(getFilterParam());
-
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
+    const randomParam = makeParam();
+    let definePath = "?filter" + randomParam;
     if (e.target.checked) {
       dispatch(
         recipeAction.addFilters({
@@ -54,7 +37,8 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         })
       );
     }
-    navigate(getFilterParam());
+
+    navigate(definePath);
   };
 
   return (
