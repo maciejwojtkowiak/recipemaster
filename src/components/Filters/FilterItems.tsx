@@ -18,8 +18,6 @@ const FilterItems: React.FC<FuncProps> = (props) => {
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
-    const randomParam = makeParam();
-    let definePath = "?filter" + randomParam;
     if (e.target.checked) {
       dispatch(
         recipeAction.addFilters({
@@ -37,8 +35,6 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         })
       );
     }
-
-    navigate(definePath);
   };
 
   return (

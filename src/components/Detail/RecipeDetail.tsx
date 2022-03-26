@@ -9,6 +9,7 @@ import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
 import RecipeIngredientDetail from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
+import CommentShowButton from "./Comments/CommentShowButton";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
@@ -45,6 +46,7 @@ const RecipeDetail = () => {
             </Flex>
           </Box>
           <RecipeIngredientDetail recipe={detailedRecipe!} />
+          <CommentShowButton />
         </Grid>
       </Box>
     </React.Fragment>

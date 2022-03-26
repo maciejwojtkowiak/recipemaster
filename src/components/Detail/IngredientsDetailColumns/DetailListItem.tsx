@@ -1,4 +1,4 @@
-import { Box, Grid, Text, Flex } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
 
 interface funcProps {
@@ -18,27 +18,33 @@ const DetailListItem: React.FC<funcProps> = (props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Flex margin="1rem">
-            <Box
+          <Grid templateColumns="1fr 1fr" margin="1rem" width="10vw">
+            <Grid
               bgGradient="linear(to-r, orange.200, orange.400)"
-              height="6vh"
-              width="6vh"
+              minHeight="6vh"
+              minWidth="6vh"
               boxShadow="md"
               rounded="md"
+              alignSelf="center"
             >
-              <Grid w="100%" h="100%" placeItems="center">
+              <Grid placeItems="center">
                 <Text color="white" fontWeight="700" fontSize="140%">
                   {props.amount && props.amount + props.unit}
                   {!props.amount && props.indexOfItem}
                 </Text>
               </Grid>
-            </Box>
-            <Grid placeItems="center">
-              <Text marginLeft="1rem" fontWeight="500" fontSize="1.8rem">
-                {props.itemName}
-              </Text>
             </Grid>
-          </Flex>
+            <Grid placeItems="center">
+              <Box maxW="10vw">
+                <Box>
+                  <Text marginLeft="1rem" fontWeight="500" fontSize="1.2rem">
+                    {props.itemName}
+                    dasjkdasjkidasjdaskldsjakkkkkkkkkkksajdaskjdaskjd
+                  </Text>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       )}
     </Draggable>
