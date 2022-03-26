@@ -4,11 +4,10 @@ import { Link, useParams } from "react-router-dom";
 const CommentShowButton = () => {
   const actualParams = useParams();
   const defineLink = `${actualParams.recipeid}/comments`;
-  console.log(defineLink);
 
   return (
     <Box>
-      <Link to={defineLink}>
+      <Link to="comments">
         <Button
           marginTop="6rem"
           marginBottom="6rem"

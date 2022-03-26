@@ -18,6 +18,7 @@ const RecipeDetail = () => {
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
+  console.log(paramsId);
   console.log(detailedRecipe);
   let imgName = getRecipeImage(detailedRecipe?.type!);
 
@@ -47,7 +48,7 @@ const RecipeDetail = () => {
           </Box>
           <RecipeIngredientDetail recipe={detailedRecipe!} />
           <CommentShowButton />
-          <Link to={`${paramsId}/comments`}>comm</Link>
+
           <Outlet />
         </Grid>
       </Box>
