@@ -70,6 +70,13 @@ const recipeSlice = createSlice({
 
       recipeToChangeSteps!.steps = action.payload.steps;
     },
+
+    addComment(state, action: PayloadAction<{ id: number; comment: string }>) {
+      const detailedRecipe = state.recipes.find(
+        (recipe) => recipe.id === action.payload.id
+      );
+      detailedRecipe?.comment?.push(action.payload.comment);
+    },
   },
 });
 

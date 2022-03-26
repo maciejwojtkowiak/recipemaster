@@ -42,6 +42,7 @@ export type Recipe = {
   ingredients: ingredient[];
   steps: Step[];
   stars: number;
+  comment?: string[];
 };
 
 export type Notification = {
