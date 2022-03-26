@@ -9,12 +9,10 @@ const CommentForm = () => {
   const detailParams = useParams();
   const recipeId = detailParams.recipeid;
   const dispatch = useDispatch();
-  console.log(recipeId);
   const [comment, setComment] = useState<string>("");
   const detailedRecipe = useSelector((state: RootState) =>
     state.recipe.recipes.find((recipe) => recipe.id === +recipeId!)
   );
-  console.log(detailedRecipe);
   const commentList = detailedRecipe?.comments;
   const onCommentChangeHandler = (
     e: React.ChangeEvent<HTMLTextAreaElement>
