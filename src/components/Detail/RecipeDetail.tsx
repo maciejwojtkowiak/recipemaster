@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Box, Grid, Image, Flex } from "@chakra-ui/react";
@@ -47,6 +47,8 @@ const RecipeDetail = () => {
           </Box>
           <RecipeIngredientDetail recipe={detailedRecipe!} />
           <CommentShowButton />
+          <Link to={`${paramsId}/comments`}>comm</Link>
+          <Outlet />
         </Grid>
       </Box>
     </React.Fragment>

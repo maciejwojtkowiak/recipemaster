@@ -18,7 +18,7 @@ const DetailListItem: React.FC<funcProps> = (props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Grid templateColumns="1fr 1fr" margin="1rem" width="10vw">
+          <Grid templateColumns="min-content 1fr" margin="1rem" width="10vw">
             <Grid
               bgGradient="linear(to-r, orange.200, orange.400)"
               minHeight="6vh"
@@ -34,12 +34,11 @@ const DetailListItem: React.FC<funcProps> = (props) => {
                 </Text>
               </Grid>
             </Grid>
-            <Grid placeItems="center">
+            <Grid alignItems="center">
               <Box maxW="10vw">
                 <Box>
                   <Text marginLeft="1rem" fontWeight="500" fontSize="1.2rem">
                     {props.itemName}
-                    dasjkdasjkidasjdaskldsjakkkkkkkkkkksajdaskjdaskjd
                   </Text>
                 </Box>
               </Box>

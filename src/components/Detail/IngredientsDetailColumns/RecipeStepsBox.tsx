@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { Recipe, Step } from "../../../shared/types/Recipe";
+import { Step } from "../../../shared/types/Recipe";
 import ColumnHeader from "./ColumnHeader";
 import DetailListItem from "./DetailListItem";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store/store";
 import { recipeAction } from "../../../store/recipe-slice";
