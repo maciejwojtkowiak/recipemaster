@@ -75,7 +75,7 @@ const recipeSlice = createSlice({
       const detailedRecipe = state.recipes.find(
         (recipe) => recipe.id === action.payload.id
       );
-      detailedRecipe?.comment?.push(action.payload.comment);
+      detailedRecipe!.comments!.push(action.payload.comment);
     },
   },
 });

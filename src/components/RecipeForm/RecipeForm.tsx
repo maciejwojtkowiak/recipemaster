@@ -47,6 +47,7 @@ const RecipeForm = () => {
         ingredients: ingredients,
         stars: Math.floor(Math.random() * 6) + 1,
         steps: steps,
+        comments: [],
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
