@@ -29,8 +29,9 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
+    let notificationTimer: ReturnType<typeof setTimeout>;
     if (notificationIsShown) {
-      setTimeout(() => {
+      notificationTimer = setTimeout(() => {
         dispatch(
           uiAction.setNotification({
             type: "",
@@ -40,6 +41,10 @@ function App() {
         );
       }, 3000);
     }
+
+    return () => {
+      clearTimeout(notificationTimer);
+    };
   }, [dispatch, notificationIsShown]);
 
   return (

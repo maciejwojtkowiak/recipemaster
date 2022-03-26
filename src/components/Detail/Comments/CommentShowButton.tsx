@@ -1,10 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CommentShowButton = () => {
-  const actualParams = useParams();
-  const defineLink = `${actualParams.recipeid}/comments`;
-
   return (
     <Box>
       <Link to="comments">
