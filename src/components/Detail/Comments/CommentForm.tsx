@@ -1,6 +1,6 @@
-import { Textarea, Grid, Button, Box } from "@chakra-ui/react";
+import { Textarea, Grid, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { createPortal } from "react-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { recipeAction } from "../../../store/recipe-slice";
@@ -16,10 +16,7 @@ const CommentForm = () => {
   const recipeId = detailParams.recipeid;
   const dispatch = useDispatch();
   const [comment, setComment] = useState<string>("");
-  const detailedRecipe = useSelector((state: RootState) =>
-    state.recipe.recipes.find((recipe) => recipe.id === +recipeId!)
-  );
-  const commentList = detailedRecipe?.comments;
+
   const onCommentChangeHandler = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -28,6 +25,7 @@ const CommentForm = () => {
 
   const onCommentAdd = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(comment);
     dispatch(recipeAction.addComment({ id: +recipeId!, comment: comment }));
   };
 
@@ -48,19 +46,21 @@ const CommentForm = () => {
             transform="translate(-50%, -50%)"
           >
             <form onSubmit={onCommentAdd}>
-              <Textarea
-                backgroundColor="white"
-                onChange={onCommentChangeHandler}
-                w="30vw"
-                h="25vh"
-                resize="none"
-                placeholder="Add your opinion"
-              />
-              <Button type="submit">Add</Button>
+              <Grid>
+                <Textarea
+                  backgroundColor="white"
+                  onChange={onCommentChangeHandler}
+                  w="30vw"
+                  h="25vh"
+                  resize="none"
+                  placeholder="Add your opinion"
+                  borderEndRadius="0"
+                />
+                <Button type="submit" borderRadius="0">
+                  Add
+                </Button>
+              </Grid>
             </form>
-            {commentList?.map((comment) => (
-              <Box>{comment}</Box>
-            ))}
           </Grid>
         </Overlay>
       )}
