@@ -3,6 +3,7 @@ import {
   Recipe,
   FilteringConfiguration,
   InitialState,
+  Step,
 } from "../shared/types/Recipe";
 
 const INITIAL_VALUE: InitialState = {
@@ -60,6 +61,21 @@ const recipeSlice = createSlice({
         (filterItem) => filterItem !== action.payload.content
       );
       state.filters[action.payload.filterName] = filteredArray;
+    },
+
+    setSteps(state, action: PayloadAction<{ id: number; steps: Step[] }>) {
+      let recipeToChangeSteps = state.recipes.find(
+        (recipe) => recipe.id === action.payload.id
+      );
+
+      recipeToChangeSteps!.steps = action.payload.steps;
+    },
+
+    addComment(state, action: PayloadAction<{ id: number; comment: string }>) {
+      const detailedRecipe = state.recipes.find(
+        (recipe) => recipe.id === action.payload.id
+      );
+      detailedRecipe!.comments!.push(action.payload.comment);
     },
   },
 });

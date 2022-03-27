@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Box, Grid, Image, Flex } from "@chakra-ui/react";
@@ -9,6 +9,7 @@ import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
 import RecipeIngredientDetail from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
+import CommentShowButton from "./Comments/CommentShowButton";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
@@ -17,6 +18,7 @@ const RecipeDetail = () => {
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
+  console.log(paramsId);
   console.log(detailedRecipe);
   let imgName = getRecipeImage(detailedRecipe?.type!);
 
@@ -45,6 +47,9 @@ const RecipeDetail = () => {
             </Flex>
           </Box>
           <RecipeIngredientDetail recipe={detailedRecipe!} />
+          <CommentShowButton />
+
+          <Outlet />
         </Grid>
       </Box>
     </React.Fragment>

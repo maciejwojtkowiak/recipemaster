@@ -1,15 +1,21 @@
 import { Box } from "@chakra-ui/react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { Recipe, Step } from "../../../shared/types/Recipe";
+import { Step } from "../../../shared/types/Recipe";
 import ColumnHeader from "./ColumnHeader";
 import DetailListItem from "./DetailListItem";
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../store/store";
+import { recipeAction } from "../../../store/recipe-slice";
 
 interface funcProps {
-  recipe: Recipe;
+  recipeId: number;
 }
 const RecipeStepsBox: React.FC<funcProps> = (props) => {
-  const [stepsState, setStepsState] = useState<Step[]>(props.recipe.steps);
+  const dispatch = useDispatch();
+  const recipe = useSelector((state: RootState) =>
+    state.recipe.recipes.find((recipe) => recipe.id === props.recipeId)
+  );
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -23,23 +29,25 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
 
     let stepId = [];
 
-    for (const step of stepsState!) {
+    for (const step of recipe?.steps!) {
       stepId.push(step.id);
     }
     let newSteps: Step[] = [];
-    const [reoderedSteps] = stepId.splice(result.source.index, 1);
-    stepId.splice(result.destination?.index!, 0, reoderedSteps);
+    const [reoderedStep] = stepId.splice(result.source.index, 1);
+
+    stepId.splice(result.destination?.index!, 0, reoderedStep);
+    console.log(stepId);
 
     for (const id of stepId) {
-      for (const step of stepsState!) {
+      for (const step of recipe?.steps!) {
         if (id === step.id) newSteps.push(step);
       }
-
-      setStepsState(newSteps);
     }
 
     stepId.splice(source.index, 1);
     stepId.splice(destination.index, 0, Number(draggableId));
+
+    dispatch(recipeAction.setSteps({ id: recipe!.id, steps: newSteps }));
   };
   return (
     <React.Fragment>
@@ -48,7 +56,7 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
         <Droppable droppableId="steps">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {stepsState.map((step, index) => (
+              {recipe?.steps.map((step, index) => (
                 <DetailListItem
                   key={step.id}
                   itemName={step.name}

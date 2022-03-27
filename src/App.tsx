@@ -13,6 +13,7 @@ import { handleLoggedInState } from "./store/user-action";
 import Notification from "./components/UI/Notification";
 import { RootState } from "./store/store";
 import { uiAction } from "./store/ui-slice";
+import DetailComments from "./components/Detail/Comments/DetailComments";
 
 function App() {
   const notificationIsShown = useSelector(
@@ -28,8 +29,9 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
+    let notificationTimer: ReturnType<typeof setTimeout>;
     if (notificationIsShown) {
-      setTimeout(() => {
+      notificationTimer = setTimeout(() => {
         dispatch(
           uiAction.setNotification({
             type: "",
@@ -39,19 +41,25 @@ function App() {
         );
       }, 3000);
     }
+
+    return () => {
+      clearTimeout(notificationTimer);
+    };
   }, [dispatch, notificationIsShown]);
 
   return (
     <React.Fragment>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:recipeid" element={<Detail />} />
+        <Route path="/:recipeid" element={<Detail />}>
+          <Route path="comments" element={<DetailComments />} />
+        </Route>
         <Route path="/addRecipe" element={<AddRecipe />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
       </Routes>
-      <Notification />
+      {notificationIsShown && <Notification />}
     </React.Fragment>
   );
 }

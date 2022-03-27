@@ -20,42 +20,37 @@ const animate = {
 };
 
 const Notification = () => {
-  const notificationIsShown = useSelector(
-    (state: RootState) => state.ui.notification.isShown
-  );
   const notification = useSelector((state: RootState) => state.ui.notification);
   return (
     <React.Fragment>
       <AnimatePresence>
-        {notificationIsShown && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={animate}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={animate}
+        >
+          <Box
+            position="fixed"
+            bottom="1%"
+            left="50%"
+            h="10vh"
+            w="20vw"
+            transform="translate(-50%, -50%)"
+            zIndex="10"
+            bgColor="white"
+            borderColor="orange.400"
+            borderWidth="5px"
+            boxShadow="lg"
+            rounded="md"
           >
-            <Box
-              position="fixed"
-              bottom="1%"
-              left="50%"
-              h="10vh"
-              w="20vw"
-              transform="translate(-50%, -50%)"
-              zIndex="10"
-              bgColor="white"
-              borderColor="orange.400"
-              borderWidth="5px"
-              boxShadow="lg"
-              rounded="md"
-            >
-              <Grid placeItems="center" width="100%" height="100%">
-                <Text fontFamily="dancingScriptFont" fontSize="3rem">
-                  {notification.message}
-                </Text>
-              </Grid>
-            </Box>
-          </motion.div>
-        )}
+            <Grid placeItems="center" width="100%" height="100%">
+              <Text fontFamily="dancingScriptFont" fontSize="3rem">
+                {notification.message}
+              </Text>
+            </Grid>
+          </Box>
+        </motion.div>
       </AnimatePresence>
     </React.Fragment>
   );

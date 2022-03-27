@@ -16,7 +16,7 @@ const IngredientList: React.FC<funcProps> = (props) => {
         props.ingredients!.map((item, index) => (
           <IngredientItem
             key={index}
-            itemName={item.name!}
+            ingredient={item}
             numberOfIngredient={index + 1}
           />
         ))}

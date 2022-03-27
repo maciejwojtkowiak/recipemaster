@@ -1,5 +1,4 @@
 import { Box, Grid } from "@chakra-ui/react";
-import { DragDropContext } from "react-beautiful-dnd";
 import { Recipe } from "../../../shared/types/Recipe";
 import RecipeDescriptionBox from "./RecipeDescriptionBox";
 import RecipeIngredientsBox from "./RecipeIngredientsBox";
@@ -9,7 +8,6 @@ interface funcProps {
   recipe: Recipe;
 }
 const DetailColumns: React.FC<funcProps> = (props) => {
-  const onDragEnd = () => {};
   return (
     <Box
       h="80vh"
@@ -24,7 +22,7 @@ const DetailColumns: React.FC<funcProps> = (props) => {
           <RecipeDescriptionBox recipe={props.recipe} />
         </Box>
         <Box borderLeftWidth="0.5rem" borderColor="orange.300">
-          <RecipeStepsBox recipe={props.recipe} />
+          <RecipeStepsBox recipeId={props.recipe.id} />
         </Box>
 
         <Box borderLeftWidth="0.5rem" borderColor="orange.300">

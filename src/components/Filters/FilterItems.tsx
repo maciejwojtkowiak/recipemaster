@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import React from "react";
 import { filters } from "../../shared/types/Recipe";
+import { useNavigate } from "react-router-dom";
+import { makeParam } from "../../Helpers/makeParam";
 
 interface FuncProps {
   options: string[];
@@ -11,8 +13,10 @@ interface FuncProps {
 }
 
 const FilterItems: React.FC<FuncProps> = (props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
     if (e.target.checked) {
       dispatch(
@@ -41,7 +45,11 @@ const FilterItems: React.FC<FuncProps> = (props) => {
       <Stack pl={2} mt={1} spacing={1}>
         {props.options.map((option) => {
           return (
-            <Checkbox key={option} value={option} onChange={onChangeHandler}>
+            <Checkbox
+              key={option}
+              value={option}
+              onChange={onChosenFilterHandler}
+            >
               <Text>{option}</Text>
             </Checkbox>
           );

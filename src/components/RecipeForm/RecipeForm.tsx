@@ -47,6 +47,7 @@ const RecipeForm = () => {
         ingredients: ingredients,
         stars: Math.floor(Math.random() * 6) + 1,
         steps: steps,
+        comments: [],
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
@@ -100,7 +101,11 @@ const RecipeForm = () => {
                 ingredients={ingredients}
                 onIngredientAdd={onIngredientAdd}
               />
-              <StepsContainer onStepAdd={onStepAdd} steps={steps} />
+              <StepsContainer
+                onStepAdd={onStepAdd}
+                steps={steps}
+                setSteps={setSteps}
+              />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"

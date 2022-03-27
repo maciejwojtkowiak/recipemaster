@@ -1,4 +1,8 @@
-export interface filters {
+interface ObjectKeys {
+  [key: string]: string[];
+}
+
+export interface filters extends ObjectKeys {
   filterTypes: string[];
   filterLengths: string[];
 }
@@ -38,6 +42,7 @@ export type Recipe = {
   ingredients: ingredient[];
   steps: Step[];
   stars: number;
+  comments?: string[];
 };
 
 export type Notification = {
