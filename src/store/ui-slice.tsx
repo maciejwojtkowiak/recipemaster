@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     message: "",
     type: "",
   } as Notification,
+  commentFormIsShown: false,
 };
 
 const uiSlice = createSlice({
@@ -25,6 +26,10 @@ const uiSlice = createSlice({
 
     setNotification(state, action: PayloadAction<Notification>) {
       state.notification = { ...action.payload };
+    },
+
+    isCommentFormShown(state, action: PayloadAction<boolean>) {
+      state.commentFormIsShown = action.payload;
     },
   },
 });
