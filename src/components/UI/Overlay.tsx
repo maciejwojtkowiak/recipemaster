@@ -1,7 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import { createPortal } from "react-dom";
 
-const Overlay: React.FC = (props) => {
+interface funcProps {
+  hideOverlay: () => void;
+}
+
+const Overlay: React.FC<funcProps> = (props) => {
   return (
     <Box
       position="fixed"
@@ -12,6 +16,7 @@ const Overlay: React.FC = (props) => {
       zIndex="10"
       top="0"
       left="0"
+      onClick={props.hideOverlay}
     >
       {createPortal(
         props.children,

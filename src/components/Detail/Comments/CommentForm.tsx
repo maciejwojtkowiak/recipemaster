@@ -68,7 +68,7 @@ const CommentForm = () => {
     <React.Fragment>
       <AnimatePresence>
         {formIsShown && (
-          <Overlay>
+          <Overlay hideOverlay={hideFormModal}>
             <Grid
               width="60vw"
               placeItems="center"
@@ -77,6 +77,7 @@ const CommentForm = () => {
               top="50%"
               left="50%"
               transform="translate(-50%, -50%)"
+              textAlign="right"
             >
               <motion.div
                 variants={animation}
@@ -84,10 +85,10 @@ const CommentForm = () => {
                 animate="onShow"
                 exit="onShowExit"
               >
-                <Button onClick={hideFormModal}>Close</Button>
                 <form onSubmit={onCommentAdd}>
                   <Grid>
                     <Input
+                      placeholder="Title"
                       onChange={(e) =>
                         onCommentChangeHandler(e, setCommentTitle)
                       }
