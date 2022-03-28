@@ -32,6 +32,11 @@ export type FilteringConfiguration = {
   filterName: keyof filters;
 };
 
+export interface Comment {
+  title: string;
+  content: string;
+}
+
 export type Recipe = {
   id: number;
   username: string;
@@ -42,7 +47,7 @@ export type Recipe = {
   ingredients: ingredient[];
   steps: Step[];
   stars: number;
-  comments?: string[];
+  comments?: Comment[];
 };
 
 export type Notification = {

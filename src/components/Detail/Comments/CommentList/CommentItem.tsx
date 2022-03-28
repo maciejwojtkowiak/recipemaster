@@ -1,11 +1,17 @@
 import { Box } from "@chakra-ui/react";
+import { Comment } from "../../../../shared/types/Recipe";
 
 interface funcProps {
-  comment: string;
+  comment: Comment;
 }
 
 const CommentItem: React.FC<funcProps> = (props) => {
-  return <Box>{props.comment}</Box>;
+  return (
+    <Box>
+      {props.comment.title}
+      {props.comment.content}
+    </Box>
+  );
 };
 
 export default CommentItem;

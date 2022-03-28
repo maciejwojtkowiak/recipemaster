@@ -4,6 +4,7 @@ import {
   FilteringConfiguration,
   InitialState,
   Step,
+  Comment,
 } from "../shared/types/Recipe";
 
 const INITIAL_VALUE: InitialState = {
@@ -71,7 +72,7 @@ const recipeSlice = createSlice({
       recipeToChangeSteps!.steps = action.payload.steps;
     },
 
-    addComment(state, action: PayloadAction<{ id: number; comment: string }>) {
+    addComment(state, action: PayloadAction<{ id: number; comment: Comment }>) {
       const detailedRecipe = state.recipes.find(
         (recipe) => recipe.id === action.payload.id
       );
