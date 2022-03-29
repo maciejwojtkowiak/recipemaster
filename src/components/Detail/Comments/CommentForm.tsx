@@ -1,6 +1,5 @@
 import { Textarea, Grid, Button, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { recipeAction } from "../../../store/recipe-slice";
@@ -59,6 +58,14 @@ const CommentForm = () => {
     };
 
     dispatch(recipeAction.addComment({ id: +recipeId!, comment: comment }));
+    dispatch(uiAction.isCommentFormShown(false));
+    dispatch(
+      uiAction.setNotification({
+        message: "Comment was added",
+        type: "comment",
+        isShown: true,
+      })
+    );
   };
 
   const hideFormModal = () => {
@@ -68,7 +75,8 @@ const CommentForm = () => {
     <React.Fragment>
       <AnimatePresence>
         {formIsShown && (
-          <Overlay hideOverlay={hideFormModal}>
+          <React.Fragment>
+            <Overlay hideOverlay={hideFormModal} />
             <Grid
               width="60vw"
               placeItems="center"
@@ -113,7 +121,7 @@ const CommentForm = () => {
                 </form>
               </motion.div>
             </Grid>
-          </Overlay>
+          </React.Fragment>
         )}
       </AnimatePresence>
     </React.Fragment>
