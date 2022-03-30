@@ -7,7 +7,13 @@ interface funcProps {
 
 const CommentItem: React.FC<funcProps> = (props) => {
   return (
-    <Box>
+    <Box
+      width="40vw"
+      height="20vh"
+      border="1px"
+      borderColor="orange.400"
+      marginTop="1rem"
+    >
       {props.comment.title}
       {props.comment.content}
     </Box>

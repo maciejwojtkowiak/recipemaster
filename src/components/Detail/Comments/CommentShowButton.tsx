@@ -1,18 +1,26 @@
 import { Box, Button } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { uiAction } from "../../../store/ui-slice";
+import { RootState } from "../../../store/store";
 
 const CommentShowButton = () => {
   const dispatch = useDispatch();
+  const params = useLocation().pathname;
+  console.log(params);
+  const formIsShown = useSelector(
+    (state: RootState) => state.ui.commentFormIsShown
+  );
 
   const onShowModal = () => {
     dispatch(uiAction.isCommentFormShown(true));
   };
+
+  const commentsAreShown = params.includes("comments");
   return (
     <Box>
-      <Link to="comments">
+      <Link to={commentsAreShown ? "" : "comments"}>
         <Button
           marginTop="6rem"
           marginBottom="6rem"
@@ -24,7 +32,7 @@ const CommentShowButton = () => {
             backgroundColor: "orange.200",
           }}
         >
-          Show Comments
+          {commentsAreShown ? "Hide comments" : "Show comments"}
         </Button>
       </Link>
       <Button
