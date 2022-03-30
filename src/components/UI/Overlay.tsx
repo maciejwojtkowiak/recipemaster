@@ -12,22 +12,18 @@ const Overlay: React.FC<funcProps> = (props) => {
   };
   return (
     <React.Fragment>
-      {createPortal(
-        <Box
-          position="fixed"
-          w="100%"
-          h="100%"
-          bgColor="black"
-          opacity="0.1"
-          zIndex="0"
-          top="0"
-          left="0"
-          onClick={(e) => onOverLayClick(e)}
-        >
-          {" "}
-        </Box>,
-        document.getElementById("modal") as HTMLDivElement
-      )}
+      <Box
+        position="fixed"
+        w="100%"
+        h="100%"
+        bgColor="black"
+        opacity="0.1"
+        top="0"
+        left="0"
+        onClick={(e) => onOverLayClick(e)}
+      >
+        {" "}
+      </Box>
     </React.Fragment>
   );
 };

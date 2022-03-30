@@ -7,6 +7,7 @@ import { RootState } from "../../../store/store";
 import { uiAction } from "../../../store/ui-slice";
 import Overlay from "../../UI/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
 
 const animation = {
   initialPosition: {
@@ -71,17 +72,15 @@ const CommentForm = () => {
   const hideFormModal = () => {
     dispatch(uiAction.isCommentFormShown(false));
   };
-  return (
+  return createPortal(
     <React.Fragment>
       <AnimatePresence>
         {formIsShown && (
           <React.Fragment>
             <Overlay hideOverlay={hideFormModal} />
             <Grid
-              width="60vw"
               placeItems="center"
               position="fixed"
-              zIndex="100"
               top="50%"
               left="50%"
               transform="translate(-50%, -50%)"
@@ -124,7 +123,8 @@ const CommentForm = () => {
           </React.Fragment>
         )}
       </AnimatePresence>
-    </React.Fragment>
+    </React.Fragment>,
+    document.getElementById("modal") as HTMLDivElement
   );
 };
 
