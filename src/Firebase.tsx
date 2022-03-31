@@ -2,14 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const app = initializeApp({
-  apiKey: "AIzaSyAK7HPi-jEJRk9WMWcvF3_eF42bendLHLk",
-  authDomain: "recipemaster-3256c.firebaseapp.com",
+  apiKey: "AIzaSyByTAEIz9Yp4vwdu1aEaZFnCrGf3VIEDwQ",
+  authDomain: "recipemaster-d77f3.firebaseapp.com",
   databaseURL:
-    "https://recipemaster-3256c-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "recipemaster-3256c",
-  storageBucket: "recipemaster-3256c.appspot.com",
-  messagingSenderId: "823337100127",
-  appId: "1:823337100127:web:98e7299265ab45a1ab0cea",
+    "https://recipemaster-d77f3-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "recipemaster-d77f3",
+  storageBucket: "recipemaster-d77f3.appspot.com",
+  messagingSenderId: "1065908682623",
+  appId: "1:1065908682623:web:f138d57786f05fda20644a",
+  measurementId: "G-S9X4VJVGRE",
 });
 
 // Initialize Firebase

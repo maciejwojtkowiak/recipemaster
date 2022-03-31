@@ -35,6 +35,7 @@ export type FilteringConfiguration = {
 export interface Comment {
   title: string;
   content: string;
+  user: string;
 }
 
 export type Recipe = {

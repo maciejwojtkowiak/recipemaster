@@ -8,6 +8,7 @@ import { uiAction } from "../../../store/ui-slice";
 import Overlay from "../../UI/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { createPortal } from "react-dom";
+import { auth } from "../../../Firebase";
 
 const animation = {
   initialPosition: {
@@ -35,6 +36,7 @@ const animation = {
 };
 
 const CommentForm = () => {
+  const user = auth.currentUser;
   const formIsShown = useSelector(
     (state: RootState) => state.ui.commentFormIsShown
   );
@@ -56,6 +58,7 @@ const CommentForm = () => {
     const comment = {
       title: commentTitle,
       content: commentContent,
+      user: user?.displayName!,
     };
 
     dispatch(recipeAction.addComment({ id: +recipeId!, comment: comment }));
