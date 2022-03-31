@@ -1,5 +1,5 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { Comment, Recipe } from "../shared/types/Recipe";
+import { Recipe } from "../shared/types/Recipe";
 import { recipeAction } from "./recipe-slice";
 import { uiAction } from "./ui-slice";
 
@@ -40,6 +40,7 @@ export const fetchRecipes = () => {
     try {
       const data = await getRecipes();
       if (data) {
+        console.log(data);
         for (const key of Object.keys(data)) {
           console.log(data[key]);
           dispatch(recipeAction.replaceRecipes(data[key]));

@@ -26,12 +26,9 @@ const recipeSlice = createSlice({
   name: "recipe",
   initialState: INITIAL_VALUE,
   reducers: {
-    replaceRecipes(
-      state,
-      action: PayloadAction<{ recipe: Recipe; id: number }>
-    ) {
-      const fetchedRecipe = action.payload.recipe;
-      action.payload.recipe.comments = [];
+    replaceRecipes(state, action: PayloadAction<Recipe>) {
+      const fetchedRecipe = action.payload;
+      action.payload.comments = [] as Comment[];
       state.recipes.push(fetchedRecipe);
     },
     addRecipe(state, action: PayloadAction<Recipe>) {
