@@ -9,6 +9,7 @@ import Overlay from "../../UI/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { auth } from "../../../Firebase";
+import { sendData } from "../../../store/recipe-action";
 
 const animation = {
   initialPosition: {
@@ -36,12 +37,16 @@ const animation = {
 };
 
 const CommentForm = () => {
+  const detailParams = useParams();
+  const recipeId = detailParams.recipeid;
   const user = auth.currentUser;
   const formIsShown = useSelector(
     (state: RootState) => state.ui.commentFormIsShown
   );
-  const detailParams = useParams();
-  const recipeId = detailParams.recipeid;
+  const detailedRecipe = useSelector((state: RootState) =>
+    state.recipe.recipes.find((recipe) => recipe.id === +recipeId!)
+  );
+
   const dispatch = useDispatch();
   const [commentContent, setCommentContent] = useState<string>("");
   const [commentTitle, setCommentTitle] = useState<string>("");
@@ -55,6 +60,7 @@ const CommentForm = () => {
 
   const onCommentAdd = (e: React.FormEvent) => {
     e.preventDefault();
+
     const comment = {
       title: commentTitle,
       content: commentContent,
@@ -70,6 +76,7 @@ const CommentForm = () => {
         isShown: true,
       })
     );
+    dispatch(sendData(detailedRecipe!));
   };
 
   const hideFormModal = () => {

@@ -39,10 +39,9 @@ export const fetchRecipes = () => {
 
     try {
       const data = await getRecipes();
+      console.log(data);
       if (data) {
-        console.log(data);
         for (const key of Object.keys(data)) {
-          console.log(data[key]);
           dispatch(recipeAction.replaceRecipes(data[key]));
         }
         dispatch(

@@ -49,7 +49,6 @@ const RecipeForm = () => {
         steps: steps,
         comments: [],
       };
-      console.log(recipe);
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
       navigate("/");
