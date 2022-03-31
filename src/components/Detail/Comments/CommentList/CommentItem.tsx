@@ -14,6 +14,7 @@ const CommentItem: React.FC<funcProps> = (props) => {
       borderColor="orange.400"
       marginTop="1rem"
     >
+      {props.comment.user}
       {props.comment.title}
       {props.comment.content}
     </Box>

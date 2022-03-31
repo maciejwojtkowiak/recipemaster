@@ -11,8 +11,8 @@ const CommentList = () => {
   );
   return (
     <Box>
-      {detailedRecipe?.comments?.map((comment) => (
-        <CommentItem comment={comment} />
+      {detailedRecipe?.comments?.map((comment, i) => (
+        <CommentItem key={i} comment={comment} />
       ))}
     </Box>
   );
