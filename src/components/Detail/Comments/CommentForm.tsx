@@ -76,7 +76,6 @@ const CommentForm = () => {
         isShown: true,
       })
     );
-    dispatch(sendData(detailedRecipe!));
   };
 
   const hideFormModal = () => {

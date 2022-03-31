@@ -32,9 +32,7 @@ const CommentItem: React.FC<funcProps> = (props) => {
           <Text fontWeight="700" marginBottom="0.5rem" fontSize="1.6rem">
             {props.comment.title}
           </Text>
-          <Text maxW="30vw" marginLeft="0.5rem">
-            {props.comment.content}
-          </Text>
+          <Text maxW="30vw">{props.comment.content}</Text>
         </Grid>
       </Flex>
     </Flex>
