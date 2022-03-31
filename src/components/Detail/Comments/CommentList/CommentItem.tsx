@@ -8,32 +8,37 @@ interface funcProps {
 
 const CommentItem: React.FC<funcProps> = (props) => {
   return (
-    <Box
-      width="40vw"
-      height="20vh"
+    <Flex
+      alignItems="center"
+      minWidth="40vw"
+      minHeight="20vh"
       border="1px"
       borderColor="orange.400"
       marginTop="1rem"
+      paddingTop="2rem"
+      paddingBottom="2rem"
     >
-      <Flex width="100%" height="100%" alignItems="center">
-        <Grid placeItems="center" marginLeft="2rem">
-          <Flex>
-            <Grid placeItems="center">
+      <Grid maxW="100%" placeItems="center" marginLeft="2rem">
+        <Flex maxW="100%">
+          <Grid maxW="100%" placeItems="center" marginRight="2rem">
+            <Flex alignItems="center" flexDir="column">
               <Image boxSize="5rem" src={defaultUser} />
               <Text marginTop="1rem" fontWeight="700">
                 {props.comment.user}
               </Text>
-            </Grid>
-            <Grid templateRows="max-content 1fr">
-              <Text fontWeight="700" marginBottom="0.5rem">
-                {props.comment.title}
-              </Text>
-              <Text marginLeft="0.5rem">{props.comment.content}</Text>
-            </Grid>
-          </Flex>
-        </Grid>
-      </Flex>
-    </Box>
+            </Flex>
+          </Grid>
+          <Grid maxW="100%" templateRows="max-content 1fr">
+            <Text fontWeight="700" marginBottom="0.5rem" fontSize="1.6rem">
+              {props.comment.title}
+            </Text>
+            <Text maxW="30vw" marginLeft="0.5rem">
+              {props.comment.content}
+            </Text>
+          </Grid>
+        </Flex>
+      </Grid>
+    </Flex>
   );
 };
 
