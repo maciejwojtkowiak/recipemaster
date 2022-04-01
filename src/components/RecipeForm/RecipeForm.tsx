@@ -31,6 +31,14 @@ const initialStateReducer: inputsFormState = {
     val: "",
     isValid: false,
   },
+  step: {
+    val: "",
+    isValid: false,
+  },
+  ingredient: {
+    val: "",
+    isValid: false,
+  },
 };
 
 const RecipeForm = () => {
@@ -60,8 +68,6 @@ const RecipeForm = () => {
     inputReducer,
     initialStateReducer
   );
-
-  console.log(inputsValues.description);
 
   const user = auth.currentUser;
   const recipeTypes = useSelector(
@@ -151,9 +157,11 @@ const RecipeForm = () => {
                 onIngredientAdd={onIngredientAdd}
               />
               <StepsContainer
+                stepName={inputsValues.step.val}
                 onStepAdd={onStepAdd}
-                steps={steps}
+                onStepNameChange={(e) => changeTextHandler(e)}
                 setSteps={setSteps}
+                steps={steps}
               />
               <SelectComponent
                 onChange={(e) => onChangeHandler(e, setTime)}

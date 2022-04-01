@@ -11,6 +11,16 @@ export type inputsFormState = {
     val: string;
     isValid: boolean;
   };
+
+  step: {
+    val: string;
+    isValid: boolean;
+  };
+
+  ingredient: {
+    val: string;
+    isValid: boolean;
+  };
 };
 
 export type inputsFormAction = {
