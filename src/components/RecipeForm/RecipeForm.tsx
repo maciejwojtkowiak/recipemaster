@@ -38,16 +38,15 @@ const RecipeForm = () => {
     state: inputsFormState,
     action: inputsFormAction
   ): inputsFormState => {
-    console.log(action.type, action.content, action.field);
     let isValid: boolean;
     const { content } = action;
     isValid = content.length > 0;
     return {
+      ...state,
       [action.field]: {
         val: content,
         isValid: isValid,
       },
-      ...state,
     };
   };
   const dispatch = useDispatch();
