@@ -99,10 +99,8 @@ const RecipeForm = () => {
     }
   };
 
-  const onChangeHandler = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+  const onSelectChangeHandler = (
+    e: React.ChangeEvent<HTMLSelectElement>,
     setValue: (value: string) => void
   ): void => {
     const newValue = e.target.value;
@@ -148,7 +146,7 @@ const RecipeForm = () => {
                 placeholder="Name for your recipe"
               />
               <SelectComponent
-                onChange={(e) => onChangeHandler(e, setType)}
+                onChange={(e) => onSelectChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
                 values={recipeTypes}
               />
