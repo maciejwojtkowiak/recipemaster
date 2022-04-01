@@ -1,5 +1,8 @@
+import { ingredient } from "./Recipe";
+
 export enum ActionKind {
-  changeVal,
+  stringVal,
+  ingredientVal,
 }
 
 export type inputsFormState = {
@@ -18,13 +21,13 @@ export type inputsFormState = {
   };
 
   ingredient: {
-    val: string;
+    val: ingredient;
     isValid: boolean;
   };
 };
 
 export type inputsFormAction = {
-  type: ActionKind.changeVal;
-  field: string;
-  content: string;
+  type: ActionKind;
+  field: string | null;
+  content: string | ingredient;
 };

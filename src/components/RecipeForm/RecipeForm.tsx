@@ -36,7 +36,7 @@ const initialStateReducer: inputsFormState = {
     isValid: false,
   },
   ingredient: {
-    val: "",
+    val: { name: "", amount: "", unit: "" },
     isValid: false,
   },
 };
@@ -46,15 +46,47 @@ const RecipeForm = () => {
     state: inputsFormState,
     action: inputsFormAction
   ): inputsFormState => {
-    let isValid: boolean;
+    let isValid: boolean = false;
     const { content } = action;
-    isValid = content.length > 0;
+
+    if (
+      action.type === ActionKind.stringVal &&
+      content instanceof String &&
+      action.field
+    ) {
+      isValid = content.length > 0;
+      return {
+        ...state,
+        [action.field]: {
+          val: content,
+          isValid: isValid,
+        },
+      };
+    }
+
+    function isIngredient(object: any): object is ingredient {
+      return "unit" in object;
+    }
+
+    if (action.type === ActionKind.ingredientVal && isIngredient(content)) {
+      if (content.name) {
+        isValid = content.name.length > 0;
+      }
+      return {
+        ...state,
+        ingredient: {
+          val: {
+            name: content.name,
+            amount: content.amount,
+            unit: content.unit,
+          },
+          isValid: isValid,
+        },
+      };
+    }
+
     return {
       ...state,
-      [action.field]: {
-        val: content,
-        isValid: isValid,
-      },
     };
   };
   const dispatch = useDispatch();
@@ -111,9 +143,17 @@ const RecipeForm = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     dispatchReducer({
-      type: ActionKind.changeVal,
+      type: ActionKind.stringVal,
       field: e.target.name,
       content: e.target.value,
+    });
+  };
+
+  const getIngredient = (ingredient: ingredient) => {
+    dispatchReducer({
+      type: ActionKind.ingredientVal,
+      content: ingredient,
+      field: null,
     });
   };
 
@@ -126,6 +166,8 @@ const RecipeForm = () => {
   const onStepAdd = (step: Step) => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
+
+  console.log(inputsValues);
 
   return (
     <React.Fragment>
@@ -151,6 +193,7 @@ const RecipeForm = () => {
                 values={recipeTypes}
               />
               <IngredientsContainer
+                getIngredientValues={getIngredient}
                 ingredients={ingredients}
                 onIngredientAdd={onIngredientAdd}
               />
@@ -162,7 +205,7 @@ const RecipeForm = () => {
                 steps={steps}
               />
               <SelectComponent
-                onChange={(e) => onChangeHandler(e, setTime)}
+                onChange={(e) => onSelectChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
                 values={recipeLengths}
               />
