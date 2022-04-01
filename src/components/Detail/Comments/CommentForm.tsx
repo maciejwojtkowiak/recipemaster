@@ -9,7 +9,6 @@ import Overlay from "../../UI/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { auth } from "../../../Firebase";
-import { sendData } from "../../../store/recipe-action";
 
 const animation = {
   initialPosition: {
