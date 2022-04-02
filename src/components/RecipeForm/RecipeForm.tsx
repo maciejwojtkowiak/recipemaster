@@ -26,18 +26,26 @@ const initialStateReducer: inputsFormState = {
   title: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   description: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   step: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   ingredient: {
     val: { name: "", amount: "", unit: "" },
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
 };
 
@@ -46,20 +54,29 @@ const RecipeForm = () => {
     state: inputsFormState,
     action: inputsFormAction
   ): inputsFormState => {
-    let isValid: boolean = false;
+    let isValid = false;
+    let isClicked = true;
+    let isWrong = false;
     const { content } = action;
+    const validateInput = (content: string) => {
+      isClicked = true;
+      isValid = content.length > 0;
+      isWrong = isClicked && !isValid;
+    };
 
     if (
       action.type === ActionKind.stringVal &&
       action.field &&
       typeof content === "string"
     ) {
-      isValid = content.length > 0;
+      validateInput(content);
       return {
         ...state,
         [action.field]: {
           val: content,
           isValid: isValid,
+          isClicked: isClicked,
+          isWrong: isWrong,
         },
       };
     }
@@ -70,7 +87,7 @@ const RecipeForm = () => {
 
     if (action.type === ActionKind.ingredientVal && isIngredient(content)) {
       if (content.name) {
-        isValid = content.name.length > 0;
+        validateInput(content.name);
       }
       return {
         ...state,
@@ -80,7 +97,9 @@ const RecipeForm = () => {
             amount: content.amount,
             unit: content.unit,
           },
+          isClicked: isClicked,
           isValid: isValid,
+          isWrong: isWrong,
         },
       };
     }

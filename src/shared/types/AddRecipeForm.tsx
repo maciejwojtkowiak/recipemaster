@@ -9,21 +9,28 @@ export type inputsFormState = {
   title: {
     val: string;
     isValid: boolean;
+    isClicked: boolean;
+    isWrong: boolean;
   };
   description: {
     val: string;
     isValid: boolean;
+    isClicked: boolean;
+    isWrong: boolean;
   };
 
   step: {
     val: string;
     isValid: boolean;
+    isClicked: boolean;
+    isWrong: boolean;
   };
 
   ingredient: {
     val: ingredient;
-
     isValid: boolean;
+    isClicked: boolean;
+    isWrong: boolean;
   };
 };
 
