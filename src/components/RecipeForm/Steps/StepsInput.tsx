@@ -6,15 +6,19 @@ import { Step } from "../../../shared/types/Recipe";
 interface funcProps {
   onStepAdd: (step: Step) => void;
   onStepNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  stepIsWrong: boolean;
   stepName: string;
 }
 
 const StepsInput: React.FC<funcProps> = (props) => {
+  const [stepInput, setStepInput] = useState<string>("");
   const onStepNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStepInput(e.target.value);
     props.onStepNameChange(e);
   };
   const onStepNameAdd = () => {
     props.onStepAdd({ name: props.stepName, id: Math.random() });
+    setStepInput("");
   };
 
   return (
@@ -22,10 +26,14 @@ const StepsInput: React.FC<funcProps> = (props) => {
       <Flex gap="1px">
         <Input
           name="step"
+          value={stepInput}
           onChange={onStepNameChange}
-          placeholder="Add a step"
           borderRadius="0"
           border="1px"
+          placeholder={`${
+            props.stepIsWrong ? "This field can not be an empty" : "Add a step"
+          }`}
+          bgColor={`${props.stepIsWrong && "#FED7D7"}`}
         />
 
         <AddButton onClickHandler={onStepNameAdd} />

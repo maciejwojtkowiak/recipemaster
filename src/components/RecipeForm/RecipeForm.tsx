@@ -204,8 +204,12 @@ const RecipeForm = () => {
               <Input
                 name="title"
                 onChange={(e) => changeTextHandler(e)}
-                placeholder="Name for your recipe"
-                bgColor={`${inputsValues.title.isWrong && "red"}`}
+                placeholder={`${
+                  inputsValues.title.isWrong
+                    ? "This field can not be an empty"
+                    : "Title"
+                }`}
+                bgColor={`${inputsValues.title.isWrong && "#FED7D7"}`}
               />
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setType)}
@@ -222,6 +226,7 @@ const RecipeForm = () => {
                 onStepAdd={onStepAdd}
                 onStepNameChange={(e) => changeTextHandler(e)}
                 setSteps={setSteps}
+                stepIsWrong={inputsValues.step.isWrong}
                 steps={steps}
               />
               <SelectComponent
@@ -232,7 +237,12 @@ const RecipeForm = () => {
               <Textarea
                 name="description"
                 onChange={(e) => changeTextHandler(e)}
-                placeholder="Description"
+                placeholder={`${
+                  inputsValues.title.isWrong
+                    ? "This field can not be an empty"
+                    : "Description"
+                }`}
+                bgColor={`${inputsValues.description.isWrong && "#FED7D7"}`}
                 cols={20}
                 rows={20}
                 resize="none"

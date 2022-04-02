@@ -8,6 +8,7 @@ interface funcProps {
   onStepAdd: (step: Step) => void;
   setSteps: (steps: Step[]) => void;
   onStepNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  stepIsWrong: boolean;
   stepName: string;
   steps: Step[];
 }
@@ -20,6 +21,7 @@ const StepsContainer: React.FC<funcProps> = (props) => {
         onStepAdd={props.onStepAdd}
         onStepNameChange={props.onStepNameChange}
         stepName={props.stepName}
+        stepIsWrong={props.stepIsWrong}
       />
     </Box>
   );
