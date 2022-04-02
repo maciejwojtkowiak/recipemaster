@@ -4,6 +4,7 @@ import {
   FilteringConfiguration,
   InitialState,
   Step,
+  Comment,
 } from "../shared/types/Recipe";
 
 const INITIAL_VALUE: InitialState = {
@@ -26,7 +27,9 @@ const recipeSlice = createSlice({
   initialState: INITIAL_VALUE,
   reducers: {
     replaceRecipes(state, action: PayloadAction<Recipe>) {
-      state.recipes.push(action.payload);
+      const fetchedRecipe = action.payload;
+      action.payload.comments = [] as Comment[];
+      state.recipes.push(fetchedRecipe);
     },
     addRecipe(state, action: PayloadAction<Recipe>) {
       state.recipes.push({
@@ -71,7 +74,7 @@ const recipeSlice = createSlice({
       recipeToChangeSteps!.steps = action.payload.steps;
     },
 
-    addComment(state, action: PayloadAction<{ id: number; comment: string }>) {
+    addComment(state, action: PayloadAction<{ id: number; comment: Comment }>) {
       const detailedRecipe = state.recipes.find(
         (recipe) => recipe.id === action.payload.id
       );

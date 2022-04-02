@@ -15,10 +15,11 @@ const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
   const params = useParams();
   const paramsId = params.recipeid;
+
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
-  console.log(paramsId);
+
   console.log(detailedRecipe);
   let imgName = getRecipeImage(detailedRecipe?.type!);
 

@@ -30,7 +30,7 @@ const DetailListItem: React.FC<funcProps> = (props) => {
               <Grid placeItems="center">
                 <Text color="white" fontWeight="700" fontSize="140%">
                   {props.amount && props.amount + props.unit}
-                  {!props.amount && props.indexOfItem}
+                  {!props.amount && props.indexOfItem + 1}
                 </Text>
               </Grid>
             </Grid>

@@ -1,23 +1,30 @@
 import { Box } from "@chakra-ui/react";
+import React from "react";
 import { createPortal } from "react-dom";
 
-const Overlay: React.FC = (props) => {
+interface funcProps {
+  hideOverlay: () => void;
+}
+
+const Overlay: React.FC<funcProps> = (props) => {
+  const onOverLayClick = (e: React.MouseEvent) => {
+    props.hideOverlay();
+  };
   return (
-    <Box
-      position="fixed"
-      w="100%"
-      h="100%"
-      bgColor="black"
-      opacity="0.1"
-      zIndex="10"
-      top="0"
-      left="0"
-    >
-      {createPortal(
-        props.children,
-        document.getElementById("modal") as HTMLDivElement
-      )}
-    </Box>
+    <React.Fragment>
+      <Box
+        position="fixed"
+        w="100%"
+        h="100%"
+        bgColor="black"
+        opacity="0.1"
+        top="0"
+        left="0"
+        onClick={(e) => onOverLayClick(e)}
+      >
+        {" "}
+      </Box>
+    </React.Fragment>
   );
 };
 

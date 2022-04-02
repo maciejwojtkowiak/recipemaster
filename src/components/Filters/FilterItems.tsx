@@ -4,7 +4,6 @@ import { recipeAction } from "../../store/recipe-slice";
 import React from "react";
 import { filters } from "../../shared/types/Recipe";
 import { useNavigate } from "react-router-dom";
-import { makeParam } from "../../Helpers/makeParam";
 
 interface FuncProps {
   options: string[];

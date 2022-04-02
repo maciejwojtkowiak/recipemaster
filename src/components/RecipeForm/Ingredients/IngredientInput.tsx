@@ -1,5 +1,5 @@
 import { Box, Flex, Input, Select } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -7,12 +7,21 @@ import AddButton from "../../UI/AddButton";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
+  getIngredientValues: (ingredient: ingredient) => void;
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [ingredientName, setIngredientName] = useState<string | null>(null);
   const [ingredientAmount, setIngredientAmount] = useState<string | null>(null);
   const [ingredientUnit, setIngredientUnit] = useState<string | null>(null);
+  useEffect(() => {
+    const ingredient = {
+      name: ingredientName,
+      amount: ingredientAmount,
+      unit: ingredientUnit,
+    };
+    props.getIngredientValues(ingredient);
+  }, [ingredientName, ingredientAmount, ingredientUnit]);
   const ingredientsUnits = useSelector(
     (state: RootState) => state.constantValues.ingredientsUnits
   );

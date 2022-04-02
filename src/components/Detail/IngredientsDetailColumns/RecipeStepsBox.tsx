@@ -36,7 +36,6 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
     const [reoderedStep] = stepId.splice(result.source.index, 1);
 
     stepId.splice(result.destination?.index!, 0, reoderedStep);
-    console.log(stepId);
 
     for (const id of stepId) {
       for (const step of recipe?.steps!) {

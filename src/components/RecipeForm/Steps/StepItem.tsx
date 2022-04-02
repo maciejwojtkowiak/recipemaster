@@ -11,26 +11,22 @@ interface funcProps {
 
 const StepItem: React.FC<funcProps> = (props) => {
   return (
-    <ItemBox>
-      <Draggable draggableId={props.stepId} index={props.stepIndex}>
-        {(provided) => (
-          <Text
-            {...provided.dragHandleProps}
-            {...provided.draggableProps}
-            ref={provided.innerRef}
-            textAlign="center"
-            fontSize="1.2rem"
-          >
-            <Text fontSize="1.2rem" textAlign="center" position="relative">
-              <Box position="absolute">
-                <ItemOrangeBox>{props.stepIndex + 1}</ItemOrangeBox>
-              </Box>
-              {props.stepName}
-            </Text>
-          </Text>
-        )}
-      </Draggable>
-    </ItemBox>
+    <Draggable draggableId={props.stepId} index={props.stepIndex}>
+      {(provided) => (
+        <Box
+          {...provided.dragHandleProps}
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          textAlign="center"
+          fontSize="1.2rem"
+        >
+          <Box fontSize="1.2rem" textAlign="center" position="relative">
+            <Box position="absolute">{props.stepIndex + 1}</Box>
+            {props.stepName}
+          </Box>
+        </Box>
+      )}
+    </Draggable>
   );
 };
 

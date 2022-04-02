@@ -5,21 +5,23 @@ import { Step } from "../../../shared/types/Recipe";
 
 interface funcProps {
   onStepAdd: (step: Step) => void;
+  onStepNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  stepName: string;
 }
 
 const StepsInput: React.FC<funcProps> = (props) => {
-  const [stepName, setStepName] = useState<string>("");
   const onStepNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStepName(e.target.value);
+    props.onStepNameChange(e);
   };
   const onStepNameAdd = () => {
-    props.onStepAdd({ name: stepName, id: Math.random() });
+    props.onStepAdd({ name: props.stepName, id: Math.random() });
   };
 
   return (
     <Box>
       <Flex gap="1px">
         <Input
+          name="step"
           onChange={onStepNameChange}
           placeholder="Add a step"
           borderRadius="0"

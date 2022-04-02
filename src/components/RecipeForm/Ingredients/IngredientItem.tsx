@@ -11,15 +11,13 @@ type funcProps = {
 const IngredientItem: React.FC<funcProps> = (props) => {
   return (
     <ItemBox>
-      <Text fontSize="1.2rem" textAlign="center" position="relative">
+      <Box fontSize="1.2rem" textAlign="center" position="relative">
         <Box position="absolute">
-          <ItemOrangeBox>
-            {props.ingredient.amount}
-            {props.ingredient.unit}
-          </ItemOrangeBox>
+          {props.ingredient.amount}
+          {props.ingredient.unit}
         </Box>
         {props.ingredient.name}
-      </Text>
+      </Box>
     </ItemBox>
   );
 };

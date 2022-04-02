@@ -70,32 +70,46 @@ const Bookmark = () => {
         />
         <MenuList>
           {likedItems.map((recipe) => (
-            <Box
-              key={recipe.id}
-              margin="1rem"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Image
-                src={`${getRecipeImage(recipe.type)}`}
-                boxSize="3rem"
-                objectFit="cover"
-                borderRadius="full"
-              />
-              <Text color="black" display="inline-block">
-                <Link to="/addRecipe">{recipe.title}</Link>
-              </Text>
-              <Button
-                color="black"
-                display="inline-block"
-                onClick={(e) => {
-                  onDeleteHandler(e, recipe.id);
-                }}
+            <React.Fragment>
+              <Box
+                key={recipe.id}
+                margin="1rem"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
               >
-                <Icon as={AiOutlineClose}></Icon>
-              </Button>
-            </Box>
+                <Link to={`/${recipe.id}`}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Image
+                      src={`${getRecipeImage(recipe.type)}`}
+                      boxSize="3rem"
+                      objectFit="cover"
+                      borderRadius="full"
+                    />
+                    <Text
+                      color="black"
+                      display="inline-block"
+                      marginLeft="1rem"
+                    >
+                      {recipe.title}
+                    </Text>
+                  </Box>
+                </Link>
+                <Button
+                  color="black"
+                  display="inline-block"
+                  onClick={(e) => {
+                    onDeleteHandler(e, recipe.id);
+                  }}
+                >
+                  <Icon as={AiOutlineClose}></Icon>
+                </Button>
+              </Box>
+            </React.Fragment>
           ))}
         </MenuList>
       </Menu>
