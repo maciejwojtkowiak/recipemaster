@@ -22,6 +22,7 @@ export type inputsFormState = {
 
   ingredient: {
     val: ingredient;
+
     isValid: boolean;
   };
 };

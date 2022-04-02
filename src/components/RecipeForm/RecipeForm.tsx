@@ -51,8 +51,8 @@ const RecipeForm = () => {
 
     if (
       action.type === ActionKind.stringVal &&
-      content instanceof String &&
-      action.field
+      action.field &&
+      typeof content === "string"
     ) {
       isValid = content.length > 0;
       return {
