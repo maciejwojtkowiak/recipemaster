@@ -205,6 +205,7 @@ const RecipeForm = () => {
                 name="title"
                 onChange={(e) => changeTextHandler(e)}
                 placeholder="Name for your recipe"
+                bgColor={`${inputsValues.title.isWrong && "red"}`}
               />
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setType)}
