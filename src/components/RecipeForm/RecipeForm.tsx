@@ -128,12 +128,12 @@ const RecipeForm = () => {
         stringInputsValues[key as keyof typeof stringInputsValues].isValid
       );
       if (!stringInputsValues[key as keyof typeof stringInputsValues].isValid) {
-        arrOfInvalidFields.push(key);
+        arrOfInvalidFields.push(` ${key} `);
       }
     }
     arrOfValid.push(ingredients.length > 0);
 
-    ingredients.length === 0 && arrOfInvalidFields.push("ingredients");
+    ingredients.length === 0 && arrOfInvalidFields.push(" ingredients ");
 
     console.log(arrOfInvalidFields);
 
@@ -154,7 +154,9 @@ const RecipeForm = () => {
       console.log(arrOfInvalidFields);
       dispatch(
         uiAction.setNotification({
-          message: `Fields  ${[...arrOfInvalidFields]} can not be empty`,
+          message: `Fields and lists  [${[
+            ...arrOfInvalidFields,
+          ]}] can not be empty`,
           type: "error",
           isShown: true,
         })
