@@ -36,6 +36,6 @@ export type ingredientValidation = {
 
 export type inputsFormAction = {
   type: ActionKind;
-  field: string | null;
+  field: string;
   content: string;
 };

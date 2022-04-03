@@ -46,6 +46,14 @@ const initialStateReducer: inputsFormState = {
 };
 
 const RecipeForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [type, setType] = useState<string>("");
+  const [ingredients, setIngredients] = useState<ingredient[]>([]);
+  const [time, setTime] = useState<string>("");
+  const [formIsValid, setFormIsValid] = useState<boolean>(false);
+
+  const [steps, setSteps] = useState<Step[]>([]);
   const inputReducer = (
     state: inputsFormState,
     action: inputsFormAction
@@ -55,29 +63,22 @@ const RecipeForm = () => {
     let isWrong = false;
     const { content } = action;
 
-    if (
-      action.type === ActionKind.stringVal &&
-      action.field &&
-      typeof content === "string"
-    ) {
-      const validation = (
-        state: inputsFormState,
-        content: string
-      ): inputsFormState => {
-        Object.keys(state).forEach((key) => {
-          state[key as keyof typeof state] = {
-            val: content,
-            isClicked: true,
-            isValid: content.length > 0,
-            isWrong: !isValid && isClicked,
-          };
-        });
-        return { ...state };
-      };
+    if (action.type === ActionKind.stringVal) {
       isClicked = true;
-
       isValid = content.length > 0;
       isWrong = isClicked && !isValid;
+      if (action.field === "step") {
+        let stepsAreValid = steps.length > 0 || content.length > 0;
+        return {
+          ...state,
+          step: {
+            val: content,
+            isValid: stepsAreValid,
+            isClicked: true,
+            isWrong: isClicked && !stepsAreValid,
+          },
+        };
+      }
       return {
         ...state,
         [action.field]: {
@@ -93,17 +94,11 @@ const RecipeForm = () => {
       ...state,
     };
   };
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [type, setType] = useState<string>("");
-  const [ingredients, setIngredients] = useState<ingredient[]>([]);
-  const [time, setTime] = useState<string>("");
-  const [steps, setSteps] = useState<Step[]>([]);
-  const [formIsValid, setFormIsValid] = useState<boolean>(false);
   const [stringInputsValues, dispatchReducer] = useReducer(
     inputReducer,
     initialStateReducer
   );
+
   const [ingredientValidation, setIngredientValidation] =
     useState<ingredientValidation>({
       isValid: false,
