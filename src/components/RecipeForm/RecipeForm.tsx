@@ -137,7 +137,9 @@ const RecipeForm = () => {
       }
     }
 
-    console.log(arrOfInvalidFields);
+    if (ingredients.length < 0) {
+      arrOfInvalidFields.splice(1, 0, "ingredients");
+    }
     arrOfValid.push(ingredients.length > 0);
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
