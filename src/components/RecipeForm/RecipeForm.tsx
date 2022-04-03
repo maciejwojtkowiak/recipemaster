@@ -136,14 +136,15 @@ const RecipeForm = () => {
         arrOfInvalidFields.push(key);
       }
     }
-
-    if (ingredients.length < 0) {
-      arrOfInvalidFields.splice(1, 0, "ingredients");
-    }
     arrOfValid.push(ingredients.length > 0);
+
+    ingredients.length === 0 && arrOfInvalidFields.push("ingredients");
+
+    console.log(arrOfInvalidFields);
+
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
-
+  console.log(arrOfValid);
   let isFormValid = everythingIsValid();
   console.log(isFormValid);
 
@@ -155,6 +156,7 @@ const RecipeForm = () => {
     e.preventDefault();
 
     if (!formIsValid) {
+      console.log(arrOfInvalidFields);
       dispatch(
         uiAction.setNotification({
           message: `Fields  ${[...arrOfInvalidFields]} can not be empty`,
