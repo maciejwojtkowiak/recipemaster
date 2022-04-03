@@ -185,8 +185,19 @@ const RecipeForm = () => {
   const onStepAdd = (step: Step) => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
+  let arrOfValid: boolean[] = [];
+  for (const key of Object.keys(inputsValues)) {
+    arrOfValid.push(inputsValues[key as keyof typeof inputsValues].isValid);
+  }
+  const everythingIsValid = () => {
+    return arrOfValid.every((inputIsTrue) => inputIsTrue);
+  };
 
-  console.log(inputsValues);
+  let isFormValid = everythingIsValid();
+
+  useEffect(() => {
+    setFormIsValid(isFormValid);
+  }, [isFormValid]);
 
   return (
     <React.Fragment>
@@ -247,7 +258,7 @@ const RecipeForm = () => {
                 rows={20}
                 resize="none"
               />
-              <FormSubmitButton />
+              <FormSubmitButton formIsValid={formIsValid} />
             </Grid>
           </Flex>
         </form>
