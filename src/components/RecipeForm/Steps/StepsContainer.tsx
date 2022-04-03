@@ -7,7 +7,7 @@ import StepsList from "./StepsList";
 interface funcProps {
   onStepAdd: (step: Step) => void;
   setSteps: (steps: Step[]) => void;
-  onStepNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onStepNameChange: (content: string, field: string) => void;
   stepIsWrong: boolean;
   stepName: string;
   steps: Step[];

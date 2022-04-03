@@ -21,6 +21,7 @@ import {
   inputsFormState,
   ActionKind,
 } from "../../shared/types/AddRecipeForm";
+import { uiAction } from "../../store/ui-slice";
 
 const initialStateReducer: inputsFormState = {
   title: {
@@ -58,18 +59,16 @@ const RecipeForm = () => {
     let isClicked = true;
     let isWrong = false;
     const { content } = action;
-    const validateInput = (content: string) => {
-      isClicked = true;
-      isValid = content.length > 0;
-      isWrong = isClicked && !isValid;
-    };
 
     if (
       action.type === ActionKind.stringVal &&
       action.field &&
       typeof content === "string"
     ) {
-      validateInput(content);
+      isClicked = true;
+
+      isValid = content.length > 0;
+      isWrong = isClicked && !isValid;
       return {
         ...state,
         [action.field]: {
@@ -87,8 +86,11 @@ const RecipeForm = () => {
 
     if (action.type === ActionKind.ingredientVal && isIngredient(content)) {
       if (content.name) {
-        validateInput(content.name);
+        isClicked = true;
+        isValid = content.name.length > 0;
+        isWrong = isClicked && !isValid;
       }
+
       return {
         ...state,
         ingredient: {
@@ -120,6 +122,8 @@ const RecipeForm = () => {
     initialStateReducer
   );
 
+  console.log(inputsValues);
+
   const user = auth.currentUser;
   const recipeTypes = useSelector(
     (state: RootState) => state.constantValues.recipeTypes
@@ -128,10 +132,36 @@ const RecipeForm = () => {
     (state: RootState) => state.constantValues.recipeLengths
   );
 
+  let arrOfValid: boolean[] = [];
+
+  for (const key of Object.keys(inputsValues)) {
+    arrOfValid.push(inputsValues[key as keyof typeof inputsValues].isValid);
+  }
+
+  const everythingIsValid = () => {
+    return arrOfValid.every((inputIsTrue) => inputIsTrue);
+  };
+
+  let isFormValid = everythingIsValid();
+
+  useEffect(() => {
+    setFormIsValid(isFormValid);
+  }, [isFormValid]);
+
   const onSubmitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
-    if (user?.displayName) {
-      console.log(inputsValues.description.val);
+
+    if (!formIsValid) {
+      dispatch(
+        uiAction.setNotification({
+          message: "Fields 'title' and 'description' can not be empty",
+          type: "error",
+          isShown: true,
+        })
+      );
+    }
+
+    if (formIsValid && user?.displayName) {
       const recipe: Recipe = {
         username: user.displayName,
         title: inputsValues.description.val,
@@ -158,14 +188,18 @@ const RecipeForm = () => {
     setValue(newValue);
   };
 
-  const changeTextHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const changeTextHandler = (field: string, content: string) => {
     dispatchReducer({
       type: ActionKind.stringVal,
-      field: e.target.name,
-      content: e.target.value,
+      field: field,
+      content: content,
     });
+  };
+
+  const changeInputValue = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    changeTextHandler(e.target.name, e.target.value);
   };
 
   const getIngredient = (ingredient: ingredient) => {
@@ -185,19 +219,6 @@ const RecipeForm = () => {
   const onStepAdd = (step: Step) => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
-  let arrOfValid: boolean[] = [];
-  for (const key of Object.keys(inputsValues)) {
-    arrOfValid.push(inputsValues[key as keyof typeof inputsValues].isValid);
-  }
-  const everythingIsValid = () => {
-    return arrOfValid.every((inputIsTrue) => inputIsTrue);
-  };
-
-  let isFormValid = everythingIsValid();
-
-  useEffect(() => {
-    setFormIsValid(isFormValid);
-  }, [isFormValid]);
 
   return (
     <React.Fragment>
@@ -214,7 +235,7 @@ const RecipeForm = () => {
             <Grid gap="1rem" width="100%">
               <Input
                 name="title"
-                onChange={(e) => changeTextHandler(e)}
+                onChange={(e) => changeInputValue(e)}
                 placeholder={`${
                   inputsValues.title.isWrong
                     ? "This field can not be an empty"
@@ -235,7 +256,7 @@ const RecipeForm = () => {
               <StepsContainer
                 stepName={inputsValues.step.val}
                 onStepAdd={onStepAdd}
-                onStepNameChange={(e) => changeTextHandler(e)}
+                onStepNameChange={changeTextHandler}
                 setSteps={setSteps}
                 stepIsWrong={inputsValues.step.isWrong}
                 steps={steps}
@@ -247,7 +268,7 @@ const RecipeForm = () => {
               />
               <Textarea
                 name="description"
-                onChange={(e) => changeTextHandler(e)}
+                onChange={(e) => changeInputValue(e)}
                 placeholder={`${
                   inputsValues.title.isWrong
                     ? "This field can not be an empty"

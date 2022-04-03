@@ -11,19 +11,11 @@ type ingredientProps = {
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
-  const [ingredientName, setIngredientName] = useState<string | null>(null);
-  const [ingredientAmount, setIngredientAmount] = useState<string | null>(null);
-  const [ingredientUnit, setIngredientUnit] = useState<string | null>(null);
+  const [ingredientName, setIngredientName] = useState<string>("");
+  const [ingredientAmount, setIngredientAmount] = useState<string>("");
+  const [ingredientUnit, setIngredientUnit] = useState<string>("");
   const { getIngredientValues } = props;
-  useEffect(() => {
-    const ingredient = {
-      name: ingredientName,
-      amount: ingredientAmount,
-      unit: ingredientUnit,
-    };
 
-    getIngredientValues(ingredient);
-  }, [ingredientName, ingredientAmount, ingredientUnit]);
   const ingredientsUnits = useSelector(
     (state: RootState) => state.constantValues.ingredientsUnits
   );
@@ -32,6 +24,13 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     setValue: (value: string) => void
   ) => {
     setValue(e.target.value);
+    const ingredient = {
+      name: ingredientName,
+      amount: ingredientAmount,
+      unit: ingredientUnit,
+    };
+
+    getIngredientValues(ingredient);
   };
   const onAddIngredient = () => {
     const ingredient: ingredient = {
@@ -55,6 +54,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             zIndex="10"
             border="1px"
             flex="6"
+            value={ingredientName}
           />
 
           <Input
@@ -63,6 +63,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             borderRadius="0"
             outline="none"
             flex="1"
+            value={ingredientAmount}
           />
           <Select
             onChange={(e) => onIngredientChange(e, setIngredientUnit)}
@@ -72,7 +73,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             flex="1"
           >
             {ingredientsUnits.map((unit) => (
-              <option key={unit}>{unit}</option>
+              <option key={unit} value={unit}>
+                {unit}
+              </option>
             ))}
           </Select>
 
