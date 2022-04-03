@@ -4,17 +4,18 @@ import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import AddButton from "../../UI/AddButton";
+import { ingredientValidation } from "../../../shared/types/AddRecipeForm";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
-  getIngredientValues: (ingredient: ingredient) => void;
+  getIngredientValues: (ingredentsValidate: ingredientValidation) => void;
+  isWrong: boolean;
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [ingredientName, setIngredientName] = useState<string>("");
   const [ingredientAmount, setIngredientAmount] = useState<string>("");
   const [ingredientUnit, setIngredientUnit] = useState<string>("");
-  const { getIngredientValues } = props;
 
   const ingredientsUnits = useSelector(
     (state: RootState) => state.constantValues.ingredientsUnits
@@ -30,7 +31,14 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       unit: ingredientUnit,
     };
 
-    getIngredientValues(ingredient);
+    let isClicked = true;
+    let isValid = ingredientName.length > 0;
+    props.getIngredientValues({
+      values: ingredient,
+      isClicked: isClicked,
+      isValid: isValid,
+      isWrong: isClicked && !isValid,
+    });
   };
   const onAddIngredient = () => {
     const ingredient: ingredient = {

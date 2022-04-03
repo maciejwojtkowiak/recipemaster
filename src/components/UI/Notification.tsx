@@ -45,7 +45,7 @@ const Notification = () => {
             rounded="md"
           >
             <Grid placeItems="center" width="100%" height="100%">
-              <Text fontFamily="dancingScriptFont" fontSize="100%">
+              <Text fontFamily="dancingScriptFont" fontSize="200%">
                 {notification.message}
               </Text>
             </Grid>

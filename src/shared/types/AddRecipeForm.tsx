@@ -25,17 +25,17 @@ export type inputsFormState = {
     isClicked: boolean;
     isWrong: boolean;
   };
+};
 
-  ingredient: {
-    val: ingredient;
-    isValid: boolean;
-    isClicked: boolean;
-    isWrong: boolean;
-  };
+export type ingredientValidation = {
+  values: ingredient;
+  isValid: boolean;
+  isClicked: boolean;
+  isWrong: boolean;
 };
 
 export type inputsFormAction = {
   type: ActionKind;
   field: string | null;
-  content: string | ingredient;
+  content: string;
 };
