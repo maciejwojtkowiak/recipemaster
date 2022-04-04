@@ -139,9 +139,8 @@ const RecipeForm = () => {
 
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
-  console.log(arrOfValid);
+
   let isFormValid = everythingIsValid();
-  console.log(isFormValid);
 
   useEffect(() => {
     setFormIsValid(isFormValid);
@@ -151,7 +150,6 @@ const RecipeForm = () => {
     e.preventDefault();
 
     if (!formIsValid) {
-      console.log(arrOfInvalidFields);
       dispatch(
         uiAction.setNotification({
           message: `Fields and lists  [${[
@@ -214,8 +212,11 @@ const RecipeForm = () => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
 
-  const validateIngredients = (ingredientValidation: ingredientValidation) => {
-    setIngredientValidation(ingredientValidation);
+  const validateIngredients = (
+    ingredientValidationValues: ingredientValidation
+  ) => {
+    setIngredientValidation(ingredientValidationValues);
+    console.log(ingredientValidation);
   };
 
   return (

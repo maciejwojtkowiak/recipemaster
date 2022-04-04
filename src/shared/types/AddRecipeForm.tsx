@@ -39,3 +39,5 @@ export type inputsFormAction = {
   field: string;
   content: string;
 };
+
+// for ingredient

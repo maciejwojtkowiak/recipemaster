@@ -31,7 +31,9 @@ const StepsInput: React.FC<funcProps> = (props) => {
           borderRadius="0"
           border="1px"
           placeholder={`${
-            props.stepIsWrong ? "This field can not be an empty" : "Add a step"
+            props.stepIsWrong
+              ? "List must contain at least one item"
+              : "Add a step"
           }`}
           bgColor={`${props.stepIsWrong && "#FED7D7"}`}
         />

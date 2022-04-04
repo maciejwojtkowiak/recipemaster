@@ -6,7 +6,7 @@ import React from "react";
 import { ingredientValidation } from "../../../shared/types/AddRecipeForm";
 interface funcProps {
   onIngredientAdd: (ingredient: ingredient) => void;
-  getIngredientValues: (ingredentsValidate: ingredientValidation) => void;
+  getIngredientValues: (ingredientValue: ingredientValidation) => void;
   isWrong: boolean;
   ingredients: ingredient[];
 }
