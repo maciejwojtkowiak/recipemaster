@@ -10,6 +10,7 @@ type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
   getIngredientValues: (ingredentsValidate: ingredientValidation) => void;
   isWrong: boolean;
+  ingredients: ingredient[];
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
@@ -32,7 +33,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     };
     let isValid = ingredientName.length > 0;
 
-    let isWrong = isClicked && !isValid;
+    let isWrong = isClicked && !isValid && props.ingredients.length === 0;
     console.log(isWrong, ingredient);
 
     getIngredientValues({
@@ -73,7 +74,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             bgColor={`${props.isWrong && "#FED7D7"}`}
             type="text"
             placeholder={`${
-              props.isWrong && "List must contain at least one item"
+              props.isWrong
+                ? "List must contain at least one item"
+                : "Add an ingredient"
             }`}
             borderRadius="0"
             zIndex="10"

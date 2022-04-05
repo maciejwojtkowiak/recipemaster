@@ -15,6 +15,7 @@ const IngredientsContainer: React.FC<funcProps> = (props) => {
     <Grid width="100%">
       <IngredientList ingredients={props.ingredients} />
       <IngredientInput
+        ingredients={props.ingredients}
         onIngredientAdd={props.onIngredientAdd}
         getIngredientValues={props.getIngredientValues}
         isWrong={props.isWrong}

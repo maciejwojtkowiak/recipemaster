@@ -1,7 +1,6 @@
-import { Text, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { ingredient } from "../../../shared/types/Recipe";
 import ItemBox from "../UI/ItemBox";
-import ItemOrangeBox from "../UI/ItemOrangeBox";
 
 type funcProps = {
   ingredient: ingredient;
