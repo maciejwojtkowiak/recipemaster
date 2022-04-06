@@ -244,6 +244,7 @@ const RecipeForm = () => {
                 onChange={(e) => onSelectChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
                 values={recipeTypes}
+                typeOfSelect="type of dish"
               />
               <IngredientsContainer
                 getIngredientValues={validateIngredients}
@@ -263,6 +264,7 @@ const RecipeForm = () => {
                 onChange={(e) => onSelectChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
                 values={recipeLengths}
+                typeOfSelect="length of dish"
               />
               <Textarea
                 name="description"
