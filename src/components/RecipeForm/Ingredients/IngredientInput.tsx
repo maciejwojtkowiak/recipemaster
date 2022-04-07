@@ -46,6 +46,16 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     state: IngredientInputState,
     action: IngredientInputAction
   ): IngredientInputState => {
+    if (action.name) {
+      return {
+        ...state,
+        [action.name]: {
+          val: action.val,
+          isValid: true,
+        },
+      };
+    }
+
     return {
       ...state,
     };
@@ -100,7 +110,10 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     setValue: (value: string) => void
   ) => {
-    setValue(e.target.value);
+    dispatchIngredient({
+      name: e.target.name,
+      val: e.target.value,
+    });
     setIsClicked(true);
   };
   const onAddIngredient = () => {
