@@ -8,24 +8,25 @@ interface funcProps {
   recipe: Recipe;
 }
 const DetailColumns: React.FC<funcProps> = (props) => {
+  const borderWidth = "0.3rem";
   return (
     <Box
       h="80vh"
-      borderWidth="0.5rem"
+      borderWidth={borderWidth}
       borderColor="orange.300"
       borderRadius="1rem"
       w="80%"
       marginTop="2rem"
     >
       <Grid w="100%" h="100%" templateColumns="60% 20% 20%">
-        <Box border="0.5rem" borderColor="orange.300">
+        <Box border={borderWidth} borderColor="orange.300">
           <RecipeDescriptionBox recipe={props.recipe} />
         </Box>
-        <Box borderLeftWidth="0.5rem" borderColor="orange.300">
+        <Box borderLeftWidth={borderWidth} borderColor="orange.300">
           <RecipeStepsBox recipeId={props.recipe.id} />
         </Box>
 
-        <Box borderLeftWidth="0.5rem" borderColor="orange.300">
+        <Box borderLeftWidth={borderWidth} borderColor="orange.300">
           <RecipeIngredientsBox recipe={props.recipe} />
         </Box>
       </Grid>

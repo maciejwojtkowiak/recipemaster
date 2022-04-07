@@ -1,5 +1,5 @@
 import { Box, Flex, Input, Select } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useReducer } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -7,12 +7,31 @@ import AddButton from "../../UI/AddButton";
 import { ingredientValidation } from "../../../shared/types/AddRecipeForm";
 import { uiAction } from "../../../store/ui-slice";
 import { useDispatch } from "react-redux";
+import {
+  IngredientInputState,
+  IngredientInputAction,
+} from "../../../shared/types/IngredientInputForm";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
   getIngredientValues: (ingredentsValidate: ingredientValidation) => void;
   isWrong: boolean;
   ingredients: ingredient[];
+};
+
+const initialState = {
+  ingredientName: {
+    val: "",
+    isValid: false,
+  },
+  ingredientAmount: {
+    val: "",
+    isValid: false,
+  },
+  ingredientUnit: {
+    val: "",
+    isValid: false,
+  },
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
@@ -22,6 +41,20 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [ingredientInputIsValid, setIngrdientInputIsValid] =
     useState<boolean>(true);
+
+  const ingredientReducer = (
+    state: IngredientInputState,
+    action: IngredientInputAction
+  ): IngredientInputState => {
+    return {
+      ...state,
+    };
+  };
+
+  const [ingredientInputs, dispatchIngredient] = useReducer(
+    ingredientReducer,
+    initialState
+  );
   const dispatch = useDispatch();
 
   const ingredientsUnits = useSelector(
@@ -29,6 +62,18 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   );
 
   const { getIngredientValues } = props;
+
+  const ingredientValFunc = useCallback(
+    (ingredient: ingredient, isValid: boolean, isWrong: boolean) => {
+      getIngredientValues({
+        values: ingredient,
+        isClicked: isClicked,
+        isValid: isValid,
+        isWrong: isWrong,
+      });
+    },
+    [isClicked]
+  );
 
   useEffect(() => {
     const ingredient = {
@@ -38,15 +83,19 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     };
     let isValid = ingredientName.length > 0;
 
-    let isWrong = isClicked && ingredientName.length === 0;
-
-    getIngredientValues({
-      values: ingredient,
-      isClicked: isClicked,
-      isValid: isValid,
-      isWrong: isWrong,
-    });
-  }, [ingredientName, ingredientAmount, ingredientUnit, isClicked]);
+    let isWrong =
+      isClicked &&
+      ingredientName.length === 0 &&
+      props.ingredients.length === 0;
+    ingredientValFunc(ingredient, isValid, isWrong);
+  }, [
+    ingredientName,
+    ingredientAmount,
+    ingredientUnit,
+    isClicked,
+    props.ingredients.length,
+    ingredientValFunc,
+  ]);
   const onIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     setValue: (value: string) => void
@@ -83,9 +132,6 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     }
   };
 
-  console.log(props.isWrong);
-  console.log(ingredientName.length);
-
   return (
     <Box width="100%">
       <Box width="100%" boxSizing="border-box">
@@ -93,9 +139,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           <Input
             name="ingredientName"
             onChange={(e) => onIngredientChange(e, setIngredientName)}
-            bgColor={`${
-              (props.isWrong || !ingredientInputIsValid) && "#FED7D7"
-            }`}
+            bgColor={`${props.isWrong && "#FED7D7"}`}
             type="text"
             placeholder={`${
               props.isWrong
@@ -112,6 +156,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           <Input
             name="ingredientAmount"
             onChange={(e) => onIngredientChange(e, setIngredientAmount)}
+            bgColor={`${!ingredientInputIsValid && "#FED7D7"}`}
             placeholder="Amount"
             borderRadius="0"
             outline="none"
