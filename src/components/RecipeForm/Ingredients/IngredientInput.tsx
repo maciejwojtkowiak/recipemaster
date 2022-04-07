@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import AddButton from "../../UI/AddButton";
 import { ingredientValidation } from "../../../shared/types/AddRecipeForm";
+import { uiAction } from "../../../store/ui-slice";
+import { useDispatch } from "react-redux";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
@@ -18,6 +20,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [ingredientAmount, setIngredientAmount] = useState<string>("");
   const [ingredientUnit, setIngredientUnit] = useState<string>("");
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [ingredientInputIsValid, setIngrdientInputIsValid] =
+    useState<boolean>(true);
+  const dispatch = useDispatch();
 
   const ingredientsUnits = useSelector(
     (state: RootState) => state.constantValues.ingredientsUnits
@@ -33,8 +38,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     };
     let isValid = ingredientName.length > 0;
 
-    let isWrong = isClicked && !isValid && props.ingredients.length === 0;
-    console.log(isWrong, ingredient);
+    let isWrong = isClicked && ingredientName.length === 0;
 
     getIngredientValues({
       values: ingredient,
@@ -51,18 +55,36 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     setIsClicked(true);
   };
   const onAddIngredient = () => {
-    const ingredient: ingredient = {
-      name: ingredientName,
-      amount: ingredientAmount,
-      unit: ingredientUnit,
-    };
+    let ingredientInputIsValid =
+      ingredientName.length > 0 &&
+      ingredientAmount.length > 0 &&
+      ingredientUnit !== null;
+    setIngrdientInputIsValid(ingredientInputIsValid);
+    if (ingredientInputIsValid) {
+      const ingredient: ingredient = {
+        name: ingredientName,
+        amount: ingredientAmount,
+        unit: ingredientUnit,
+      };
 
-    props.onIngredientAdd(ingredient);
+      props.onIngredientAdd(ingredient);
 
-    setIngredientName("");
+      setIngredientName("");
+    }
+
+    if (!ingredientInputIsValid) {
+      dispatch(
+        uiAction.setNotification({
+          isShown: true,
+          message: "Ingredient input is invalid.",
+          type: "error",
+        })
+      );
+    }
   };
 
   console.log(props.isWrong);
+  console.log(ingredientName.length);
 
   return (
     <Box width="100%">
@@ -71,7 +93,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           <Input
             name="ingredientName"
             onChange={(e) => onIngredientChange(e, setIngredientName)}
-            bgColor={`${props.isWrong && "#FED7D7"}`}
+            bgColor={`${
+              (props.isWrong || !ingredientInputIsValid) && "#FED7D7"
+            }`}
             type="text"
             placeholder={`${
               props.isWrong
