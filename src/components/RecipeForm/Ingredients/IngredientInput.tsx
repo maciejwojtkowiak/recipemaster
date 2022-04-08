@@ -23,14 +23,20 @@ const initialState = {
   ingredientName: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   ingredientAmount: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   ingredientUnit: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
 };
 
@@ -44,11 +50,14 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     action: IngredientInputAction
   ): IngredientInputState => {
     if (action.name) {
+      let isValid = action.val.length > 0;
       return {
         ...state,
         [action.name]: {
           val: action.val,
-          isValid: true,
+          isValid: isValid,
+          isClicked: isClicked,
+          isWrong: !isValid && isClicked && props.ingredients.length === 0,
         },
       };
     }
@@ -164,7 +173,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           <Input
             name="ingredientAmount"
             onChange={(e) => onIngredientChange(e)}
-            bgColor={`${!ingredientInputIsValid && "#FED7D7"}`}
+            bgColor={`${
+              ingredientInputs.ingredientAmount.isWrong && "#FED7D7"
+            }`}
             placeholder="Amount"
             borderRadius="0"
             outline="none"
@@ -175,10 +186,12 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             name="ingredientUnit"
             onChange={(e) => onIngredientChange(e)}
             isReadOnly
-            placeholder="Unit"
             borderRadius="0"
             flex="1"
           >
+            <option value="" selected disabled hidden>
+              Unit
+            </option>
             {ingredientsUnits.map((unit) => (
               <option key={unit} value={unit}>
                 {unit}
