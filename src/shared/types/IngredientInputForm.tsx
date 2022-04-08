@@ -1,6 +1,12 @@
+export enum IngredientInputEnum {
+  change,
+  submit,
+}
+
 export interface IngredientInputAction {
-  val: string;
-  name: string;
+  type: IngredientInputEnum;
+  val?: string;
+  name?: string;
 }
 
 export interface IngredientInputState {

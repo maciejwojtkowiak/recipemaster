@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import {
   IngredientInputState,
   IngredientInputAction,
+  IngredientInputEnum,
 } from "../../../shared/types/IngredientInputForm";
 
 type ingredientProps = {
@@ -49,7 +50,11 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     state: IngredientInputState,
     action: IngredientInputAction
   ): IngredientInputState => {
-    if (action.name) {
+    if (
+      action.name &&
+      action.val &&
+      action.type === IngredientInputEnum.change
+    ) {
       let isValid = action.val.length > 0;
       return {
         ...state,
@@ -117,6 +122,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     dispatchIngredient({
+      type: IngredientInputEnum.change,
       name: e.target.name,
       val: e.target.value,
     });
@@ -139,6 +145,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     }
 
     if (!ingredientInputIsValid) {
+      dispatchIngredient({
+        type: IngredientInputEnum.submit,
+      });
       dispatch(
         uiAction.setNotification({
           isShown: true,
