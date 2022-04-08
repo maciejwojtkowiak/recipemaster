@@ -35,9 +35,6 @@ const initialState = {
 };
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
-  const [ingredientName, setIngredientName] = useState<string>("");
-  const [ingredientAmount, setIngredientAmount] = useState<string>("");
-  const [ingredientUnit, setIngredientUnit] = useState<string>("");
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [ingredientInputIsValid, setIngrdientInputIsValid] =
     useState<boolean>(true);
@@ -87,28 +84,28 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
 
   useEffect(() => {
     const ingredient = {
-      name: ingredientName,
-      amount: ingredientAmount,
-      unit: ingredientUnit,
+      name: ingredientInputs.ingredientName.val,
+      amount: ingredientInputs.ingredientAmount.val,
+      unit: ingredientInputs.ingredientUnit.val,
     };
-    let isValid = ingredientName.length > 0;
+    let isValid = ingredientInputs.ingredientName.val.length > 0;
 
     let isWrong =
       isClicked &&
-      ingredientName.length === 0 &&
+      ingredientInputs.ingredientName.val.length === 0 &&
       props.ingredients.length === 0;
     ingredientValFunc(ingredient, isValid, isWrong);
   }, [
-    ingredientName,
-    ingredientAmount,
-    ingredientUnit,
+    ingredientInputs.ingredientName.val,
+    ingredientInputs.ingredientAmount.val,
+    ingredientInputs.ingredientUnit.val,
     isClicked,
     props.ingredients.length,
+
     ingredientValFunc,
   ]);
   const onIngredientChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    setValue: (value: string) => void
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     dispatchIngredient({
       name: e.target.name,
@@ -118,20 +115,18 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
   };
   const onAddIngredient = () => {
     let ingredientInputIsValid =
-      ingredientName.length > 0 &&
-      ingredientAmount.length > 0 &&
-      ingredientUnit !== null;
+      ingredientInputs.ingredientName.val.length > 0 &&
+      ingredientInputs.ingredientAmount.val.length > 0 &&
+      ingredientInputs.ingredientUnit.val.length > 0;
     setIngrdientInputIsValid(ingredientInputIsValid);
     if (ingredientInputIsValid) {
       const ingredient: ingredient = {
-        name: ingredientName,
-        amount: ingredientAmount,
-        unit: ingredientUnit,
+        name: ingredientInputs.ingredientName.val,
+        amount: ingredientInputs.ingredientAmount.val,
+        unit: ingredientInputs.ingredientUnit.val,
       };
 
       props.onIngredientAdd(ingredient);
-
-      setIngredientName("");
     }
 
     if (!ingredientInputIsValid) {
@@ -151,7 +146,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
         <Flex width="100%" boxSizing="border-box" gap="1px">
           <Input
             name="ingredientName"
-            onChange={(e) => onIngredientChange(e, setIngredientName)}
+            onChange={(e) => onIngredientChange(e)}
             bgColor={`${props.isWrong && "#FED7D7"}`}
             type="text"
             placeholder={`${
@@ -163,22 +158,22 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             zIndex="10"
             border="1px"
             flex="6"
-            value={ingredientName}
+            value={ingredientInputs.ingredientName.val}
           />
 
           <Input
             name="ingredientAmount"
-            onChange={(e) => onIngredientChange(e, setIngredientAmount)}
+            onChange={(e) => onIngredientChange(e)}
             bgColor={`${!ingredientInputIsValid && "#FED7D7"}`}
             placeholder="Amount"
             borderRadius="0"
             outline="none"
             flex="1"
-            value={ingredientAmount}
+            value={ingredientInputs.ingredientAmount.val}
           />
           <Select
             name="ingredientUnit"
-            onChange={(e) => onIngredientChange(e, setIngredientUnit)}
+            onChange={(e) => onIngredientChange(e)}
             isReadOnly
             placeholder="Unit"
             borderRadius="0"
