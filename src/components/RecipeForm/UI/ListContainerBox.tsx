@@ -12,6 +12,7 @@ const ListContainerBox: React.FC<funcProps> = (props) => {
       padding="1rem"
       marginTop="1rem"
       marginBottom="1rem"
+      textAlign="center"
     >
       <Heading textAlign="center">{props.title}</Heading>
       {props.children}

@@ -20,67 +20,72 @@ import {
   inputsFormAction,
   inputsFormState,
   ActionKind,
+  ingredientValidation,
 } from "../../shared/types/AddRecipeForm";
+import { uiAction } from "../../store/ui-slice";
 
 const initialStateReducer: inputsFormState = {
   title: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   description: {
     val: "",
     isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
   step: {
     val: "",
     isValid: false,
-  },
-  ingredient: {
-    val: { name: "", amount: "", unit: "" },
-    isValid: false,
+    isClicked: false,
+    isWrong: false,
   },
 };
 
 const RecipeForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [type, setType] = useState<string>("");
+  const [ingredients, setIngredients] = useState<ingredient[]>([]);
+  const [time, setTime] = useState<string>("");
+  const [formIsValid, setFormIsValid] = useState<boolean>(false);
+
+  const [steps, setSteps] = useState<Step[]>([]);
   const inputReducer = (
     state: inputsFormState,
     action: inputsFormAction
   ): inputsFormState => {
-    let isValid: boolean = false;
+    let isValid = false;
+    let isClicked = true;
+    let isWrong = false;
     const { content } = action;
 
-    if (
-      action.type === ActionKind.stringVal &&
-      content instanceof String &&
-      action.field
-    ) {
+    if (action.type === ActionKind.stringVal) {
+      isClicked = true;
       isValid = content.length > 0;
+      isWrong = isClicked && !isValid;
+      if (action.field === "step") {
+        let stepsAreValid = steps.length > 0 || content.length > 0;
+        return {
+          ...state,
+          step: {
+            val: content,
+            isValid: stepsAreValid,
+            isClicked: true,
+            isWrong: isClicked && !stepsAreValid,
+          },
+        };
+      }
       return {
         ...state,
         [action.field]: {
           val: content,
           isValid: isValid,
-        },
-      };
-    }
-
-    function isIngredient(object: any): object is ingredient {
-      return "unit" in object;
-    }
-
-    if (action.type === ActionKind.ingredientVal && isIngredient(content)) {
-      if (content.name) {
-        isValid = content.name.length > 0;
-      }
-      return {
-        ...state,
-        ingredient: {
-          val: {
-            name: content.name,
-            amount: content.amount,
-            unit: content.unit,
-          },
-          isValid: isValid,
+          isClicked: isClicked,
+          isWrong: isWrong,
         },
       };
     }
@@ -89,17 +94,22 @@ const RecipeForm = () => {
       ...state,
     };
   };
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [type, setType] = useState<string>("");
-  const [ingredients, setIngredients] = useState<ingredient[]>([]);
-  const [time, setTime] = useState<string>("");
-  const [steps, setSteps] = useState<Step[]>([]);
-  const [formIsValid, setFormIsValid] = useState<boolean>(false);
-  const [inputsValues, dispatchReducer] = useReducer(
+  const [stringInputsValues, dispatchReducer] = useReducer(
     inputReducer,
     initialStateReducer
   );
+
+  const [ingredientValidation, setIngredientValidation] =
+    useState<ingredientValidation>({
+      isValid: false,
+      isClicked: false,
+      isWrong: false,
+      values: {
+        name: "",
+        amount: "",
+        unit: "",
+      },
+    });
 
   const user = auth.currentUser;
   const recipeTypes = useSelector(
@@ -109,15 +119,53 @@ const RecipeForm = () => {
     (state: RootState) => state.constantValues.recipeLengths
   );
 
+  let arrOfValid: boolean[] = [];
+  let arrOfInvalidFields: string[] = [];
+
+  const everythingIsValid = () => {
+    for (const key of Object.keys(stringInputsValues)) {
+      arrOfValid.push(
+        stringInputsValues[key as keyof typeof stringInputsValues].isValid
+      );
+      if (!stringInputsValues[key as keyof typeof stringInputsValues].isValid) {
+        arrOfInvalidFields.push(` ${key} `);
+      }
+    }
+    arrOfValid.push(ingredients.length > 0);
+
+    ingredients.length === 0 && arrOfInvalidFields.push(" ingredients ");
+    console.log(ingredientValidation.isWrong);
+
+    return arrOfValid.every((inputIsTrue) => inputIsTrue);
+  };
+
+  let isFormValid = everythingIsValid();
+
+  useEffect(() => {
+    setFormIsValid(isFormValid);
+  }, [isFormValid]);
+
   const onSubmitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
-    if (user?.displayName) {
-      console.log(inputsValues.description.val);
+
+    if (!formIsValid) {
+      dispatch(
+        uiAction.setNotification({
+          message: `Fields and lists  [${[
+            ...arrOfInvalidFields,
+          ]}] can not be empty`,
+          type: "error",
+          isShown: true,
+        })
+      );
+    }
+
+    if (formIsValid && user?.displayName) {
       const recipe: Recipe = {
         username: user.displayName,
-        title: inputsValues.description.val,
+        title: stringInputsValues.description.val,
         type: type,
-        description: inputsValues.title.val,
+        description: stringInputsValues.title.val,
         id: Math.random(),
         time: time,
         ingredients: ingredients,
@@ -139,22 +187,18 @@ const RecipeForm = () => {
     setValue(newValue);
   };
 
-  const changeTextHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const changeTextHandler = (field: string, content: string) => {
     dispatchReducer({
       type: ActionKind.stringVal,
-      field: e.target.name,
-      content: e.target.value,
+      field: field,
+      content: content,
     });
   };
 
-  const getIngredient = (ingredient: ingredient) => {
-    dispatchReducer({
-      type: ActionKind.ingredientVal,
-      content: ingredient,
-      field: null,
-    });
+  const changeInputValue = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    changeTextHandler(e.target.name, e.target.value);
   };
 
   const onIngredientAdd = (ingredient: ingredient) => {
@@ -167,7 +211,11 @@ const RecipeForm = () => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
 
-  console.log(inputsValues);
+  const validateIngredients = (
+    ingredientValidationValues: ingredientValidation
+  ) => {
+    setIngredientValidation(ingredientValidationValues);
+  };
 
   return (
     <React.Fragment>
@@ -184,40 +232,56 @@ const RecipeForm = () => {
             <Grid gap="1rem" width="100%">
               <Input
                 name="title"
-                onChange={(e) => changeTextHandler(e)}
-                placeholder="Name for your recipe"
+                onChange={(e) => changeInputValue(e)}
+                placeholder={`${
+                  stringInputsValues.title.isWrong
+                    ? "This field can not be an empty"
+                    : "Title"
+                }`}
+                bgColor={`${stringInputsValues.title.isWrong && "#FED7D7"}`}
               />
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
                 values={recipeTypes}
+                typeOfSelect="type of dish"
               />
               <IngredientsContainer
-                getIngredientValues={getIngredient}
+                getIngredientValues={validateIngredients}
+                isWrong={ingredientValidation.isWrong}
                 ingredients={ingredients}
                 onIngredientAdd={onIngredientAdd}
               />
               <StepsContainer
-                stepName={inputsValues.step.val}
+                stepName={stringInputsValues.step.val}
                 onStepAdd={onStepAdd}
-                onStepNameChange={(e) => changeTextHandler(e)}
+                onStepNameChange={changeTextHandler}
                 setSteps={setSteps}
+                stepIsWrong={stringInputsValues.step.isWrong}
                 steps={steps}
               />
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
                 values={recipeLengths}
+                typeOfSelect="length of dish"
               />
               <Textarea
                 name="description"
-                onChange={(e) => changeTextHandler(e)}
-                placeholder="Description"
+                onChange={(e) => changeInputValue(e)}
+                placeholder={`${
+                  stringInputsValues.title.isWrong
+                    ? "This field can not be an empty"
+                    : "Description"
+                }`}
+                bgColor={`${
+                  stringInputsValues.description.isWrong && "#FED7D7"
+                }`}
                 cols={20}
                 rows={20}
                 resize="none"
               />
-              <FormSubmitButton />
+              <FormSubmitButton formIsValid={formIsValid} />
             </Grid>
           </Flex>
         </form>

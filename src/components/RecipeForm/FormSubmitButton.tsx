@@ -1,6 +1,10 @@
 import { Button } from "@chakra-ui/react";
 
-const FormSubmitButton = () => {
+interface funcProps {
+  formIsValid: boolean;
+}
+
+const FormSubmitButton: React.FC<funcProps> = (props) => {
   return (
     <Button
       width="30%"
