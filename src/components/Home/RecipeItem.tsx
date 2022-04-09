@@ -2,10 +2,11 @@ import { Box, Image, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import RecipeHeart from "./RecipeHeart";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import { getRecipeImage } from "../../Helpers/getRecipeImage";
 import { uiAction } from "../../store/ui-slice";
+import { RootState } from "../../store/store";
 
 type listedRecipe = {
   id: number;
@@ -19,10 +20,12 @@ type listedRecipe = {
 const RecipeItem: React.FC<listedRecipe> = (props) => {
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState<boolean>(false);
-
+  const recipeIsLiked = useSelector(
+    (state: RootState) =>
+      state.recipe.recipes.find((recipe) => recipe.id === props.id)?.isLiked
+  );
   const onLikeHandler = () => {
-    if (isLiked) {
-      setIsLiked(false);
+    if (recipeIsLiked) {
       dispatch(recipeAction.deleteLikedRecipe(props.id));
       dispatch(
         uiAction.setNotification({
@@ -33,7 +36,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
       );
       return;
     }
-    setIsLiked(true);
+
     dispatch(recipeAction.addLikedRecipe(props.id));
     dispatch(
       uiAction.setNotification({
@@ -48,7 +51,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   return (
     <Box height="40vh" width="40vh" borderWidth="1px" marginTop="2rem">
       <Box position="relative">
-        <RecipeHeart onLikeHandler={onLikeHandler} isLiked={isLiked} />
+        <RecipeHeart onLikeHandler={onLikeHandler} isLiked={recipeIsLiked} />
         <Image height="20vh" width="100%" src={imgName}></Image>
       </Box>
       <Box marginLeft="1rem" marginTop="1rem">

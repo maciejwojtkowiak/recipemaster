@@ -49,6 +49,7 @@ export type Recipe = {
   steps: Step[];
   stars: number;
   comments: Comment[];
+  isLiked: boolean;
 };
 
 export type Notification = {

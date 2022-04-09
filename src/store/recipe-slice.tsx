@@ -42,12 +42,17 @@ const recipeSlice = createSlice({
         (recipe: Recipe) => recipe.id === action.payload
       ) as Recipe;
       state.likedRecipes.recipes.push(likedRecipe);
+      likedRecipe.isLiked = true;
       state.likedRecipes.totalAmount++;
     },
     deleteLikedRecipe(state, action: PayloadAction<number>) {
+      const likedRecipe = state.recipes.find(
+        (recipe: Recipe) => recipe.id === action.payload
+      ) as Recipe;
       state.likedRecipes.recipes = state.likedRecipes.recipes.filter(
         (recipe: Recipe) => recipe.id !== action.payload
       );
+      likedRecipe.isLiked = false;
       state.likedRecipes.totalAmount--;
     },
     setFilterTitle(state, action: PayloadAction<string>) {

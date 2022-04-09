@@ -172,6 +172,7 @@ const RecipeForm = () => {
         stars: Math.floor(Math.random() * 6) + 1,
         steps: steps,
         comments: [],
+        isLiked: false,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
