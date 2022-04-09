@@ -50,12 +50,12 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     state: IngredientInputState,
     action: IngredientInputAction
   ): IngredientInputState => {
-    if (
-      action.name &&
-      action.val &&
-      action.type === IngredientInputEnum.change
-    ) {
-      let isValid = action.val.length > 0;
+    if (action.name && action.type === IngredientInputEnum.change) {
+      let isValid = false;
+      if (action.val) {
+        isValid = action.val.length > 0;
+      }
+
       return {
         ...state,
         [action.name]: {
@@ -65,6 +65,15 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           isWrong: !isValid && isClicked && props.ingredients.length === 0,
         },
       };
+    }
+
+    if (action.type === IngredientInputEnum.submit) {
+      Object.keys(state).forEach((key) => {
+        if (state[key as keyof typeof state].val.length === 0) {
+          state[key as keyof typeof state].isWrong = true;
+        }
+        return state[key as keyof typeof state];
+      });
     }
 
     return {
@@ -165,7 +174,10 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
           <Input
             name="ingredientName"
             onChange={(e) => onIngredientChange(e)}
-            bgColor={`${props.isWrong && "#FED7D7"}`}
+            bgColor={`${
+              (props.isWrong || ingredientInputs.ingredientName.isWrong) &&
+              "#FED7D7"
+            }`}
             type="text"
             placeholder={`${
               props.isWrong
@@ -198,7 +210,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             borderRadius="0"
             flex="1"
           >
-            <option value="" selected disabled hidden>
+            <option selected disabled hidden>
               Unit
             </option>
             {ingredientsUnits.map((unit) => (
