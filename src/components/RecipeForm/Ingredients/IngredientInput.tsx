@@ -209,8 +209,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             isReadOnly
             borderRadius="0"
             flex="1"
+            bgColor={`${ingredientInputs.ingredientUnit.isWrong && "#FED7D7"}`}
           >
-            <option selected disabled hidden>
+            <option value="" selected disabled hidden>
               Unit
             </option>
             {ingredientsUnits.map((unit) => (

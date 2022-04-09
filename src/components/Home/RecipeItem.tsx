@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import { getRecipeImage } from "../../Helpers/getRecipeImage";
+import { uiAction } from "../../store/ui-slice";
 
 type listedRecipe = {
   id: number;
@@ -23,10 +24,24 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
     if (isLiked) {
       setIsLiked(false);
       dispatch(recipeAction.deleteLikedRecipe(props.id));
+      dispatch(
+        uiAction.setNotification({
+          type: "message",
+          isShown: true,
+          message: "Item was removed from favorites",
+        })
+      );
       return;
     }
     setIsLiked(true);
     dispatch(recipeAction.addLikedRecipe(props.id));
+    dispatch(
+      uiAction.setNotification({
+        type: "message",
+        isShown: true,
+        message: "Item was added to favorites",
+      })
+    );
   };
   let imgName = getRecipeImage(props.type);
 
