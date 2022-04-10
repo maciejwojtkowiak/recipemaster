@@ -1,7 +1,7 @@
 import { Box, Image, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import RecipeHeart from "./RecipeHeart";
-import { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import { getRecipeImage } from "../../Helpers/getRecipeImage";
@@ -19,7 +19,7 @@ type listedRecipe = {
 
 const RecipeItem: React.FC<listedRecipe> = (props) => {
   const dispatch = useDispatch();
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+
   const recipeIsLiked = useSelector(
     (state: RootState) =>
       state.recipe.recipes.find((recipe) => recipe.id === props.id)?.isLiked

@@ -8,6 +8,7 @@ interface funcProps {
   onStepAdd: (step: Step) => void;
   setSteps: (steps: Step[]) => void;
   onStepNameChange: (content: string, field: string) => void;
+  onStepDelete: (id: number) => void;
   stepIsWrong: boolean;
   stepName: string;
   steps: Step[];
@@ -16,7 +17,11 @@ interface funcProps {
 const StepsContainer: React.FC<funcProps> = (props) => {
   return (
     <Box>
-      <StepsList steps={props.steps} setSteps={props.setSteps} />
+      <StepsList
+        onStepDelete={props.onStepDelete}
+        steps={props.steps}
+        setSteps={props.setSteps}
+      />
       <StepsInput
         onStepAdd={props.onStepAdd}
         onStepNameChange={props.onStepNameChange}

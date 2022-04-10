@@ -212,6 +212,10 @@ const RecipeForm = () => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
 
+  const onStepDelete = (id: number) => {
+    setSteps((prevSteps) => prevSteps.filter((step) => step.id !== id));
+  };
+
   const validateIngredients = (
     ingredientValidationValues: ingredientValidation
   ) => {
@@ -258,6 +262,7 @@ const RecipeForm = () => {
                 onStepAdd={onStepAdd}
                 onStepNameChange={changeTextHandler}
                 setSteps={setSteps}
+                onStepDelete={onStepDelete}
                 stepIsWrong={stringInputsValues.step.isWrong}
                 steps={steps}
               />
