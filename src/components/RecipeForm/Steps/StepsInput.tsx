@@ -1,6 +1,6 @@
 import { Box, Flex, Input } from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Step } from "../../../shared/types/Recipe";
 
 interface funcProps {
@@ -12,13 +12,38 @@ interface funcProps {
 
 const StepsInput: React.FC<funcProps> = (props) => {
   const [stepInput, setStepInput] = useState<string>("");
+  const [stepIsValid, setStepIsValid] = useState<boolean>(false);
+  const [stepIsWrong, setStepIsWrong] = useState<boolean>(false);
+
+  useEffect(() => {
+    setStepIsValid(stepInput.length > 0);
+    if (stepIsValid) {
+      setStepIsWrong(false);
+    }
+  }, [stepInput, stepIsValid]);
   const onStepNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStepInput(e.target.value);
+
     props.onStepNameChange(e.target.name, e.target.value);
   };
   const onStepNameAdd = () => {
-    props.onStepAdd({ name: props.stepName, id: Math.random() });
-    setStepInput("");
+    if (stepIsValid) {
+      props.onStepAdd({ name: props.stepName, id: Math.random() });
+      setStepInput("");
+    }
+    if (!stepIsValid) {
+      setStepIsWrong(true);
+    }
+  };
+
+  const placeHolderContent = () => {
+    if (props.stepIsWrong) {
+      return " List must contain at least one item";
+    }
+    if (stepIsWrong) {
+      return "You added empty step!";
+    }
+    return "Add a step";
   };
 
   return (
@@ -30,12 +55,8 @@ const StepsInput: React.FC<funcProps> = (props) => {
           onChange={onStepNameChange}
           borderRadius="0"
           border="1px"
-          placeholder={`${
-            props.stepIsWrong
-              ? "List must contain at least one item"
-              : "Add a step"
-          }`}
-          bgColor={`${props.stepIsWrong && "#FED7D7"}`}
+          placeholder={placeHolderContent()}
+          bgColor={`${(props.stepIsWrong || stepIsWrong) && "#FED7D7"}`}
         />
 
         <AddButton onClickHandler={onStepNameAdd} />

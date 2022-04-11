@@ -134,7 +134,6 @@ const RecipeForm = () => {
     arrOfValid.push(ingredients.length > 0);
 
     ingredients.length === 0 && arrOfInvalidFields.push(" ingredients ");
-    console.log(ingredientValidation.isWrong);
 
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
