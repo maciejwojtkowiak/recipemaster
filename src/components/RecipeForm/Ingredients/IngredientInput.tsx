@@ -53,7 +53,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     if (action.name && action.type === IngredientInputEnum.change) {
       let isValid = false;
       if (action.val) {
-        isValid = action.val.length > 0;
+        isValid = action.val.length > 0 && action.val.length < 51;
       }
 
       return {
@@ -183,7 +183,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
               props.isWrong
                 ? "List must contain at least one item"
                 : "Add an ingredient"
-            }`}
+            } (Max length=50)`}
             borderRadius="0"
             zIndex="10"
             border="1px"

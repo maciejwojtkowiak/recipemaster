@@ -2,6 +2,8 @@ import { Box, Flex, Input } from "@chakra-ui/react";
 import AddButton from "../../UI/AddButton";
 import React, { useState, useEffect } from "react";
 import { Step } from "../../../shared/types/Recipe";
+import { useDispatch } from "react-redux";
+import { uiAction } from "../../../store/ui-slice";
 
 interface funcProps {
   onStepAdd: (step: Step) => void;
@@ -11,12 +13,13 @@ interface funcProps {
 }
 
 const StepsInput: React.FC<funcProps> = (props) => {
+  const dispatch = useDispatch();
   const [stepInput, setStepInput] = useState<string>("");
   const [stepIsValid, setStepIsValid] = useState<boolean>(false);
   const [stepIsWrong, setStepIsWrong] = useState<boolean>(false);
 
   useEffect(() => {
-    setStepIsValid(stepInput.length > 0);
+    setStepIsValid(stepInput.length > 0 && stepInput.length < 51);
     if (stepIsValid) {
       setStepIsWrong(false);
     }
@@ -33,17 +36,27 @@ const StepsInput: React.FC<funcProps> = (props) => {
     }
     if (!stepIsValid) {
       setStepIsWrong(true);
+
+      dispatch(
+        uiAction.setNotification({
+          isShown: true,
+          type: "error",
+          message: `Step is wrong. ${
+            stepInput.length === 0 ? "Input is empty" : "Input is too long"
+          }`,
+        })
+      );
     }
   };
 
   const placeHolderContent = () => {
     if (props.stepIsWrong) {
-      return " List must contain at least one item";
+      return " List must contain at least one item (Max length=50)";
     }
     if (stepIsWrong) {
-      return "You added empty step!";
+      return "You added empty step! (Max length=50)";
     }
-    return "Add a step";
+    return "Add a step (Max length=50)";
   };
 
   return (

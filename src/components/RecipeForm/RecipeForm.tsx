@@ -58,32 +58,31 @@ const RecipeForm = () => {
     state: inputsFormState,
     action: inputsFormAction
   ): inputsFormState => {
-    let isValid = false;
     let isClicked = true;
     let isWrong = false;
     const { content } = action;
 
     if (action.type === ActionKind.stringVal) {
       isClicked = true;
-      isValid = content.length > 0;
-      isWrong = isClicked && !isValid;
-      if (action.field === "step") {
-        let stepsAreValid = steps.length > 0 || content.length > 0;
-        return {
-          ...state,
-          step: {
-            val: content,
-            isValid: stepsAreValid,
-            isClicked: true,
-            isWrong: isClicked && !stepsAreValid,
-          },
-        };
-      }
+
+      const isValid = () => {
+        if (action.field === "step") {
+          return (
+            (steps.length > 0 || content.length > 0) && content.length < 51
+          );
+        }
+        if (action.field === "title") {
+          return content.length > 0 && content.length < 51;
+        }
+        return content.length > 0;
+      };
+      isWrong = isClicked && !isValid();
+
       return {
         ...state,
         [action.field]: {
           val: content,
-          isValid: isValid,
+          isValid: isValid(),
           isClicked: isClicked,
           isWrong: isWrong,
         },
@@ -239,9 +238,9 @@ const RecipeForm = () => {
                 onChange={(e) => changeInputValue(e)}
                 placeholder={`${
                   stringInputsValues.title.isWrong
-                    ? "This field can not be an empty"
-                    : "Title"
-                }`}
+                    ? "This field can not be an empty "
+                    : "Title "
+                }(Max length=50)`}
                 bgColor={`${stringInputsValues.title.isWrong && "#FED7D7"}`}
               />
               <SelectComponent
