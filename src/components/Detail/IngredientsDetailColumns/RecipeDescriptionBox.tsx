@@ -1,5 +1,5 @@
 import { Recipe } from "../../../shared/types/Recipe";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import ColumnHeader from "./ColumnHeader";
 
 interface funcProps {
@@ -11,9 +11,11 @@ const RecipeDescriptionBox: React.FC<funcProps> = (props) => {
   return (
     <Box>
       <ColumnHeader title="Description" />
-      <Text textAlign="center" fontSize="1.8rem" marginTop="1.5rem">
-        {description}
-      </Text>
+      <Grid placeItems="center">
+        <Text textAlign="center" fontSize="1.8rem" marginTop="1.5rem" w="40vw">
+          {description}
+        </Text>
+      </Grid>
     </Box>
   );
 };

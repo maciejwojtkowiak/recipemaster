@@ -15,6 +15,7 @@ const RecipeIngredientsBox: React.FC<funcProps> = (props) => {
       <ColumnHeader title="Ingredients" />
       {ingredients.map((ingredient, i) => (
         <DetailListItem
+          key={i}
           itemName={ingredient.name!}
           indexOfItem={i}
         ></DetailListItem>
