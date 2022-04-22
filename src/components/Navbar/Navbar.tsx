@@ -53,13 +53,17 @@ const Navbar = () => {
             gap="2rem"
             color="white"
             fontSize="1.2rem"
-            marginRight="2rem"
+            paddingRight="2rem"
           >
             <Bookmark />
             <ListItem>
               <Link to="/addRecipe">add recipe</Link>
             </ListItem>
-            <ListItem>Profile</ListItem>
+            {!isLoggedIn && (
+              <Link to="/register">
+                <ListItem>Register</ListItem>
+              </Link>
+            )}
             {isLoggedIn && (
               <ListItem>
                 <Button onClick={onLogoutHandler}>Logout</Button>
