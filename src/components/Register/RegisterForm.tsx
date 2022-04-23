@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Box, Input, FormControl, Button, Grid } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  FormControl,
+  Button,
+  Grid,
+  Center,
+  Heading,
+} from "@chakra-ui/react";
 import { userSignUp } from "../../store/user-action";
 import { useDispatch } from "react-redux";
 import Register from "../../images/Register.jpg";
+import { uiAction } from "../../store/ui-slice";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsValid((username.length && email.length && password.length) > 0);
+  }, [username, email, password]);
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userSignUp(username, email, password));
+
+    if (isValid) {
+      dispatch(userSignUp(username, email, password));
+    }
+    if (!isValid) {
+      dispatch(
+        uiAction.setNotification({
+          type: "error",
+          message: "Some input must be empty",
+          isShown: true,
+        })
+      );
+    }
   };
 
   const changeHandler = (
@@ -25,10 +51,20 @@ const RegisterForm = () => {
 
   return (
     <Box height="100vh" width="100%" backgroundImage={Register}>
-      <Grid height="100%" placeItems="center">
+      <Center height="100%">
         <form onSubmit={onSubmitHandler}>
-          <Box>
-            <FormControl border="1px" paddingY="10rem" paddingX="5rem">
+          <Box
+            borderRadius="5rem"
+            backgroundColor="white"
+            paddingTop="5rem"
+            paddingBottom="5rem"
+            paddingX="2rem"
+          >
+            <Center marginBottom="3rem">
+              <Heading fontSize="4rem">RecipeMaster</Heading>
+            </Center>
+
+            <FormControl w="20vw">
               <Grid placeItems="center">
                 <Input
                   name="username"
@@ -48,18 +84,30 @@ const RegisterForm = () => {
                 />
                 <Input
                   name="password"
+                  type="password"
                   placeholder="Type your password"
                   onChange={(e) => {
                     changeHandler(e, setPassword);
                   }}
                   marginBottom="1rem"
                 />
-                <Button type="submit">Register</Button>
+                <Button
+                  bgColor="orange.300"
+                  fontSize="1.5rem"
+                  color="white"
+                  type="submit"
+                  paddingY="1.5rem"
+                  _hover={{
+                    bgColor: "#FBD38D",
+                  }}
+                >
+                  Register
+                </Button>
               </Grid>
             </FormControl>
           </Box>
         </form>
-      </Grid>
+      </Center>
     </Box>
   );
 };
