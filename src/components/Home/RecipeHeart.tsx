@@ -3,7 +3,7 @@ import { FaHeart } from "react-icons/fa";
 
 interface funcProps {
   onLikeHandler: () => void;
-  isLiked: boolean;
+  isLiked: boolean | undefined;
 }
 
 const RecipeHeart: React.FC<funcProps> = (props) => {

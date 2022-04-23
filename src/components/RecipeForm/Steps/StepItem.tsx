@@ -1,13 +1,18 @@
-import { Text, Box, Grid } from "@chakra-ui/react";
+import { Text, Box, Grid, Icon, Button, Flex } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
+import { IoMdHand } from "react-icons/io";
 
 interface funcProps {
   stepName: string;
   stepId: string;
   stepIndex: number;
+  onStepDelete: (id: number) => void;
 }
 
 const StepItem: React.FC<funcProps> = (props) => {
+  const onStepRemove = (id: number) => {
+    props.onStepDelete(id);
+  };
   return (
     <Draggable draggableId={props.stepId} index={props.stepIndex}>
       {(provided) => (
@@ -31,12 +36,40 @@ const StepItem: React.FC<funcProps> = (props) => {
               w="5vh"
               placeItems="center"
               borderRadius="0.2rem"
+              left="0"
+              top="50%"
+              transform="translate(-0, -50%)"
             >
               <Text fontSize="1.6rem" color="white">
                 {props.stepIndex + 1}
               </Text>
             </Grid>
+
             <Text fontSize="1.5rem">{props.stepName}</Text>
+
+            <Grid
+              position="absolute"
+              left="96%"
+              top="50%"
+              transform="translate(0, -50%)"
+            >
+              <Flex>
+                <Box>
+                  <Button
+                    _hover={{
+                      bgColor: "red",
+                    }}
+                    minW="3vh"
+                    minH="3vh"
+                    bgColor="red.300"
+                    color="white"
+                    onClick={() => onStepRemove(+props.stepId)}
+                  >
+                    X
+                  </Button>
+                </Box>
+              </Flex>
+            </Grid>
           </Box>
         </Box>
       )}

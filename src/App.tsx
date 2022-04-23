@@ -14,6 +14,7 @@ import Notification from "./components/UI/Notification";
 import { RootState } from "./store/store";
 import { uiAction } from "./store/ui-slice";
 import DetailComments from "./components/Detail/Comments/DetailComments";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const notificationIsShown = useSelector(
@@ -56,8 +57,9 @@ function App() {
         </Route>
         <Route path="/addRecipe" element={<AddRecipe />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {notificationIsShown && <Notification />}
     </React.Fragment>

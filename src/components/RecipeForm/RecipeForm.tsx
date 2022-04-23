@@ -58,32 +58,31 @@ const RecipeForm = () => {
     state: inputsFormState,
     action: inputsFormAction
   ): inputsFormState => {
-    let isValid = false;
     let isClicked = true;
     let isWrong = false;
     const { content } = action;
 
     if (action.type === ActionKind.stringVal) {
       isClicked = true;
-      isValid = content.length > 0;
-      isWrong = isClicked && !isValid;
-      if (action.field === "step") {
-        let stepsAreValid = steps.length > 0 || content.length > 0;
-        return {
-          ...state,
-          step: {
-            val: content,
-            isValid: stepsAreValid,
-            isClicked: true,
-            isWrong: isClicked && !stepsAreValid,
-          },
-        };
-      }
+
+      const isValid = () => {
+        if (action.field === "step") {
+          return (
+            (steps.length > 0 || content.length > 0) && content.length < 51
+          );
+        }
+        if (action.field === "title") {
+          return content.length > 0 && content.length < 51;
+        }
+        return content.length > 0;
+      };
+      isWrong = isClicked && !isValid();
+
       return {
         ...state,
         [action.field]: {
           val: content,
-          isValid: isValid,
+          isValid: isValid(),
           isClicked: isClicked,
           isWrong: isWrong,
         },
@@ -134,7 +133,6 @@ const RecipeForm = () => {
     arrOfValid.push(ingredients.length > 0);
 
     ingredients.length === 0 && arrOfInvalidFields.push(" ingredients ");
-    console.log(ingredientValidation.isWrong);
 
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
@@ -172,6 +170,7 @@ const RecipeForm = () => {
         stars: Math.floor(Math.random() * 6) + 1,
         steps: steps,
         comments: [],
+        isLiked: false,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
@@ -211,6 +210,10 @@ const RecipeForm = () => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
 
+  const onStepDelete = (id: number) => {
+    setSteps((prevSteps) => prevSteps.filter((step) => step.id !== id));
+  };
+
   const validateIngredients = (
     ingredientValidationValues: ingredientValidation
   ) => {
@@ -235,9 +238,9 @@ const RecipeForm = () => {
                 onChange={(e) => changeInputValue(e)}
                 placeholder={`${
                   stringInputsValues.title.isWrong
-                    ? "This field can not be an empty"
-                    : "Title"
-                }`}
+                    ? "This field can not be an empty "
+                    : "Title "
+                }(Max length=50)`}
                 bgColor={`${stringInputsValues.title.isWrong && "#FED7D7"}`}
               />
               <SelectComponent
@@ -257,6 +260,7 @@ const RecipeForm = () => {
                 onStepAdd={onStepAdd}
                 onStepNameChange={changeTextHandler}
                 setSteps={setSteps}
+                onStepDelete={onStepDelete}
                 stepIsWrong={stringInputsValues.step.isWrong}
                 steps={steps}
               />

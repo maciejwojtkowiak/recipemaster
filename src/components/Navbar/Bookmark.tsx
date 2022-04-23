@@ -8,6 +8,7 @@ import {
   Box,
   Text,
   Image,
+  Grid,
 } from "@chakra-ui/react";
 
 import { AiOutlineClose } from "react-icons/ai";
@@ -77,10 +78,12 @@ const Bookmark = () => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
+                mW="10vw"
               >
                 <Link to={`/${recipe.id}`}>
                   <Box
                     display="flex"
+                    width="8vw"
                     justifyContent="space-between"
                     alignItems="center"
                   >
@@ -94,20 +97,24 @@ const Bookmark = () => {
                       color="black"
                       display="inline-block"
                       marginLeft="1rem"
+                      overflow="hidden"
                     >
                       {recipe.title}
                     </Text>
                   </Box>
                 </Link>
-                <Button
-                  color="black"
-                  display="inline-block"
-                  onClick={(e) => {
-                    onDeleteHandler(e, recipe.id);
-                  }}
-                >
-                  <Icon as={AiOutlineClose}></Icon>
-                </Button>
+                <Grid placeItems="center">
+                  <Button
+                    marginLeft="1rem"
+                    color="black"
+                    display="inline-block"
+                    onClick={(e) => {
+                      onDeleteHandler(e, recipe.id);
+                    }}
+                  >
+                    <Icon as={AiOutlineClose}></Icon>
+                  </Button>
+                </Grid>
               </Box>
             </React.Fragment>
           ))}

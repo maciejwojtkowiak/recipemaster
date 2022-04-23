@@ -7,6 +7,7 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 interface funcProps {
   steps: Step[];
   setSteps: (steps: Step[]) => void;
+  onStepDelete: (id: number) => void;
 }
 
 const StepsList: React.FC<funcProps> = (props) => {
@@ -41,6 +42,7 @@ const StepsList: React.FC<funcProps> = (props) => {
     stepId.splice(destination.index, 0, Number(draggableId));
     props.setSteps(newSteps);
   };
+
   return (
     <ListContainerBox title="Steps">
       {thereIsNoSteps && <Text>No steps was added yet</Text>}
@@ -55,6 +57,7 @@ const StepsList: React.FC<funcProps> = (props) => {
                     stepName={step.name}
                     stepId={step.id.toString()}
                     stepIndex={index}
+                    onStepDelete={props.onStepDelete}
                   />
                 ))}
               </Box>
