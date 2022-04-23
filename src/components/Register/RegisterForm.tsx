@@ -13,9 +13,11 @@ import { userSignUp } from "../../store/user-action";
 import { useDispatch } from "react-redux";
 import Register from "../../images/Register.jpg";
 import { uiAction } from "../../store/ui-slice";
-
+import { useNavigate } from "react-router-dom";
+// Dodaj odnośnik do logowania się
 const RegisterForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -30,6 +32,14 @@ const RegisterForm = () => {
 
     if (isValid) {
       dispatch(userSignUp(username, email, password));
+      dispatch(
+        uiAction.setNotification({
+          isShown: true,
+          type: "message",
+          message: "Account was created!",
+        })
+      );
+      navigate("/");
     }
     if (!isValid) {
       dispatch(
@@ -67,6 +77,7 @@ const RegisterForm = () => {
             <FormControl w="20vw">
               <Grid placeItems="center">
                 <Input
+                  key="name"
                   name="username"
                   placeholder="Type your username"
                   onChange={(e) => {
@@ -75,6 +86,7 @@ const RegisterForm = () => {
                   marginBottom="1rem"
                 />
                 <Input
+                  key="email"
                   name="email"
                   placeholder="Type your email"
                   onChange={(e) => {
@@ -83,6 +95,7 @@ const RegisterForm = () => {
                   marginBottom="1rem"
                 />
                 <Input
+                  key="password"
                   name="password"
                   type="password"
                   placeholder="Type your password"
