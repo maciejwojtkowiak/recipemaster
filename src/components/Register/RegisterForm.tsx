@@ -8,12 +8,13 @@ import {
   Grid,
   Center,
   Heading,
+  Text,
 } from "@chakra-ui/react";
 import { userSignUp } from "../../store/user-action";
 import { useDispatch } from "react-redux";
 import Register from "../../images/Register.jpg";
 import { uiAction } from "../../store/ui-slice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Dodaj odnośnik do logowania się
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -110,12 +111,21 @@ const RegisterForm = () => {
                   color="white"
                   type="submit"
                   paddingY="1.5rem"
+                  marginBottom="1.5rem"
                   _hover={{
                     bgColor: "#FBD38D",
                   }}
                 >
                   Register
                 </Button>
+                <Link to="/login">
+                  <Text>
+                    Do you have an account?{" "}
+                    <Text as="span" color="orange.200" fontWeight="700">
+                      Login!
+                    </Text>
+                  </Text>
+                </Link>
               </Grid>
             </FormControl>
           </Box>
