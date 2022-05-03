@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import {
   Box,
@@ -6,56 +6,28 @@ import {
   FormControl,
   Button,
   Grid,
+  Text,
   Center,
   Heading,
-  Text,
 } from "@chakra-ui/react";
-import { userSignUp } from "../../store/user-action";
+import { userLogin } from "../../../store/user-action";
 import { useDispatch } from "react-redux";
-import Register from "../../images/Register.jpg";
-import { uiAction } from "../../store/ui-slice";
-import { Link, useNavigate } from "react-router-dom";
-// Dodaj odnośnik do logowania się
-const RegisterForm = () => {
+import { Link } from "react-router-dom";
+import Register from "../../../images/Register.jpg";
+
+const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsValid((username.length && email.length && password.length) > 0);
-  }, [username, email, password]);
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (isValid) {
-      dispatch(userSignUp(username, email, password));
-      dispatch(
-        uiAction.setNotification({
-          isShown: true,
-          type: "message",
-          message: "Account was created!",
-        })
-      );
-      navigate("/");
-    }
-    if (!isValid) {
-      dispatch(
-        uiAction.setNotification({
-          type: "error",
-          message: "Some input must be empty",
-          isShown: true,
-        })
-      );
-    }
+    dispatch(userLogin(email, password));
   };
 
   const changeHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
-    setValue: Function
+    setValue: (val: string) => void
   ) => {
     setValue(e.target.value);
   };
@@ -77,15 +49,6 @@ const RegisterForm = () => {
 
             <FormControl w="20vw">
               <Grid placeItems="center">
-                <Input
-                  key="name"
-                  name="username"
-                  placeholder="Type your username"
-                  onChange={(e) => {
-                    changeHandler(e, setUsername);
-                  }}
-                  marginBottom="1rem"
-                />
                 <Input
                   key="email"
                   name="email"
@@ -111,21 +74,13 @@ const RegisterForm = () => {
                   color="white"
                   type="submit"
                   paddingY="1.5rem"
-                  marginBottom="1.5rem"
+                  marginY="1.5rem"
                   _hover={{
                     bgColor: "#FBD38D",
                   }}
                 >
-                  Register
+                  Login
                 </Button>
-                <Link to="/login">
-                  <Text>
-                    Do you have an account?{" "}
-                    <Text as="span" color="orange.200" fontWeight="700">
-                      Login!
-                    </Text>
-                  </Text>
-                </Link>
               </Grid>
             </FormControl>
           </Box>
@@ -135,4 +90,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

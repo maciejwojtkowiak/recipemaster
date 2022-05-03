@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../components/Login/LoginForm";
+import LoginForm from "../components/Auth/Login/LoginForm";
 import PageAnimationWrapper from "../components/wrappers/PageAnimationWrapper";
 
 const Login = () => {

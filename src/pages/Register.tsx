@@ -1,4 +1,4 @@
-import RegisterForm from "../components/Register/RegisterForm";
+import RegisterForm from "../components/Auth/Register/RegisterForm";
 import PageAnimationWrapper from "../components/wrappers/PageAnimationWrapper";
 const Register = () => {
   return (
