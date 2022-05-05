@@ -42,9 +42,6 @@ const CommentForm = () => {
   const formIsShown = useSelector(
     (state: RootState) => state.ui.commentFormIsShown
   );
-  const detailedRecipe = useSelector((state: RootState) =>
-    state.recipe.recipes.find((recipe) => recipe.id === +recipeId!)
-  );
 
   const dispatch = useDispatch();
   const [commentContent, setCommentContent] = useState<string>("");

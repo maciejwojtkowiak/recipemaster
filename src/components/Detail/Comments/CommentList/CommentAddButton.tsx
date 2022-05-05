@@ -1,10 +1,23 @@
 import { Button, Grid, Text } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { uiAction } from "../../../../store/ui-slice";
+import { auth } from "../../../../Firebase";
 const CommentAddButton = () => {
   const dispatch = useDispatch();
+  const user = auth.currentUser;
   const onShowModal = () => {
-    dispatch(uiAction.isCommentFormShown(true));
+    if (!user) {
+      dispatch(
+        uiAction.setNotification({
+          message: "You have to be logged in to add a comment",
+          isShown: true,
+          type: "message",
+        })
+      );
+    }
+    if (user) {
+      dispatch(uiAction.isCommentFormShown(true));
+    }
   };
   return (
     <Grid placeItems="center" marginTop="2rem">

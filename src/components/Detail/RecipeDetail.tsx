@@ -1,4 +1,4 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Box, Grid, Image, Flex } from "@chakra-ui/react";
