@@ -118,14 +118,13 @@ const RegisterForm = () => {
                 >
                   Register
                 </Button>
-                <Link to="/login">
-                  <Text>
-                    Do you have an account?{" "}
-                    <Text as="span" color="orange.200" fontWeight="700">
-                      Login!
-                    </Text>
+
+                <Text>
+                  Do you have an account?{" "}
+                  <Text as="span" color="orange.200" fontWeight="700">
+                    <Link to="/login">Login!</Link>
                   </Text>
-                </Link>
+                </Text>
               </Grid>
             </FormControl>
           </Box>
