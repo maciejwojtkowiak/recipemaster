@@ -10,8 +10,8 @@ interface FuncProp {
 
 const SelectComponent: React.FC<FuncProp> = (props) => {
   return (
-    <Select onChange={props.onChange}>
-      <option value="" selected disabled hidden>
+    <Select defaultValue="" onChange={props.onChange}>
+      <option value="" disabled hidden>
         Choose here {props.typeOfSelect}
       </option>
       {props.values.map((value) => {

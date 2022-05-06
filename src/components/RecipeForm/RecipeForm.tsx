@@ -231,14 +231,23 @@ const RecipeForm = () => {
     <React.Fragment>
       <Navbar />
       <Box width="100%">
-        <Grid height="100%" placeItems="center" marginTop="3rem">
+        <Grid
+          height="100%"
+          placeItems="center"
+          marginTop="3rem"
+          textAlign="center"
+        >
           <FormHeader />
         </Grid>
       </Box>
 
-      <Center width="100%" minH="95vh" paddingTop="4rem" paddingBottom="2rem">
+      <Center width="100%" minH="95vh" paddingTop="3rem" paddingBottom="2rem">
         <form onSubmit={onSubmitHandler}>
-          <Flex justifyContent="center" alignItems="center" width="50vw">
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            width={["90vw", "70vw", "60vw", "50vw"]}
+          >
             <Grid gap="1rem" width="100%">
               <Input
                 name="title"

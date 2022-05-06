@@ -43,8 +43,6 @@ const initialState = {
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [ingredientInputIsValid, setIngrdientInputIsValid] =
-    useState<boolean>(true);
 
   const ingredientReducer = (
     state: IngredientInputState,
@@ -134,7 +132,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       ingredientInputs.ingredientName.val.length > 0 &&
       ingredientInputs.ingredientAmount.val.length > 0 &&
       ingredientInputs.ingredientUnit.val.length > 0;
-    setIngrdientInputIsValid(ingredientInputIsValid);
+
     if (ingredientInputIsValid) {
       const ingredient = {
         name: ingredientInputs.ingredientName.val,
@@ -203,8 +201,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             borderRadius="0"
             flex="1"
             bgColor={`${ingredientInputs.ingredientUnit.isWrong && "#FED7D7"}`}
+            defaultValue="DEF"
           >
-            <option value="" selected disabled hidden>
+            <option value="DEF" disabled hidden>
               Unit
             </option>
             {ingredientsUnits.map((unit) => (
