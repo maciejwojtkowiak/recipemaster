@@ -1,5 +1,5 @@
 import { Box, Flex, Input, Select } from "@chakra-ui/react";
-import React, { useState, useEffect, useCallback, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -93,18 +93,6 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
 
   const { getIngredientValues } = props;
 
-  const ingredientValFunc = useCallback(
-    (ingredient: ingredient, isValid: boolean, isWrong: boolean) => {
-      getIngredientValues({
-        values: ingredient,
-        isClicked: isClicked,
-        isValid: isValid,
-        isWrong: isWrong,
-      });
-    },
-    [isClicked]
-  );
-
   useEffect(() => {
     const ingredient = {
       name: ingredientInputs.ingredientName.val,
@@ -118,15 +106,18 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       isClicked &&
       ingredientInputs.ingredientName.val.length === 0 &&
       props.ingredients.length === 0;
-    ingredientValFunc(ingredient, isValid, isWrong);
+    getIngredientValues({
+      values: ingredient,
+      isClicked: isClicked,
+      isValid: isValid,
+      isWrong: isWrong,
+    });
   }, [
     ingredientInputs.ingredientName.val,
     ingredientInputs.ingredientAmount.val,
     ingredientInputs.ingredientUnit.val,
     isClicked,
     props.ingredients.length,
-
-    ingredientValFunc,
   ]);
   const onIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

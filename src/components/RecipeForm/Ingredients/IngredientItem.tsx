@@ -1,6 +1,5 @@
-import { Box, Grid, Text, Flex } from "@chakra-ui/react";
 import { ingredient } from "../../../shared/types/Recipe";
-import ItemDeleteButton from "../UI/ItemDeleteButton";
+
 import ItemBox from "../UI/ItemBox";
 
 type funcProps = {
