@@ -4,6 +4,7 @@ import ListContainerBox from "../UI/ListContainerBox";
 
 interface funcProps {
   ingredients: ingredient[];
+  onIngredientDelete: (id: number) => void;
 }
 
 const IngredientList: React.FC<funcProps> = (props) => {
@@ -18,6 +19,7 @@ const IngredientList: React.FC<funcProps> = (props) => {
             key={index}
             ingredient={item}
             numberOfIngredient={index + 1}
+            onIngredientDelete={props.onIngredientDelete}
           />
         ))}
     </ListContainerBox>

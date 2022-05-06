@@ -1,6 +1,7 @@
 import { Text, Box, Grid, Icon, Button, Flex } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
 import { IoMdHand } from "react-icons/io";
+import ItemDeleteButton from "../UI/ItemDeleteButton";
 
 interface funcProps {
   stepName: string;
@@ -20,7 +21,6 @@ const StepItem: React.FC<funcProps> = (props) => {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
-          textAlign="center"
           fontSize="1.2rem"
         >
           <Box
@@ -55,18 +55,10 @@ const StepItem: React.FC<funcProps> = (props) => {
             >
               <Flex>
                 <Box>
-                  <Button
-                    _hover={{
-                      bgColor: "red",
-                    }}
-                    minW="3vh"
-                    minH="3vh"
-                    bgColor="red.300"
-                    color="white"
-                    onClick={() => onStepRemove(+props.stepId)}
-                  >
-                    X
-                  </Button>
+                  <ItemDeleteButton
+                    onRemove={onStepRemove}
+                    itemId={+props.stepId}
+                  />
                 </Box>
               </Flex>
             </Grid>

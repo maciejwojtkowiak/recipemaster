@@ -110,6 +110,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       name: ingredientInputs.ingredientName.val,
       amount: ingredientInputs.ingredientAmount.val,
       unit: ingredientInputs.ingredientUnit.val,
+      id: null,
     };
     let isValid = ingredientInputs.ingredientName.val.length > 0;
 
@@ -144,10 +145,11 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       ingredientInputs.ingredientUnit.val.length > 0;
     setIngrdientInputIsValid(ingredientInputIsValid);
     if (ingredientInputIsValid) {
-      const ingredient: ingredient = {
+      const ingredient = {
         name: ingredientInputs.ingredientName.val,
         amount: ingredientInputs.ingredientAmount.val,
         unit: ingredientInputs.ingredientUnit.val,
+        id: Math.random(),
       };
 
       props.onIngredientAdd(ingredient);

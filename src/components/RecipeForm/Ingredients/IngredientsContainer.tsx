@@ -7,13 +7,17 @@ import { ingredientValidation } from "../../../shared/types/AddRecipeForm";
 interface funcProps {
   onIngredientAdd: (ingredient: ingredient) => void;
   getIngredientValues: (ingredientValue: ingredientValidation) => void;
+  onIngredientDelete: (id: number) => void;
   isWrong: boolean;
   ingredients: ingredient[];
 }
 const IngredientsContainer: React.FC<funcProps> = (props) => {
   return (
     <Grid width="100%">
-      <IngredientList ingredients={props.ingredients} />
+      <IngredientList
+        ingredients={props.ingredients}
+        onIngredientDelete={props.onIngredientDelete}
+      />
       <IngredientInput
         ingredients={props.ingredients}
         onIngredientAdd={props.onIngredientAdd}

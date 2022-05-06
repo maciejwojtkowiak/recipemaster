@@ -107,6 +107,7 @@ const RecipeForm = () => {
         name: "",
         amount: "",
         unit: "",
+        id: null,
       },
     });
 
@@ -206,6 +207,12 @@ const RecipeForm = () => {
     );
   };
 
+  const onIngredientDelete = (id: number) => {
+    setIngredients((prevIngredients) =>
+      prevIngredients.filter((ingredient) => ingredient.id !== id)
+    );
+  };
+
   const onStepAdd = (step: Step) => {
     setSteps((previousSteps) => previousSteps.concat(step));
   };
@@ -251,6 +258,7 @@ const RecipeForm = () => {
               />
               <IngredientsContainer
                 getIngredientValues={validateIngredients}
+                onIngredientDelete={onIngredientDelete}
                 isWrong={ingredientValidation.isWrong}
                 ingredients={ingredients}
                 onIngredientAdd={onIngredientAdd}

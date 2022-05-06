@@ -10,6 +10,7 @@ export interface ingredient {
   name: string | null;
   amount: string | null;
   unit: string | null;
+  id: number | null;
 }
 
 export interface InitialState {
