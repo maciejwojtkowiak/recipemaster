@@ -50,7 +50,9 @@ const Navbar = () => {
       />
 
       <MenuList>
-        <MenuItem>Download</MenuItem>
+        <MenuItem>
+          <Link to="/addRecipe">Add recipe</Link>
+        </MenuItem>
         <MenuItem>Create a Copy</MenuItem>
         <MenuItem>Mark as Draft</MenuItem>
         <MenuItem>Delete</MenuItem>
@@ -97,7 +99,7 @@ const Navbar = () => {
       <UnorderedList height="100%" styleType="none">
         <Flex height="100%" justifyContent="center" alignItems="center">
           <ListItem color="white">
-            <Heading fontSize="4rem">
+            <Heading fontSize={{ base: "3rem", lg: "4rem" }}>
               <Link to="/">Recipemaster</Link>
             </Heading>
           </ListItem>
