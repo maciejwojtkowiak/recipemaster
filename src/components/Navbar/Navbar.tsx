@@ -38,34 +38,43 @@ const Navbar = () => {
   // Zrób hamburger menu
 
   const hamburgerMenuOnSmallDevice = (
-    <Menu>
-      <MenuButton
-        w="5vh"
-        h="5vh"
-        color="white"
-        marginRight="0.5rem"
-        marginTop="0.5rem"
-        padding={0}
-        as={HamburgerIcon}
-      />
+    <Flex justifyContent="center" alignItems="center" gap="1rem">
+      <Bookmark />
+      <Menu>
+        <MenuButton
+          w="5vh"
+          h="5vh"
+          color="white"
+          marginRight="0.5rem"
+          padding={0}
+          as={HamburgerIcon}
+        />
 
-      <MenuList>
-        <MenuItem>
-          <Link to="/addRecipe">Add recipe</Link>
-        </MenuItem>
-        <MenuItem>Create a Copy</MenuItem>
-        <MenuItem>Mark as Draft</MenuItem>
-        <MenuItem>Delete</MenuItem>
-        <MenuItem>Attend a Workshop</MenuItem>
-      </MenuList>
-    </Menu>
+        <MenuList>
+          <MenuItem>
+            <Link to="/addRecipe">Add recipe</Link>
+          </MenuItem>
+          <MenuItem></MenuItem>
+          <MenuItem>Mark as Draft</MenuItem>
+          <MenuItem>Delete</MenuItem>
+          <MenuItem>Attend a Workshop</MenuItem>
+        </MenuList>
+      </Menu>
+    </Flex>
   );
 
   const lgNavbar = (
     <React.Fragment>
+      <Input
+        bgColor="white"
+        placeholder="Find a recipe"
+        width="30%"
+        onChange={onChangeHandler}
+      />
       <Spacer />
       <Flex
         alignItems="center"
+        justifyContent="center"
         height="100%"
         gap="2rem"
         color="white"
@@ -97,7 +106,7 @@ const Navbar = () => {
       bgGradient="linear(to-r, orange.300, orange.400)"
     >
       <UnorderedList height="100%" styleType="none">
-        <Flex height="100%" justifyContent="center" alignItems="center">
+        <Flex height="100%" alignItems="center">
           <ListItem color="white">
             <Heading fontSize={{ base: "3rem", lg: "4rem" }}>
               <Link to="/">Recipemaster</Link>

@@ -11,7 +11,13 @@ const FilterBox = () => {
   };
 
   return (
-    <Box position="relative" height="100%" width="100%" zIndex="10">
+    <Box
+      position="relative"
+      height="100%"
+      width="100%"
+      bgColor="white"
+      zIndex="10"
+    >
       <Box position="fixed" top="30%">
         <Flex width="100%" justifyContent="center" alignItems="center">
           <Grid
@@ -23,6 +29,7 @@ const FilterBox = () => {
             width="20vh"
             padding="1rem"
             paddingLeft="1.5rem"
+            bgColor="white"
           >
             <FilterType />
           </Grid>
