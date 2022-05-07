@@ -9,8 +9,14 @@ import {
   Button,
   Heading,
   useMediaQuery,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Grid,
 } from "@chakra-ui/react";
 import { userLogout } from "../../store/user-action";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import React from "react";
@@ -31,7 +37,56 @@ const Navbar = () => {
 
   // Zrób hamburger menu
 
-  const hamburgerMenuOnSmallDevice = 
+  const hamburgerMenuOnSmallDevice = (
+    <Menu>
+      <MenuButton
+        w="5vh"
+        h="5vh"
+        color="white"
+        marginRight="0.5rem"
+        marginTop="0.5rem"
+        padding={0}
+        as={HamburgerIcon}
+      />
+
+      <MenuList>
+        <MenuItem>Download</MenuItem>
+        <MenuItem>Create a Copy</MenuItem>
+        <MenuItem>Mark as Draft</MenuItem>
+        <MenuItem>Delete</MenuItem>
+        <MenuItem>Attend a Workshop</MenuItem>
+      </MenuList>
+    </Menu>
+  );
+
+  const lgNavbar = (
+    <React.Fragment>
+      <Spacer />
+      <Flex
+        alignItems="center"
+        height="100%"
+        gap="2rem"
+        color="white"
+        fontSize="1.2rem"
+        paddingRight="2rem"
+      >
+        <Bookmark />
+        <ListItem>
+          <Link to="/addRecipe">add recipe</Link>
+        </ListItem>
+        {!isLoggedIn && (
+          <Link to="/register">
+            <ListItem>Register</ListItem>
+          </Link>
+        )}
+        {isLoggedIn && (
+          <ListItem>
+            <Button onClick={onLogoutHandler}>Logout</Button>
+          </ListItem>
+        )}
+      </Flex>
+    </React.Fragment>
+  );
 
   return (
     <Box
@@ -41,49 +96,15 @@ const Navbar = () => {
     >
       <UnorderedList height="100%" styleType="none">
         <Flex height="100%" justifyContent="center" alignItems="center">
-          <ListItem fontSize="2rem" color="white">
+          <ListItem color="white">
             <Heading fontSize="4rem">
               <Link to="/">Recipemaster</Link>
             </Heading>
           </ListItem>
           <Spacer />
-          <ListItem>
-            <Input
-              width="30rem"
-              placeholder="Let`s find a recipe!"
-              backgroundColor="white"
-              type="text"
-              onChange={onChangeHandler}
-            />
-          </ListItem>
-          {!isSmallScreen && (
-            <React.Fragment>
-              <Spacer />
-              <Flex
-                alignItems="center"
-                height="100%"
-                gap="2rem"
-                color="white"
-                fontSize="1.2rem"
-                paddingRight="2rem"
-              >
-                <Bookmark />
-                <ListItem>
-                  <Link to="/addRecipe">add recipe</Link>
-                </ListItem>
-                {!isLoggedIn && (
-                  <Link to="/register">
-                    <ListItem>Register</ListItem>
-                  </Link>
-                )}
-                {isLoggedIn && (
-                  <ListItem>
-                    <Button onClick={onLogoutHandler}>Logout</Button>
-                  </ListItem>
-                )}
-              </Flex>
-            </React.Fragment>
-          )}
+
+          {!isSmallScreen && lgNavbar}
+          {isSmallScreen && hamburgerMenuOnSmallDevice}
         </Flex>
       </UnorderedList>
     </Box>
