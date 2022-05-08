@@ -41,23 +41,26 @@ const Bookmark = () => {
   };
 
   return (
-    <Box position="relative">
+    <Box>
       <Menu>
-        <Text
-          position="absolute"
-          top="0%"
-          right="0%"
-          bg="white"
-          borderRadius="50%"
-          fontSize="0.8rem"
-          color="black"
-          paddingLeft="0.4rem"
-          paddingRight="0.4rem"
-          fontWeight="700"
-          zIndex="10"
-        >
-          {totalAmount}
-        </Text>
+        <Box position="relative">
+          <Text
+            position="absolute"
+            top="0%"
+            right="0%"
+            bg="white"
+            borderRadius="50%"
+            fontSize="0.8rem"
+            color="black"
+            paddingLeft="0.4rem"
+            paddingRight="0.4rem"
+            fontWeight="700"
+            zIndex="10"
+          >
+            {totalAmount}
+          </Text>
+        </Box>
+
         <MenuButton
           background="none"
           as={IconButton}

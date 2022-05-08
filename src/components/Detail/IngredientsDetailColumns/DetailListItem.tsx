@@ -25,10 +25,15 @@ const DetailListItem: React.FC<funcProps> = (props) => {
           </Text>
         </Grid>
       </Grid>
-      <Grid alignItems="center">
+      <Grid alignItems="center" width="100%">
         <Box maxW="10vw">
           <Box>
-            <Text marginLeft="1rem" fontWeight="500" fontSize="1.2rem">
+            <Text
+              marginLeft="1rem"
+              width="100%"
+              fontWeight="500"
+              fontSize="1.2rem"
+            >
               {props.itemName}
             </Text>
           </Box>
