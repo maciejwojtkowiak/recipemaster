@@ -64,6 +64,7 @@ const Bookmark = () => {
           borderRadius="md"
           borderWidth="0px"
           color="white"
+          padding={0}
           _hover={{ bg: "none" }}
           _expanded={{ bg: "none" }}
           _focus={{ boxShadow: "none" }}

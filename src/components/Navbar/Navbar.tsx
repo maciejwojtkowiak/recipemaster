@@ -16,16 +16,21 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { userLogout } from "../../store/user-action";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { recipeAction } from "../../store/recipe-slice";
 import Bookmark from "./Bookmark";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isBlured, setIsBlured] = useState<boolean>(false);
+
+  const [inputForSmallDevicesIsShown, setInputForSmallDevicesIsShown] =
+    useState<boolean>(false);
   const isLoggedIn = useSelector((state: RootState) => state.ui.isLoggedIn);
   const onLogoutHandler = () => {
     dispatch(userLogout());
@@ -35,32 +40,43 @@ const Navbar = () => {
     dispatch(recipeAction.setFilterTitle(e.target.value));
   };
 
-  // Zrób hamburger menu
+  const onSearchClickSmallDevice = () => {
+    setIsFocused(true);
+  };
+
+  const onInputBlur = () => {
+    setIsFocused(false);
+  };
 
   const hamburgerMenuOnSmallDevice = (
-    <Flex justifyContent="center" alignItems="center" gap="1rem">
-      <Bookmark />
-      <Menu>
-        <MenuButton
-          w="5vh"
-          h="5vh"
-          color="white"
-          marginRight="0.5rem"
-          padding={0}
-          as={HamburgerIcon}
-        />
+    <React.Fragment>
+      <Flex justifyContent="center" alignItems="center" gap="1rem">
+        <Bookmark />
 
-        <MenuList>
-          <MenuItem>
-            <Link to="/addRecipe">Add recipe</Link>
-          </MenuItem>
-          <MenuItem></MenuItem>
-          <MenuItem>Mark as Draft</MenuItem>
-          <MenuItem>Delete</MenuItem>
-          <MenuItem>Attend a Workshop</MenuItem>
-        </MenuList>
-      </Menu>
-    </Flex>
+        <Menu>
+          <MenuButton
+            w="5vh"
+            h="5vh"
+            color="white"
+            marginRight="0.5rem"
+            padding={0}
+            as={HamburgerIcon}
+          />
+
+          <MenuList>
+            <MenuItem>
+              <Link to="/addRecipe">Add recipe</Link>
+            </MenuItem>
+            <MenuItem>
+              <Button onClick={onSearchClickSmallDevice}>Search Recipe</Button>
+            </MenuItem>
+            <MenuItem>Mark as Draft</MenuItem>
+            <MenuItem>Delete</MenuItem>
+            <MenuItem>Attend a Workshop</MenuItem>
+          </MenuList>
+        </Menu>
+      </Flex>
+    </React.Fragment>
   );
 
   const lgNavbar = (
@@ -118,6 +134,19 @@ const Navbar = () => {
           {isSmallScreen && hamburgerMenuOnSmallDevice}
         </Flex>
       </UnorderedList>
+      {isFocused && (
+        <Input
+          onChange={onChangeHandler}
+          placeholder="search recipe"
+          borderRadius="0%"
+          border="none"
+          borderBottom="1px"
+          borderBottomColor="orange.300"
+          bgColor="white"
+          bgGradient="none"
+          onBlur={onInputBlur}
+        />
+      )}
     </Box>
   );
 };
