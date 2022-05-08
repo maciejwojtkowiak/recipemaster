@@ -45,8 +45,11 @@ const RecipeDetail = () => {
           />
         </Flex>
       </Box>
-      <Grid placeItems="center">
+      <Grid placeItems="center" marginBottom="2rem" marginTop="2rem">
         <RecipeIngredientDetail recipe={detailedRecipe!} />
+        <CommentShowButton />
+
+        <Outlet />
       </Grid>
     </React.Fragment>
   );

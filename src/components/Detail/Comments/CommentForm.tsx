@@ -9,6 +9,7 @@ import Overlay from "../../UI/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { auth } from "../../../Firebase";
+import { useMediaQuery } from "@chakra-ui/react";
 
 const animation = {
   initialPosition: {
@@ -42,6 +43,7 @@ const CommentForm = () => {
   const formIsShown = useSelector(
     (state: RootState) => state.ui.commentFormIsShown
   );
+  const [isSmallDevice] = useMediaQuery("(max-width: 48em)");
 
   const dispatch = useDispatch();
   const [commentContent, setCommentContent] = useState<string>("");
@@ -112,8 +114,8 @@ const CommentForm = () => {
                       onChange={(e) =>
                         onCommentChangeHandler(e, setCommentContent)
                       }
-                      w="30vw"
-                      h="25vh"
+                      width={isSmallDevice ? "90vw" : "30vw"}
+                      height={isSmallDevice ? "70vh" : "30vh"}
                       resize="none"
                       placeholder="Add your opinion"
                       borderRadius="0"
