@@ -11,6 +11,8 @@ interface funcProps {
 const DetailColumns: React.FC<funcProps> = (props) => {
   const borderWidth = "0.3rem";
   const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
+  const smallScreenBorderWidth = `${isSmallScreen ? "" : borderWidth}`;
+  const smallScreenBorderColor = `${isSmallScreen ? "" : "orange.300"}`;
   return (
     <Box
       h="80vh"
@@ -26,21 +28,21 @@ const DetailColumns: React.FC<funcProps> = (props) => {
         templateColumns={isSmallScreen ? "1fr" : "60% 20% 20%"}
       >
         <Box
-          border={borderWidth}
-          borderColor={isSmallScreen ? "" : "orange.300"}
+          border={smallScreenBorderWidth}
+          borderColor={smallScreenBorderColor}
         >
           <RecipeDescriptionBox recipe={props.recipe} />
         </Box>
         <Box
-          borderLeftWidth={borderWidth}
-          borderColor={isSmallScreen ? "" : "orange.300"}
+          borderLeftWidth={smallScreenBorderWidth}
+          borderColor={smallScreenBorderColor}
         >
           <RecipeStepsBox recipeId={props.recipe.id} />
         </Box>
 
         <Box
-          borderLeftWidth={borderWidth}
-          borderColor={isSmallScreen ? "" : "orange.300"}
+          borderLeftWidth={smallScreenBorderWidth}
+          borderColor={smallScreenBorderColor}
         >
           <RecipeIngredientsBox recipe={props.recipe} />
         </Box>

@@ -64,15 +64,13 @@ const Navbar = () => {
           />
 
           <MenuList>
-            <MenuItem>
-              <Link to="/addRecipe">Add recipe</Link>
+            <Link to="/addRecipe">
+              <MenuItem>Add recipe</MenuItem>
+            </Link>
+
+            <MenuItem onClick={onSearchClickSmallDevice}>
+              Search Recipe
             </MenuItem>
-            <MenuItem>
-              <Button onClick={onSearchClickSmallDevice}>Search Recipe</Button>
-            </MenuItem>
-            <MenuItem>Mark as Draft</MenuItem>
-            <MenuItem>Delete</MenuItem>
-            <MenuItem>Attend a Workshop</MenuItem>
           </MenuList>
         </Menu>
       </Flex>
