@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   const onSearchClickSmallDevice = () => {
-    setIsFocused(true);
+    setIsFocused((prevFocus) => !prevFocus);
   };
 
   const onInputBlur = () => {
@@ -116,11 +116,7 @@ const Navbar = () => {
   );
 
   return (
-    <Box
-      h="10vh"
-      width="100%"
-      bgGradient="linear(to-r, orange.300, orange.400)"
-    >
+    <Box h="10vh" bgGradient="linear(to-r, orange.300, orange.400)">
       <UnorderedList height="100%" styleType="none">
         <Flex height="100%" alignItems="center">
           <ListItem color="white">

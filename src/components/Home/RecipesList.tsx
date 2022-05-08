@@ -39,7 +39,7 @@ const RecipesList = () => {
       height="100%"
       justifyContent="center"
       alignItems="center"
-      margin="2rem"
+      marginY="2rem"
     >
       <Grid
         minH="80%"

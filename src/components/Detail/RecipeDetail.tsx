@@ -10,20 +10,48 @@ import RecipeTitleBox from "./RecipeTitleBox";
 import RecipeIngredientDetail from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
 import CommentShowButton from "./Comments/CommentShowButton";
+import { useMediaQuery } from "@chakra-ui/react";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
   const params = useParams();
   const paramsId = params.recipeid;
+  const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
 
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
 
-  console.log(detailedRecipe);
   let imgName = getRecipeImage(detailedRecipe?.type!);
 
-  return (
+  const smallDeviceStyle = (
+    <React.Fragment>
+      <Navbar />
+      <Box>
+        <TopBorderStyling />
+        <Flex
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <RecipeTitleBox recipe={detailedRecipe!} />
+          <Image
+            boxShadow="dark-lg"
+            rounded="md"
+            objectFit="cover"
+            boxSize="20rem"
+            marginTop="2rem"
+            src={imgName}
+          />
+        </Flex>
+      </Box>
+      <Grid placeItems="center">
+        <RecipeIngredientDetail recipe={detailedRecipe!} />
+      </Grid>
+    </React.Fragment>
+  );
+
+  const largeDeviceStyle = (
     <React.Fragment>
       <Navbar />
       <Box>
@@ -53,6 +81,12 @@ const RecipeDetail = () => {
           <Outlet />
         </Grid>
       </Box>
+    </React.Fragment>
+  );
+  return (
+    <React.Fragment>
+      {!isSmallScreen && largeDeviceStyle}
+      {isSmallScreen && smallDeviceStyle}
     </React.Fragment>
   );
 };
