@@ -1,6 +1,8 @@
 import { Text, Box, Grid, Icon, Button, Flex } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
 import { IoMdHand } from "react-icons/io";
+import ItemBox from "../UI/ItemBox";
+import ItemDeleteButton from "../UI/ItemDeleteButton";
 
 interface funcProps {
   stepName: string;
@@ -20,57 +22,14 @@ const StepItem: React.FC<funcProps> = (props) => {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
-          textAlign="center"
           fontSize="1.2rem"
         >
-          <Box
-            fontSize="1.2rem"
-            textAlign="center"
-            position="relative"
-            marginY="1rem"
-          >
-            <Grid
-              bgGradient="linear(to-r, orange.300, orange.400)"
-              position="absolute"
-              h="5vh"
-              w="5vh"
-              placeItems="center"
-              borderRadius="0.2rem"
-              left="0"
-              top="50%"
-              transform="translate(-0, -50%)"
-            >
-              <Text fontSize="1.6rem" color="white">
-                {props.stepIndex + 1}
-              </Text>
-            </Grid>
-
-            <Text fontSize="1.5rem">{props.stepName}</Text>
-
-            <Grid
-              position="absolute"
-              left="96%"
-              top="50%"
-              transform="translate(0, -50%)"
-            >
-              <Flex>
-                <Box>
-                  <Button
-                    _hover={{
-                      bgColor: "red",
-                    }}
-                    minW="3vh"
-                    minH="3vh"
-                    bgColor="red.300"
-                    color="white"
-                    onClick={() => onStepRemove(+props.stepId)}
-                  >
-                    X
-                  </Button>
-                </Box>
-              </Flex>
-            </Grid>
-          </Box>
+          <ItemBox
+            onRemove={onStepRemove}
+            itemId={+props.stepId}
+            itemName={props.stepName}
+            itemNumber={props.stepIndex}
+          />
         </Box>
       )}
     </Draggable>

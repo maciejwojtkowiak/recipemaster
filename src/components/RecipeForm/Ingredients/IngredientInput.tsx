@@ -1,5 +1,5 @@
 import { Box, Flex, Input, Select } from "@chakra-ui/react";
-import React, { useState, useEffect, useCallback, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -43,8 +43,6 @@ const initialState = {
 
 const AddIngredients: React.FC<ingredientProps> = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [ingredientInputIsValid, setIngrdientInputIsValid] =
-    useState<boolean>(true);
 
   const ingredientReducer = (
     state: IngredientInputState,
@@ -93,23 +91,12 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
 
   const { getIngredientValues } = props;
 
-  const ingredientValFunc = useCallback(
-    (ingredient: ingredient, isValid: boolean, isWrong: boolean) => {
-      getIngredientValues({
-        values: ingredient,
-        isClicked: isClicked,
-        isValid: isValid,
-        isWrong: isWrong,
-      });
-    },
-    [isClicked]
-  );
-
   useEffect(() => {
     const ingredient = {
       name: ingredientInputs.ingredientName.val,
       amount: ingredientInputs.ingredientAmount.val,
       unit: ingredientInputs.ingredientUnit.val,
+      id: null,
     };
     let isValid = ingredientInputs.ingredientName.val.length > 0;
 
@@ -117,15 +104,18 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       isClicked &&
       ingredientInputs.ingredientName.val.length === 0 &&
       props.ingredients.length === 0;
-    ingredientValFunc(ingredient, isValid, isWrong);
+    getIngredientValues({
+      values: ingredient,
+      isClicked: isClicked,
+      isValid: isValid,
+      isWrong: isWrong,
+    });
   }, [
     ingredientInputs.ingredientName.val,
     ingredientInputs.ingredientAmount.val,
     ingredientInputs.ingredientUnit.val,
     isClicked,
     props.ingredients.length,
-
-    ingredientValFunc,
   ]);
   const onIngredientChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -142,12 +132,13 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
       ingredientInputs.ingredientName.val.length > 0 &&
       ingredientInputs.ingredientAmount.val.length > 0 &&
       ingredientInputs.ingredientUnit.val.length > 0;
-    setIngrdientInputIsValid(ingredientInputIsValid);
+
     if (ingredientInputIsValid) {
-      const ingredient: ingredient = {
+      const ingredient = {
         name: ingredientInputs.ingredientName.val,
         amount: ingredientInputs.ingredientAmount.val,
         unit: ingredientInputs.ingredientUnit.val,
+        id: Math.random(),
       };
 
       props.onIngredientAdd(ingredient);
@@ -210,8 +201,9 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             borderRadius="0"
             flex="1"
             bgColor={`${ingredientInputs.ingredientUnit.isWrong && "#FED7D7"}`}
+            defaultValue="DEF"
           >
-            <option value="" selected disabled hidden>
+            <option value="DEF" disabled hidden>
               Unit
             </option>
             {ingredientsUnits.map((unit) => (

@@ -1,23 +1,26 @@
-import { Box } from "@chakra-ui/react";
 import { ingredient } from "../../../shared/types/Recipe";
+
 import ItemBox from "../UI/ItemBox";
 
 type funcProps = {
   ingredient: ingredient;
   numberOfIngredient: number;
+  onIngredientDelete: (id: number) => void;
 };
 
 const IngredientItem: React.FC<funcProps> = (props) => {
+  const onDeleteIngredient = (id: number) => {
+    props.onIngredientDelete(id);
+  };
+
   return (
-    <ItemBox>
-      <Box fontSize="1.2rem" textAlign="center" position="relative">
-        <Box position="absolute">
-          {props.ingredient.amount}
-          {props.ingredient.unit}
-        </Box>
-        {props.ingredient.name}
-      </Box>
-    </ItemBox>
+    <ItemBox
+      onRemove={onDeleteIngredient}
+      itemId={props.ingredient.id!}
+      itemName={props.ingredient.name!}
+      ingredientAmount={props.ingredient.amount!}
+      ingredientUnit={props.ingredient.unit!}
+    />
   );
 };
 

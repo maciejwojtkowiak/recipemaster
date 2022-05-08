@@ -1,10 +1,8 @@
 import { Box, Grid, Text } from "@chakra-ui/react";
-import { Draggable } from "react-beautiful-dnd";
 
 interface funcProps {
   itemName: string;
   indexOfItem: number;
-
   amount?: string;
   unit?: string;
 }
