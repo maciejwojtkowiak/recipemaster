@@ -28,6 +28,24 @@ const AuthForm: React.FC<funcProps> = (props) => {
   ) => {
     setValue(e.target.value);
   };
+
+  const loginFooter = (
+    <Text textAlign="center">
+      You do not have an account?{" "}
+      <Text as="span" color="orange.200" fontWeight="700">
+        <Link to="/register">Sign up!</Link>
+      </Text>
+    </Text>
+  );
+
+  const registerFooter = (
+    <Text>
+      Do you have an account?{" "}
+      <Text as="span" color="orange.200" fontWeight="700">
+        <Link to="/login">Login!</Link>
+      </Text>
+    </Text>
+  );
   return (
     <Box height="100vh" width="100%" backgroundImage={Register}>
       <Center height="100%">
@@ -43,7 +61,7 @@ const AuthForm: React.FC<funcProps> = (props) => {
               <Heading fontSize="4rem">RecipeMaster</Heading>
             </Center>
 
-            <FormControl w="20vw">
+            <FormControl w="100%">
               <Grid placeItems="center">
                 {!props.isLoginForm && (
                   <Input
@@ -81,15 +99,10 @@ const AuthForm: React.FC<funcProps> = (props) => {
                     bgColor: "#FBD38D",
                   }}
                 >
-                  Register
+                  {props.isLoginForm ? "Login!" : "Register"}
                 </Button>
 
-                <Text>
-                  Do you have an account?{" "}
-                  <Text as="span" color="orange.200" fontWeight="700">
-                    <Link to="/login">Login!</Link>
-                  </Text>
-                </Text>
+                {props.isLoginForm ? loginFooter : registerFooter}
               </Grid>
             </FormControl>
           </Box>

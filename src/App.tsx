@@ -52,7 +52,7 @@ function App() {
     <React.Fragment>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:recipeid" element={<Detail />}>
+        <Route path="/recipe/:recipeid" element={<Detail />}>
           <Route path="comments" element={<DetailComments />} />
         </Route>
         <Route path="/addRecipe" element={<AddRecipe />} />
