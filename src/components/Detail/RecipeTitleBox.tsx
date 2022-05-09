@@ -27,7 +27,7 @@ const RecipeDescription: React.FC<recipeDesc> = (props) => {
       justifyContent="center"
       alignItems={isSmallScreen ? "center" : ""}
     >
-      <Text fontSize="4rem" fontWeight="700">
+      <Text fontSize={{ sm: "4rem", lg: "3rem" }} fontWeight="700">
         {props.recipe.title}
       </Text>
       <Box>{stars}</Box>

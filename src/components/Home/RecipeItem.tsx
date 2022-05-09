@@ -50,8 +50,8 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
 
   return (
     <Box
-      height={{ sm: "50vh", lg: "40vh" }}
-      width="40vh"
+      minHeight={{ sm: "50vh", md: "auto", lg: "40vh" }}
+      width={{ sm: "40vh", md: "auto", lg: "50vh", xl: "40vh" }}
       borderWidth="1px"
       marginTop="2rem"
       paddingBottom="1rem"
@@ -89,6 +89,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
       <Link to={`/recipe/${props.id}`}>
         <Box textAlign="right" marginRight="2rem">
           <Button
+            marginTop={{ md: "1rem" }}
             variant="solid"
             color="white"
             _hover={{ bg: "orange.300" }}
