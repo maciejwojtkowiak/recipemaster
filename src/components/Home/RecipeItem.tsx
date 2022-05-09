@@ -1,4 +1,4 @@
-import { Box, Image, Text, Button } from "@chakra-ui/react";
+import { Box, Image, Text, Button, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import RecipeHeart from "./RecipeHeart";
 
@@ -49,24 +49,29 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
   let imgName = getRecipeImage(props.type);
 
   return (
-    <Box height="40vh" width="40vh" borderWidth="1px" marginTop="2rem">
+    <Box
+      height={{ sm: "50vh", lg: "40vh" }}
+      width="40vh"
+      borderWidth="1px"
+      marginTop="2rem"
+      paddingBottom="1rem"
+    >
       <Box position="relative">
         <RecipeHeart onLikeHandler={onLikeHandler} isLiked={recipeIsLiked} />
         <Image height="20vh" width="100%" src={imgName}></Image>
       </Box>
-      <Box marginLeft="1rem" marginTop="1rem">
-        <Text fontSize="2rem" fontWeight="700">
-          {props.title}
-          <Text
-            marginLeft="0.5rem"
-            fontWeight="normal"
-            fontSize="1rem"
-            as="span"
-          >
+      <Box marginLeft="1rem" marginTop="1rem" overflow="hidden">
+        <Flex>
+          <Text fontSize="1.6rem" fontWeight="700">
+            {props.title}
+          </Text>
+        </Flex>
+        <Text fontSize="0.8rem">
+          Type:{" "}
+          <Text as="span" fontSize="1.1rem">
             {props.type}
           </Text>
         </Text>
-
         <Text fontSize="0.8rem">
           Author:{" "}
           <Text as="span" fontSize="1.1rem">

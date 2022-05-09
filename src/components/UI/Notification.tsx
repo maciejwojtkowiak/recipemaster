@@ -34,7 +34,7 @@ const Notification = () => {
             position="fixed"
             bottom="1%"
             left="50%"
-            h="10vh"
+            minH="10vh"
             minW="20vw"
             transform="translate(-50%, -50%)"
             zIndex="10"
@@ -45,7 +45,11 @@ const Notification = () => {
             rounded="md"
           >
             <Grid placeItems="center" width="100%" height="100%">
-              <Text fontFamily="dancingScriptFont" fontSize="200%">
+              <Text
+                fontFamily="dancingScriptFont"
+                fontSize="200%"
+                textAlign="center"
+              >
                 {notification.message}
               </Text>
             </Grid>

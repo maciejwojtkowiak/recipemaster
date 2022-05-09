@@ -122,18 +122,30 @@ const RecipeForm = () => {
   let arrOfValid: boolean[] = [];
   let arrOfInvalidFields: string[] = [];
 
+  const pushValid = (valid: boolean) => {
+    arrOfValid.push(valid);
+  };
+
+  const pushInvalid = (message: string) => {
+    arrOfInvalidFields.push(message);
+  };
+
   const everythingIsValid = () => {
     for (const key of Object.keys(stringInputsValues)) {
-      arrOfValid.push(
+      pushValid(
         stringInputsValues[key as keyof typeof stringInputsValues].isValid
       );
       if (!stringInputsValues[key as keyof typeof stringInputsValues].isValid) {
-        arrOfInvalidFields.push(` ${key} `);
+        pushInvalid(` ${key} `);
       }
     }
-    arrOfValid.push(ingredients.length > 0);
+    pushValid(ingredients.length > 0);
+    pushValid(time.length > 0);
+    pushValid(type.length > 0);
 
-    ingredients.length === 0 && arrOfInvalidFields.push(" ingredients ");
+    ingredients.length === 0 && pushInvalid(" ingredients ");
+    time.length === 0 && pushInvalid("select the length");
+    type.length === 0 && pushInvalid("select the type");
 
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
