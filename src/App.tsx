@@ -51,10 +51,11 @@ function App() {
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipe/:recipeid" element={<Detail />}>
+        <Route path="/" element={<Home />} />(
+        <Route path="/:recipeid" element={<Detail />}>
           <Route path="comments" element={<DetailComments />} />
         </Route>
+        )
         <Route path="/addRecipe" element={<AddRecipe />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />

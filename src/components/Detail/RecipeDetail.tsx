@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Navigate, Outlet, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Box, Grid, Image, Flex } from "@chakra-ui/react";
@@ -11,16 +11,22 @@ import RecipeIngredientDetail from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
 import CommentShowButton from "./Comments/CommentShowButton";
 import { useMediaQuery } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
   const params = useParams();
   const paramsId = params.recipeid;
+
   const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
 
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
   );
+
+  if (!detailedRecipe) {
+    return <Navigate to="/" replace />;
+  }
 
   let imgName = getRecipeImage(detailedRecipe?.type!);
 

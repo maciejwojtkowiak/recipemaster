@@ -86,7 +86,7 @@ const RecipeItem: React.FC<listedRecipe> = (props) => {
           </Text>
         </Text>
       </Box>
-      <Link to={`/recipe/${props.id}`}>
+      <Link to={`/${props.id}`}>
         <Box textAlign="right" marginRight="2rem">
           <Button
             marginTop={{ md: "1rem" }}
