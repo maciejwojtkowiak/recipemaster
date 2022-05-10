@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { filters } from "../../shared/types/Recipe";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { RootState } from "../../store/store";
+import { recipeTypesArray } from "../../Helpers/constantValues";
 
 interface FuncProps {
   options: string[];
@@ -22,10 +23,11 @@ const FilterItems: React.FC<FuncProps> = (props) => {
     (state: RootState) => state.recipe.filters.filterLengths
   );
   const [searchParams, setSearchParams] = useSearchParams();
+  let searchParamString = "";
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
-    let searchParamString = "";
+
     setSearchParams(content);
     if (e.target.checked) {
       dispatch(
@@ -34,7 +36,6 @@ const FilterItems: React.FC<FuncProps> = (props) => {
           filterName: props.filterName,
         })
       );
-      searchParamString = searchParamString + content;
     }
 
     if (!e.target.checked) {
@@ -44,10 +45,31 @@ const FilterItems: React.FC<FuncProps> = (props) => {
           filterName: props.filterName,
         })
       );
-      searchParamString = searchParamString.replace(content, "");
     }
-    setSearchParams(searchParamString);
   };
+
+  useEffect(() => {
+    console.log(filtersTypes);
+    // chosen types
+    for (let i = 0; i <= filtersTypes.length - 1; i++) {
+      console.log(filtersTypes[i]);
+      searchParamString = searchParamString + filtersTypes[i].toString();
+    }
+    // if the some of the constant types are included in params
+    // Zrób helper funkcje dla powtarzajacego się kodu.
+    for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
+      if (searchParams.get("filter")?.includes(filtersTypes[i])) {
+        recipeAction.addFilters({
+          content: filtersTypes[i],
+          filterName: props.filterName,
+        });
+      }
+    }
+    setSearchParams({ filter: searchParamString });
+    if (filtersTypes.length !== 0 || filterLengths.length !== 0)
+      setSearchParams({ filter: searchParamString });
+    else setSearchParams("");
+  }, [filterLengths, filtersTypes, searchParamString]);
 
   return (
     <React.Fragment>
