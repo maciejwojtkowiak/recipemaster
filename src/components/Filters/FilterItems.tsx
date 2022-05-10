@@ -1,9 +1,10 @@
-import { Checkbox, Stack, Text } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { Checkbox, filter, Stack, Text } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
-import React from "react";
+import React, { useEffect } from "react";
 import { filters } from "../../shared/types/Recipe";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { RootState } from "../../store/store";
 
 interface FuncProps {
   options: string[];
@@ -14,9 +15,17 @@ interface FuncProps {
 const FilterItems: React.FC<FuncProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const filtersTypes = useSelector(
+    (state: RootState) => state.recipe.filters.filterTypes
+  );
+  const filterLengths = useSelector(
+    (state: RootState) => state.recipe.filters.filterLengths
+  );
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
+
     if (e.target.checked) {
       dispatch(
         recipeAction.addFilters({
@@ -35,6 +44,17 @@ const FilterItems: React.FC<FuncProps> = (props) => {
       );
     }
   };
+
+  let queryParamsString = "";
+
+  useEffect(() => {
+    for (let i = 0; i < filtersTypes.length - 1; i++) {
+      console.log(filtersTypes[i]);
+      queryParamsString = queryParamsString + filtersTypes[i].toString();
+    }
+
+    setSearchParams(queryParamsString);
+  }, [filterLengths, filtersTypes, queryParamsString]);
 
   return (
     <React.Fragment>

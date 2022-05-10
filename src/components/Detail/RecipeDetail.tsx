@@ -12,11 +12,14 @@ import { motion } from "framer-motion";
 import CommentShowButton from "./Comments/CommentShowButton";
 import { useMediaQuery } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { uiAction } from "../../store/ui-slice";
+import { useDispatch } from "react-redux";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state: RootState) => state.recipe.recipes);
   const params = useParams();
   const paramsId = params.recipeid;
+  const dispatch = useDispatch();
 
   const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
 
@@ -25,6 +28,13 @@ const RecipeDetail = () => {
   );
 
   if (!detailedRecipe) {
+    dispatch(
+      uiAction.setNotification({
+        message: "Recipe does not exist",
+        isShown: true,
+        type: "message",
+      })
+    );
     return <Navigate to="/" replace />;
   }
 
