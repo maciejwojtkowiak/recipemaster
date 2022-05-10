@@ -25,7 +25,8 @@ const FilterItems: React.FC<FuncProps> = (props) => {
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
-
+    let searchParamString = "";
+    setSearchParams(content);
     if (e.target.checked) {
       dispatch(
         recipeAction.addFilters({
@@ -33,6 +34,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
           filterName: props.filterName,
         })
       );
+      searchParamString = searchParamString + content;
     }
 
     if (!e.target.checked) {
@@ -42,19 +44,10 @@ const FilterItems: React.FC<FuncProps> = (props) => {
           filterName: props.filterName,
         })
       );
+      searchParamString = searchParamString.replace(content, "");
     }
+    setSearchParams(searchParamString);
   };
-
-  let queryParamsString = "";
-
-  useEffect(() => {
-    for (let i = 0; i < filtersTypes.length - 1; i++) {
-      console.log(filtersTypes[i]);
-      queryParamsString = queryParamsString + filtersTypes[i].toString();
-    }
-
-    setSearchParams(queryParamsString);
-  }, [filterLengths, filtersTypes, queryParamsString]);
 
   return (
     <React.Fragment>

@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { Recipe, Step } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
-import { useSelector } from "react-redux";
+
 import SelectComponent from "../UI/SelectComponent";
-import { RootState } from "../../store/store";
+
 import FormHeader from "./FormHeader";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
@@ -23,6 +23,10 @@ import {
   ingredientValidation,
 } from "../../shared/types/AddRecipeForm";
 import { uiAction } from "../../store/ui-slice";
+import {
+  recipeTypesArray,
+  recipeLengthsArray,
+} from "../../Helpers/constantValues";
 
 const initialStateReducer: inputsFormState = {
   title: {
@@ -112,12 +116,6 @@ const RecipeForm = () => {
     });
 
   const user = auth.currentUser;
-  const recipeTypes = useSelector(
-    (state: RootState) => state.constantValues.recipeTypes
-  );
-  const recipeLengths = useSelector(
-    (state: RootState) => state.constantValues.recipeLengths
-  );
 
   let arrOfValid: boolean[] = [];
   let arrOfInvalidFields: string[] = [];
@@ -274,7 +272,7 @@ const RecipeForm = () => {
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
-                values={recipeTypes}
+                values={recipeTypesArray}
                 typeOfSelect="type of dish"
               />
               <IngredientsContainer
@@ -296,7 +294,7 @@ const RecipeForm = () => {
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
-                values={recipeLengths}
+                values={recipeLengthsArray}
                 typeOfSelect="length of dish"
               />
               <Textarea
