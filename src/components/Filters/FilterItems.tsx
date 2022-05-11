@@ -56,17 +56,15 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   };
 
   useEffect(() => {
-    let searchParamString = "";
+    let paramString = "";
     if (!initial) {
       for (let i = 0; i <= chosenFiltersTypes.length - 1; i++) {
-        searchParamString += chosenFiltersTypes[i];
+        paramString += chosenFiltersTypes[i];
       }
-
-      searchParamString.length > 0
-        ? setSearchParams({ filter: searchParamString })
-        : setSearchParams("");
+      if (paramString.length > 0) setSearchParams({ filter: paramString });
+      if (paramString.length === 0) setSearchParams("");
     }
-  }, [chosenFiltersTypes, initial]);
+  }, [chosenFiltersTypes]);
 
   useEffect(() => {
     if (initial) {
@@ -85,6 +83,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
     initial = false;
   }, []);
 
+  // na odwrot gdy sie dodaje
   useEffect(() => {
     for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
       if (!searchParams.get("filter")?.includes(recipeTypesArray[i])) {
@@ -97,16 +96,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
       }
     }
   }, [location.search]);
-
-  console.log();
-
-  const isCheckedOnSearchParam = (option: string) => {
-    if (searchParams.get("filter")) {
-      return searchParams.get("filter")!.includes(option);
-    }
-    if (searchParams === null) return false;
-  };
-
+  console.log(chosenFiltersTypes);
   return (
     <React.Fragment>
       <Text _notFirst={{ marginTop: "2rem" }} fontWeight="700">
@@ -119,7 +109,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
               key={option}
               value={option}
               onChange={onChosenFilterHandler}
-              isChecked={searchParams.get("filter")?.includes(option)}
+              isChecked={chosenFiltersTypes.includes(option)}
             >
               <Text>{option}</Text>
             </Checkbox>
