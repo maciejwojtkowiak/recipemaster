@@ -1,9 +1,16 @@
-import { Checkbox, filter, Stack, Text } from "@chakra-ui/react";
+import { Checkbox, Stack, Text } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { filters } from "../../shared/types/Recipe";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useSearchParams,
+  useParams,
+  useLocation,
+  useRoutes,
+} from "react-router-dom";
+
 import { RootState } from "../../store/store";
 import { recipeTypesArray } from "../../Helpers/constantValues";
 
@@ -12,24 +19,23 @@ interface FuncProps {
   filterName: keyof filters;
   filterTitle: string;
 }
-
+let initial = true;
 const FilterItems: React.FC<FuncProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let initial = false;
-  const filtersTypes = useSelector(
+  const location = useLocation();
+
+  const chosenFiltersTypes = useSelector(
     (state: RootState) => state.recipe.filters.filterTypes
   );
-  const filterLengths = useSelector(
+  const chosenFiltersLengths = useSelector(
     (state: RootState) => state.recipe.filters.filterLengths
   );
   const [searchParams, setSearchParams] = useSearchParams();
-  let searchParamString = "";
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
 
-    setSearchParams(content);
     if (e.target.checked) {
       dispatch(
         recipeAction.addFilters({
@@ -49,15 +55,22 @@ const FilterItems: React.FC<FuncProps> = (props) => {
     }
   };
 
-  useEffect(() => {}, [filterLengths, filtersTypes, searchParamString]);
-  console.log(filtersTypes);
+  useEffect(() => {
+    let searchParamString = "";
+    if (!initial) {
+      for (let i = 0; i <= chosenFiltersTypes.length - 1; i++) {
+        searchParamString += chosenFiltersTypes[i];
+      }
+
+      searchParamString.length > 0
+        ? setSearchParams({ filter: searchParamString })
+        : setSearchParams("");
+    }
+  }, [chosenFiltersTypes, initial]);
 
   useEffect(() => {
-    if (!initial) {
+    if (initial) {
       for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
-        console.log(searchParams.get("filter"));
-        console.log(searchParams.get("filter")?.includes(recipeTypesArray[i]));
-        console.log(recipeTypesArray[i]);
         if (searchParams.get("filter")?.includes(recipeTypesArray[i])) {
           dispatch(
             recipeAction.addFilters({
@@ -67,10 +80,32 @@ const FilterItems: React.FC<FuncProps> = (props) => {
           );
         }
       }
-      initial = true;
     }
+
+    initial = false;
   }, []);
-  console.log(filtersTypes);
+
+  useEffect(() => {
+    for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
+      if (!searchParams.get("filter")?.includes(recipeTypesArray[i])) {
+        dispatch(
+          recipeAction.removeFilters({
+            content: recipeTypesArray[i],
+            filterName: "filterTypes",
+          })
+        );
+      }
+    }
+  }, [location.search]);
+
+  console.log();
+
+  const isCheckedOnSearchParam = (option: string) => {
+    if (searchParams.get("filter")) {
+      return searchParams.get("filter")!.includes(option);
+    }
+    if (searchParams === null) return false;
+  };
 
   return (
     <React.Fragment>
@@ -84,6 +119,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
               key={option}
               value={option}
               onChange={onChosenFilterHandler}
+              isChecked={searchParams.get("filter")?.includes(option)}
             >
               <Text>{option}</Text>
             </Checkbox>
