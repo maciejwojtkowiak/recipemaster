@@ -3,13 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import React, { useEffect, useState } from "react";
 import { filters } from "../../shared/types/Recipe";
-import {
-  useNavigate,
-  useSearchParams,
-  useParams,
-  useLocation,
-  useRoutes,
-} from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 
 import { RootState } from "../../store/store";
 import { recipeTypesArray } from "../../Helpers/constantValues";
@@ -21,10 +15,12 @@ interface FuncProps {
 }
 let initial = true;
 const FilterItems: React.FC<FuncProps> = (props) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const [isTouched, setIsTouched] = useState<boolean>(false);
+  const [allFiltersChosenList, setAllFiltersChosenList] = useState<string[]>(
+    []
+  );
 
   const chosenFiltersTypes = useSelector(
     (state: RootState) => state.recipe.filters.filterTypes
@@ -36,6 +32,8 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   const allChosenFiltersObject = useSelector(
     (state: RootState) => state.recipe.filters
   );
+
+  console.log(allFiltersChosenList);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -65,45 +63,48 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   useEffect(() => {
     let paramString = "";
     if (!initial && isTouched) {
-      for (let i = 0; i <= chosenFiltersTypes.length - 1; i++) {
-        paramString += chosenFiltersTypes[i];
+      for (
+        let i = 0;
+        i <= allChosenFiltersObject[props.filterName].length - 1;
+        i++
+      ) {
+        paramString += allChosenFiltersObject[props.filterName][i];
       }
       if (paramString.length > 0) setSearchParams({ filter: paramString });
       if (paramString.length === 0) setSearchParams("");
     }
-  }, [chosenFiltersTypes, isTouched]);
+  }, [chosenFiltersTypes, isTouched, setSearchParams]);
 
   useEffect(() => {
     if (initial) {
-      for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
-        if (searchParams.get("filter")?.includes(recipeTypesArray[i])) {
+      for (let i = 0; i <= props.options.length - 1; i++) {
+        if (searchParams.get("filter")?.includes(props.options[i])) {
           dispatch(
             recipeAction.addFilters({
-              content: recipeTypesArray[i],
+              content: props.options[i],
               filterName: "filterTypes",
             })
           );
         }
       }
+      initial = false;
     }
+    return;
+  }, [dispatch, searchParams]);
 
-    initial = false;
-  }, []);
-
-  // na odwrot gdy sie dodaje
   useEffect(() => {
-    for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
-      if (!searchParams.get("filter")?.includes(recipeTypesArray[i])) {
+    for (let i = 0; i <= props.options.length - 1; i++) {
+      if (!searchParams.get("filter")?.includes(props.options[i])) {
         dispatch(
           recipeAction.removeFilters({
-            content: recipeTypesArray[i],
+            content: props.options[i],
             filterName: "filterTypes",
           })
         );
       }
     }
-  }, [location.search]);
-  console.log(chosenFiltersTypes);
+  }, [location.search, dispatch]);
+
   return (
     <React.Fragment>
       <Text _notFirst={{ marginTop: "2rem" }} fontWeight="700">
@@ -116,7 +117,9 @@ const FilterItems: React.FC<FuncProps> = (props) => {
               key={option}
               value={option}
               onChange={onChosenFilterHandler}
-              isChecked={chosenFiltersTypes.includes(option)}
+              isChecked={allChosenFiltersObject[props.filterName].includes(
+                option
+              )}
             >
               <Text>{option}</Text>
             </Checkbox>
