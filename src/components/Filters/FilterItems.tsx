@@ -16,6 +16,7 @@ interface FuncProps {
 const FilterItems: React.FC<FuncProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let initial = false;
   const filtersTypes = useSelector(
     (state: RootState) => state.recipe.filters.filterTypes
   );
@@ -48,28 +49,28 @@ const FilterItems: React.FC<FuncProps> = (props) => {
     }
   };
 
+  useEffect(() => {}, [filterLengths, filtersTypes, searchParamString]);
+  console.log(filtersTypes);
+
   useEffect(() => {
-    console.log(filtersTypes);
-    // chosen types
-    for (let i = 0; i <= filtersTypes.length - 1; i++) {
-      console.log(filtersTypes[i]);
-      searchParamString = searchParamString + filtersTypes[i].toString();
-    }
-    // if the some of the constant types are included in params
-    // Zrób helper funkcje dla powtarzajacego się kodu.
-    for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
-      if (searchParams.get("filter")?.includes(filtersTypes[i])) {
-        recipeAction.addFilters({
-          content: filtersTypes[i],
-          filterName: props.filterName,
-        });
+    if (!initial) {
+      for (let i = 0; i <= recipeTypesArray.length - 1; i++) {
+        console.log(searchParams.get("filter"));
+        console.log(searchParams.get("filter")?.includes(recipeTypesArray[i]));
+        console.log(recipeTypesArray[i]);
+        if (searchParams.get("filter")?.includes(recipeTypesArray[i])) {
+          dispatch(
+            recipeAction.addFilters({
+              content: recipeTypesArray[i],
+              filterName: "filterTypes",
+            })
+          );
+        }
       }
+      initial = true;
     }
-    setSearchParams({ filter: searchParamString });
-    if (filtersTypes.length !== 0 || filterLengths.length !== 0)
-      setSearchParams({ filter: searchParamString });
-    else setSearchParams("");
-  }, [filterLengths, filtersTypes, searchParamString]);
+  }, []);
+  console.log(filtersTypes);
 
   return (
     <React.Fragment>
