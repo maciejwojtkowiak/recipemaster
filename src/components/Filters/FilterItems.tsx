@@ -24,6 +24,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const [isTouched, setIsTouched] = useState<boolean>(false);
 
   const chosenFiltersTypes = useSelector(
     (state: RootState) => state.recipe.filters.filterTypes
@@ -31,6 +32,11 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   const chosenFiltersLengths = useSelector(
     (state: RootState) => state.recipe.filters.filterLengths
   );
+
+  const allChosenFiltersObject = useSelector(
+    (state: RootState) => state.recipe.filters
+  );
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,18 +59,19 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         })
       );
     }
+    setIsTouched(true);
   };
 
   useEffect(() => {
     let paramString = "";
-    if (!initial) {
+    if (!initial && isTouched) {
       for (let i = 0; i <= chosenFiltersTypes.length - 1; i++) {
         paramString += chosenFiltersTypes[i];
       }
       if (paramString.length > 0) setSearchParams({ filter: paramString });
       if (paramString.length === 0) setSearchParams("");
     }
-  }, [chosenFiltersTypes]);
+  }, [chosenFiltersTypes, isTouched]);
 
   useEffect(() => {
     if (initial) {
