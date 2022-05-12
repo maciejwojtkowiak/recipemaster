@@ -4,7 +4,7 @@ import { useState, useReducer, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { recipeAction } from "../../store/recipe-slice";
 import { useDispatch } from "react-redux";
-import { Recipe, Step } from "../../shared/types/Recipe";
+import { nutritions, Recipe, Step } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
 
@@ -170,6 +170,12 @@ const RecipeForm = () => {
     }
 
     if (formIsValid && user?.displayName) {
+      const nutrition: nutritions = {
+        proteins: Math.floor(Math.random() * 10) + 2,
+        carbohydrates: Math.floor(Math.random() * 20) + 35,
+        fats: Math.floor(Math.random() * 10) + 10,
+        nutritionScore: Math.floor(Math.random() * 100),
+      };
       const recipe: Recipe = {
         username: user.displayName,
         title: stringInputsValues.description.val,
@@ -182,6 +188,7 @@ const RecipeForm = () => {
         steps: steps,
         comments: [],
         isLiked: false,
+        nutrition: nutrition,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));

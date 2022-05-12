@@ -22,7 +22,6 @@ const RecipeDescription: React.FC<recipeDesc> = (props) => {
 
   return (
     <Flex
-      marginLeft="2rem"
       flexDir="column"
       justifyContent="center"
       alignItems={isSmallScreen ? "center" : ""}

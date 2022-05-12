@@ -6,7 +6,6 @@ import { filters } from "../../shared/types/Recipe";
 import { useSearchParams, useLocation } from "react-router-dom";
 
 import { RootState } from "../../store/store";
-import { recipeTypesArray } from "../../Helpers/constantValues";
 
 interface FuncProps {
   options: string[];
@@ -18,22 +17,10 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isTouched, setIsTouched] = useState<boolean>(false);
-  const [allFiltersChosenList, setAllFiltersChosenList] = useState<string[]>(
-    []
-  );
-
-  const chosenFiltersTypes = useSelector(
-    (state: RootState) => state.recipe.filters.filterTypes
-  );
-  const chosenFiltersLengths = useSelector(
-    (state: RootState) => state.recipe.filters.filterLengths
-  );
 
   const allChosenFiltersObject = useSelector(
     (state: RootState) => state.recipe.filters
   );
-
-  console.log(allFiltersChosenList);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -73,7 +60,7 @@ const FilterItems: React.FC<FuncProps> = (props) => {
       if (paramString.length > 0) setSearchParams({ filter: paramString });
       if (paramString.length === 0) setSearchParams("");
     }
-  }, [chosenFiltersTypes, isTouched, setSearchParams]);
+  }, [isTouched, setSearchParams]);
 
   useEffect(() => {
     if (initial) {

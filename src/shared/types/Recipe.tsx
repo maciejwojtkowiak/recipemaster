@@ -13,6 +13,13 @@ export interface ingredient {
   id: number | null;
 }
 
+export interface nutritions {
+  proteins: number;
+  fats: number;
+  carbohydrates: number;
+  nutritionScore: number;
+}
+
 export interface InitialState {
   recipes: Recipe[];
   likedRecipes: {
@@ -51,6 +58,7 @@ export type Recipe = {
   stars: number;
   comments: Comment[];
   isLiked: boolean;
+  nutrition: nutritions;
 };
 
 export type Notification = {
