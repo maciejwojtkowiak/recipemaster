@@ -28,6 +28,7 @@ const DetailColumns: React.FC<funcProps> = (props) => {
       >
         <Box
           overflowY="auto"
+          wordBreak="break-all"
           border={{ xl: borderWidth }}
           borderColor={borderOrange}
         >
@@ -45,6 +46,7 @@ const DetailColumns: React.FC<funcProps> = (props) => {
 
         <Box
           overflowY="auto"
+          wordBreak="break-all"
           borderLeftWidth={{ xl: borderWidth }}
           borderColor={borderOrange}
         >
