@@ -15,8 +15,11 @@ import { RootState } from "./store/store";
 import { uiAction } from "./store/ui-slice";
 import DetailComments from "./components/Detail/Comments/DetailComments";
 import NotFound from "./pages/NotFound";
+import { recipeTypesArray } from "./Helpers/constantValues";
+import { useSearchParams } from "react-router-dom";
 
 function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const notificationIsShown = useSelector(
     (state: RootState) => state.ui.notification.isShown
   );
@@ -51,15 +54,15 @@ function App() {
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />(
         <Route path="/:recipeid" element={<Detail />}>
           <Route path="comments" element={<DetailComments />} />
         </Route>
+        )
         <Route path="/addRecipe" element={<AddRecipe />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
       </Routes>
       {notificationIsShown && <Notification />}
     </React.Fragment>

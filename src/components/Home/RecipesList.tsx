@@ -39,14 +39,14 @@ const RecipesList = () => {
       height="100%"
       justifyContent="center"
       alignItems="center"
-      margin="2rem"
+      marginY="2rem"
     >
       <Grid
         minH="80%"
         maxH="auto"
         width={{ md: "100%", lg: "90%" }}
         placeItems="center"
-        templateColumns={{ md: "1fr", lg: "repeat(3, 1fr)" }}
+        templateColumns={{ md: "1fr", lg: "1fr 1fr", xl: "repeat(3, 1fr)" }}
         templateRows="repeat(2, 1fr)"
       >
         {noRecipes && <h1>No recipes found</h1>}

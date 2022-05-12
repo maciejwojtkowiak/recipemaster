@@ -4,12 +4,12 @@ import { useState, useReducer, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { recipeAction } from "../../store/recipe-slice";
 import { useDispatch } from "react-redux";
-import { Recipe, Step } from "../../shared/types/Recipe";
+import { nutritions, Recipe, Step } from "../../shared/types/Recipe";
 import { sendData } from "../../store/recipe-action";
 import { auth } from "../../Firebase";
-import { useSelector } from "react-redux";
+
 import SelectComponent from "../UI/SelectComponent";
-import { RootState } from "../../store/store";
+
 import FormHeader from "./FormHeader";
 import { ingredient } from "../../shared/types/Recipe";
 import FormSubmitButton from "./FormSubmitButton";
@@ -23,6 +23,10 @@ import {
   ingredientValidation,
 } from "../../shared/types/AddRecipeForm";
 import { uiAction } from "../../store/ui-slice";
+import {
+  recipeTypesArray,
+  recipeLengthsArray,
+} from "../../Helpers/constantValues";
 
 const initialStateReducer: inputsFormState = {
   title: {
@@ -112,28 +116,34 @@ const RecipeForm = () => {
     });
 
   const user = auth.currentUser;
-  const recipeTypes = useSelector(
-    (state: RootState) => state.constantValues.recipeTypes
-  );
-  const recipeLengths = useSelector(
-    (state: RootState) => state.constantValues.recipeLengths
-  );
 
   let arrOfValid: boolean[] = [];
   let arrOfInvalidFields: string[] = [];
 
+  const pushValid = (valid: boolean) => {
+    arrOfValid.push(valid);
+  };
+
+  const pushInvalid = (message: string) => {
+    arrOfInvalidFields.push(message);
+  };
+
   const everythingIsValid = () => {
     for (const key of Object.keys(stringInputsValues)) {
-      arrOfValid.push(
+      pushValid(
         stringInputsValues[key as keyof typeof stringInputsValues].isValid
       );
       if (!stringInputsValues[key as keyof typeof stringInputsValues].isValid) {
-        arrOfInvalidFields.push(` ${key} `);
+        pushInvalid(` ${key} `);
       }
     }
-    arrOfValid.push(ingredients.length > 0);
+    pushValid(ingredients.length > 0);
+    pushValid(time.length > 0);
+    pushValid(type.length > 0);
 
-    ingredients.length === 0 && arrOfInvalidFields.push(" ingredients ");
+    ingredients.length === 0 && pushInvalid(" ingredients ");
+    time.length === 0 && pushInvalid("select the length");
+    type.length === 0 && pushInvalid("select the type");
 
     return arrOfValid.every((inputIsTrue) => inputIsTrue);
   };
@@ -160,6 +170,12 @@ const RecipeForm = () => {
     }
 
     if (formIsValid && user?.displayName) {
+      const nutrition: nutritions = {
+        proteins: Math.floor(Math.random() * 10) + 2,
+        carbohydrates: Math.floor(Math.random() * 20) + 35,
+        fats: Math.floor(Math.random() * 10) + 10,
+        nutritionScore: Math.floor(Math.random() * 100),
+      };
       const recipe: Recipe = {
         username: user.displayName,
         title: stringInputsValues.description.val,
@@ -172,6 +188,7 @@ const RecipeForm = () => {
         steps: steps,
         comments: [],
         isLiked: false,
+        nutrition: nutrition,
       };
       dispatch(recipeAction.addRecipe(recipe));
       dispatch(sendData(recipe));
@@ -262,7 +279,7 @@ const RecipeForm = () => {
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setType)}
                 placeHolder="Choose type of your dish"
-                values={recipeTypes}
+                values={recipeTypesArray}
                 typeOfSelect="type of dish"
               />
               <IngredientsContainer
@@ -284,7 +301,7 @@ const RecipeForm = () => {
               <SelectComponent
                 onChange={(e) => onSelectChangeHandler(e, setTime)}
                 placeHolder="Choose length of preparing"
-                values={recipeLengths}
+                values={recipeLengthsArray}
                 typeOfSelect="length of dish"
               />
               <Textarea

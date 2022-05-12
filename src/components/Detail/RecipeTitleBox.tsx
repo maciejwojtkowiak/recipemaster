@@ -1,6 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { Recipe } from "../../shared/types/Recipe";
 import { StarIcon } from "@chakra-ui/icons";
+import { useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 
 interface recipeDesc {
@@ -11,6 +12,7 @@ const RecipeDescription: React.FC<recipeDesc> = (props) => {
   const stars: React.ReactElement[] = [];
   const totalStars = 6;
   const numberOfGoldenStars = props.recipe.stars;
+  const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
 
   for (let i = 0; i < totalStars; i++) {
     if (i > numberOfGoldenStars) stars.push(<StarIcon h={7} w={7} key={i} />);
@@ -19,12 +21,16 @@ const RecipeDescription: React.FC<recipeDesc> = (props) => {
   }
 
   return (
-    <Box marginLeft="2rem">
-      <Text fontSize="4rem" fontWeight="700">
+    <Flex
+      flexDir="column"
+      justifyContent="center"
+      alignItems={isSmallScreen ? "center" : ""}
+    >
+      <Text fontSize={{ sm: "4rem", lg: "3rem" }} fontWeight="700">
         {props.recipe.title}
       </Text>
-      {stars}
-    </Box>
+      <Box>{stars}</Box>
+    </Flex>
   );
 };
 

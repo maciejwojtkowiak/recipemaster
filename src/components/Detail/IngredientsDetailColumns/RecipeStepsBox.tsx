@@ -1,20 +1,20 @@
 import ColumnHeader from "./ColumnHeader";
 import DetailListItem from "./DetailListItem";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { Box } from "@chakra-ui/react";
 
 interface funcProps {
   recipeId: number;
 }
 const RecipeStepsBox: React.FC<funcProps> = (props) => {
-  const dispatch = useDispatch();
   const recipe = useSelector((state: RootState) =>
     state.recipe.recipes.find((recipe) => recipe.id === props.recipeId)
   );
 
   return (
-    <React.Fragment>
+    <Box>
       <ColumnHeader title="Steps" />
       {recipe?.steps.map((step, index) => (
         <DetailListItem
@@ -23,7 +23,7 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
           indexOfItem={index}
         />
       ))}
-    </React.Fragment>
+    </Box>
   );
 };
 

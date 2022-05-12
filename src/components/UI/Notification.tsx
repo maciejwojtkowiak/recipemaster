@@ -21,6 +21,7 @@ const animate = {
 
 const Notification = () => {
   const notification = useSelector((state: RootState) => state.ui.notification);
+  const boxHeight = "10vh";
   return (
     <React.Fragment>
       <AnimatePresence>
@@ -34,7 +35,7 @@ const Notification = () => {
             position="fixed"
             bottom="1%"
             left="50%"
-            h="10vh"
+            minH={boxHeight}
             minW="20vw"
             transform="translate(-50%, -50%)"
             zIndex="10"
@@ -44,8 +45,12 @@ const Notification = () => {
             boxShadow="lg"
             rounded="md"
           >
-            <Grid placeItems="center" width="100%" height="100%">
-              <Text fontFamily="dancingScriptFont" fontSize="200%">
+            <Grid placeItems="center" width="100%" minH={boxHeight}>
+              <Text
+                fontFamily="dancingScriptFont"
+                fontSize="2rem"
+                textAlign="center"
+              >
                 {notification.message}
               </Text>
             </Grid>

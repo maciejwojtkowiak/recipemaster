@@ -1,8 +1,7 @@
 import { Box, Flex, Input, Select } from "@chakra-ui/react";
 import React, { useState, useEffect, useReducer } from "react";
 import { ingredient } from "../../../shared/types/Recipe";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+
 import AddButton from "../../UI/AddButton";
 import { ingredientValidation } from "../../../shared/types/AddRecipeForm";
 import { uiAction } from "../../../store/ui-slice";
@@ -12,6 +11,7 @@ import {
   IngredientInputAction,
   IngredientInputEnum,
 } from "../../../shared/types/IngredientInputForm";
+import { ingredientsUnitsArray } from "../../../Helpers/constantValues";
 
 type ingredientProps = {
   onIngredientAdd: (ingredient: ingredient) => void;
@@ -84,10 +84,6 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
     initialState
   );
   const dispatch = useDispatch();
-
-  const ingredientsUnits = useSelector(
-    (state: RootState) => state.constantValues.ingredientsUnits
-  );
 
   const { getIngredientValues } = props;
 
@@ -206,7 +202,7 @@ const AddIngredients: React.FC<ingredientProps> = (props) => {
             <option value="DEF" disabled hidden>
               Unit
             </option>
-            {ingredientsUnits.map((unit) => (
+            {ingredientsUnitsArray.map((unit) => (
               <option key={unit} value={unit}>
                 {unit}
               </option>
