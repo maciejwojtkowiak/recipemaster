@@ -14,7 +14,7 @@ const DetailColumns: React.FC<funcProps> = (props) => {
 
   return (
     <Box
-      h="80vh"
+      h={{ sm: "200vh", lg: "100vh" }}
       borderWidth={borderWidth}
       borderColor="orange.300"
       borderRadius="1rem"

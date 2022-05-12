@@ -21,6 +21,7 @@ const RecipeStepsBox: React.FC<funcProps> = (props) => {
           key={step.id}
           itemName={step.name}
           indexOfItem={index}
+          isIngredient={false}
         />
       ))}
     </Box>

@@ -16,8 +16,11 @@ const RecipeIngredientsBox: React.FC<funcProps> = (props) => {
       {ingredients.map((ingredient, i) => (
         <DetailListItem
           key={i}
+          isIngredient={true}
           itemName={ingredient.name!}
           indexOfItem={i}
+          amount={ingredient.amount!}
+          unit={ingredient.unit!}
         ></DetailListItem>
       ))}
     </React.Fragment>

@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import React from "react";
 import TopBorderStyling from "./TopBorderStyling";
 import RecipeTitleBox from "./RecipeTitleBox";
-import RecipeIngredientDetail from "./IngredientsDetailColumns/DetailColumns";
+import DetailColumns from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
 import CommentShowButton from "./Comments/CommentShowButton";
 import { useMediaQuery } from "@chakra-ui/react";
@@ -22,7 +22,7 @@ const RecipeDetail = () => {
   const paramsId = params.recipeid;
   const dispatch = useDispatch();
 
-  const [isSmallScreen] = useMediaQuery("(max-width: 48em)");
+  const [isSmallScreen] = useMediaQuery("(max-width: 62em)");
 
   const detailedRecipe = recipes.find(
     (recipe) => recipe.id.toString() === paramsId
@@ -66,7 +66,7 @@ const RecipeDetail = () => {
         </Box>
       </Box>
       <Grid placeItems="center" marginBottom="2rem" marginTop="2rem">
-        <RecipeIngredientDetail recipe={detailedRecipe!} />
+        <DetailColumns recipe={detailedRecipe!} />
         <CommentShowButton />
 
         <Outlet />
@@ -101,7 +101,7 @@ const RecipeDetail = () => {
               </Box>
             </Flex>
           </Box>
-          <RecipeIngredientDetail recipe={detailedRecipe!} />
+          <DetailColumns recipe={detailedRecipe!} />
           <CommentShowButton />
 
           <Outlet />
