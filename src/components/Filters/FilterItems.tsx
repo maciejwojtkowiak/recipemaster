@@ -1,4 +1,4 @@
-import { Checkbox, Stack, Text } from "@chakra-ui/react";
+import { Checkbox, Stack, Text, useSafeLayoutEffect } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { recipeAction } from "../../store/recipe-slice";
 import React, { useEffect, useState } from "react";
@@ -21,11 +21,18 @@ const FilterItems: React.FC<FuncProps> = (props) => {
   const allChosenFiltersObject = useSelector(
     (state: RootState) => state.recipe.filters
   );
+  const chosenFilterTypes = useSelector(
+    (state: RootState) => state.recipe.filters.filterTypes
+  );
+  const chosenFilterLengths = useSelector(
+    (state: RootState) => state.recipe.filters.filterLengths
+  );
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const onChosenFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
+    setIsTouched(true);
 
     if (e.target.checked) {
       dispatch(
@@ -44,23 +51,28 @@ const FilterItems: React.FC<FuncProps> = (props) => {
         })
       );
     }
-    setIsTouched(true);
   };
 
   useEffect(() => {
     let paramString = "";
     if (!initial && isTouched) {
-      for (
-        let i = 0;
-        i <= allChosenFiltersObject[props.filterName].length - 1;
-        i++
-      ) {
-        paramString += allChosenFiltersObject[props.filterName][i];
+      for (let i = 0; i <= chosenFilterTypes.length - 1; i++) {
+        paramString += chosenFilterTypes[i];
       }
+      for (let i = 0; i <= chosenFilterLengths.length - 1; i++) {
+        paramString += chosenFilterLengths[i];
+      }
+      console.log(paramString);
       if (paramString.length > 0) setSearchParams({ filter: paramString });
       if (paramString.length === 0) setSearchParams("");
     }
-  }, [isTouched, setSearchParams]);
+  }, [
+    isTouched,
+    setSearchParams,
+    initial,
+    chosenFilterTypes,
+    chosenFilterLengths,
+  ]);
 
   useEffect(() => {
     if (initial) {
