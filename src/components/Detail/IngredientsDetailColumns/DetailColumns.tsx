@@ -35,8 +35,10 @@ const DetailColumns: React.FC<funcProps> = (props) => {
         </Box>
         <Box
           overflowY="auto"
+          wordBreak="break-all"
           borderLeftWidth={{ xl: borderWidth }}
           borderColor={borderOrange}
+          width="100%"
         >
           <RecipeStepsBox recipeId={props.recipe.id} />
         </Box>

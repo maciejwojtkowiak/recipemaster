@@ -27,7 +27,7 @@ const DetailListItem: React.FC<funcProps> = (props) => {
           </Text>
         </Grid>
       </Grid>
-      <Grid alignItems="center" templateColumns={{ sm: "60vw", lg: "10vw" }}>
+      <Grid alignItems="center">
         <Text marginLeft="1rem" fontWeight="500" fontSize="1.2rem">
           {props.itemName}
         </Text>
