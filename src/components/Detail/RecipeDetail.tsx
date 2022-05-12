@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { Box, Grid, Image, Flex, Text } from "@chakra-ui/react";
+import { Box, Grid, Image, Flex } from "@chakra-ui/react";
 import { getRecipeImage } from "../../Helpers/getRecipeImage";
 import Navbar from "../Navbar/Navbar";
 import React from "react";
@@ -11,7 +11,7 @@ import DetailColumns from "./IngredientsDetailColumns/DetailColumns";
 import { motion } from "framer-motion";
 import CommentShowButton from "./Comments/CommentShowButton";
 import { useMediaQuery } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+
 import { uiAction } from "../../store/ui-slice";
 import { useDispatch } from "react-redux";
 import NutritionTable from "./Nutrition/NutritionTable";

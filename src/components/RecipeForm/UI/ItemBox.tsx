@@ -5,6 +5,7 @@ interface funcProps {
   onRemove: (id: number) => void;
   itemName: string;
   itemId: number;
+  isIngredient: boolean;
   itemNumber?: number;
   ingredientAmount?: string;
   ingredientUnit?: string;
@@ -32,7 +33,7 @@ const ItemBox: React.FC<funcProps> = (props) => {
         transform="translate(-0, -50%)"
       >
         <Text fontSize="1.6rem" color="white">
-          {props.itemNumber ? props.itemName : ingredientAmountAndUnit}
+          {props.isIngredient ? ingredientAmountAndUnit : props.itemNumber}
         </Text>
       </Grid>
 
