@@ -61,6 +61,9 @@ const RecipeDetail = () => {
             src={imgName}
           />
         </Flex>
+        <Box height="100%" width="100%">
+          <NutritionTable />
+        </Box>
       </Box>
       <Grid placeItems="center" marginBottom="2rem" marginTop="2rem">
         <RecipeIngredientDetail recipe={detailedRecipe!} />
