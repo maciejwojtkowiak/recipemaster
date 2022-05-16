@@ -16,6 +16,7 @@ const IngredientItem: React.FC<funcProps> = (props) => {
   return (
     <ItemBox
       onRemove={onDeleteIngredient}
+      isIngredient={true}
       itemId={props.ingredient.id!}
       itemName={props.ingredient.name!}
       ingredientAmount={props.ingredient.amount!}

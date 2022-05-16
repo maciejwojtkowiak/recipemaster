@@ -17,7 +17,10 @@ const NutritionTable = () => {
       fontFamily="dancing script"
       fontSize="2rem"
       gap="4rem"
+      marginTop="2remy"
       alignItems="center"
+      justifyContent="center"
+      flexWrap="wrap"
     >
       <NutritionItem
         nutritientName="Proteins"

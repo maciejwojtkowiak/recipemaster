@@ -83,7 +83,7 @@ const Bookmark = () => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                mW="10vw"
+                w="10vw"
               >
                 <Link to={`/${recipe.id}`}>
                   <Box

@@ -3,13 +3,14 @@ import { Box, Grid, Text } from "@chakra-ui/react";
 interface funcProps {
   itemName: string;
   indexOfItem: number;
+  isIngredient: boolean;
   amount?: string;
   unit?: string;
 }
 
 const DetailListItem: React.FC<funcProps> = (props) => {
   return (
-    <Grid templateColumns="min-content 1fr" margin="1rem" width="10vw">
+    <Grid templateColumns="min-content 1fr" margin="1rem">
       <Grid
         bgGradient="linear(to-r, orange.200, orange.400)"
         minHeight="6vh"
@@ -20,24 +21,16 @@ const DetailListItem: React.FC<funcProps> = (props) => {
       >
         <Grid placeItems="center">
           <Text color="white" fontWeight="700" fontSize="140%">
-            {props.amount && props.amount + props.unit}
-            {!props.amount && props.indexOfItem + 1}
+            {props.isIngredient &&
+              props.amount!.toString() + props.unit!.toString()}
+            {!props.isIngredient && props.indexOfItem + 1}
           </Text>
         </Grid>
       </Grid>
-      <Grid alignItems="center" width="100%">
-        <Box maxW="10vw">
-          <Box>
-            <Text
-              marginLeft="1rem"
-              width="100%"
-              fontWeight="500"
-              fontSize="1.2rem"
-            >
-              {props.itemName}
-            </Text>
-          </Box>
-        </Box>
+      <Grid alignItems="center">
+        <Text marginLeft="1rem" fontWeight="500" fontSize="1.2rem">
+          {props.itemName}
+        </Text>
       </Grid>
     </Grid>
   );

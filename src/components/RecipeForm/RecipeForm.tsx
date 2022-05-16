@@ -178,9 +178,9 @@ const RecipeForm = () => {
       };
       const recipe: Recipe = {
         username: user.displayName,
-        title: stringInputsValues.description.val,
+        title: stringInputsValues.title.val,
         type: type,
-        description: stringInputsValues.title.val,
+        description: stringInputsValues.description.val,
         id: Math.random(),
         time: time,
         ingredients: ingredients,
