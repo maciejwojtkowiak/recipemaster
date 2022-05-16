@@ -12,8 +12,6 @@ interface funcProps {
 }
 
 const ItemBox: React.FC<funcProps> = (props) => {
-  const ingredientAmountAndUnit =
-    props.ingredientAmount + " " + props.ingredientUnit;
   return (
     <Box
       fontSize="1.2rem"
