@@ -19,12 +19,25 @@ type listedRecipe = {
 
 const RecipeItem: React.FC<listedRecipe> = (props) => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.ui.isLoggedIn);
+  console.log("isLoggedin");
+  console.log(isLoggedIn);
 
   const recipeIsLiked = useSelector(
     (state: RootState) =>
       state.recipe.recipes.find((recipe) => recipe.id === props.id)?.isLiked
   );
   const onLikeHandler = () => {
+    if (!isLoggedIn) {
+      dispatch(
+        uiAction.setNotification({
+          message: "You have to be logged in to add item to fav",
+          isShown: true,
+          type: "message",
+        })
+      );
+      return;
+    }
     if (recipeIsLiked) {
       dispatch(recipeAction.deleteLikedRecipe(props.id));
       dispatch(
