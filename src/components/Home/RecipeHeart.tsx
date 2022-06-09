@@ -1,5 +1,7 @@
 import { Icon } from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface funcProps {
   onLikeHandler: () => void;
@@ -7,6 +9,9 @@ interface funcProps {
 }
 
 const RecipeHeart: React.FC<funcProps> = (props) => {
+  const isLoggedIn = useSelector((state: RootState) => state.ui.isLoggedIn);
+  console.log("isLoggedin");
+  console.log(isLoggedIn);
   return (
     <Icon
       onClick={props.onLikeHandler}
